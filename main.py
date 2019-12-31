@@ -2,5 +2,5 @@
 from DistributionReadIn import DistributionReader
 
 dr = DistributionReader()
-dr.read_dist(path="curve.png")
-print(dr.return_dist()[0])
+dr.read_in_dist(path="curve.png")
+dr.plot_dist(0)
