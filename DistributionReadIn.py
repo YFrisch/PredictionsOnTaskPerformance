@@ -5,22 +5,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-# Class for polynomial distributions
-class Polynomial:
-
-    def __init__(self, coefficients):
-        self.coefficients = coefficients
-
-    def __repr__(self):
-        return "Polynomial" + str(self.coefficients)
-
-    def __call__(self, x):
-        res = 0
-        for index in np.arange(len(self.coefficients)-1, -1, -1):
-            res += self.coefficients[index] * x ** index
-        return res
+import scipy.optimize as opt
 
 
 class DistributionReader:
@@ -30,35 +15,33 @@ class DistributionReader:
 
     # Return discrete function from image
     def fit_dist(self, image):
-        # TODO: Get offsets for x and y
-        x_offsets = (0, 0)
-        y_offsets = (0, 0)
-        # TODO: Cut offsets from image
-        # TODO: Get values from pixels
 
-        xs = np.arange(0, np.shape(image)[0])
+        # TODO: Cut offsets from image (x-axis
+
+        xs = np.arange(0, np.shape(image)[1])
         ys = []
         for x in xs:
-            value = 0
-            for y in np.arange(0, np.shape(image)[1]):
-                if image[x, y] <= 0.1:
+            value = -1
+            for y in np.arange(np.shape(image)[0]-1, 0, -1):
+                if image[y, x] <= 0.2:
                     value = y
                     break
             ys.append(value)
+        ys = np.array(ys)
 
-        plt.figure()
-        plt.imshow(image)
-        plt.show()
-
-        plt.figure()
-        plt.scatter(xs, ys)
-        plt.show()
+        # Cut data where y == -1 (no dark pixels)
+        indices = np.where(ys == -1)[0]
+        xs = np.delete(xs, indices)
+        ys = np.delete(ys, indices)
 
         # Fit polynomial function to data
-        poly_fit_deg = 3
+        poly_fit_deg = 2
         coeff = np.polyfit(xs, ys, deg=poly_fit_deg)
+
         # TODO: Discretize function
-        return Polynomial(coeff)
+
+        # return Polynomial(coeff)
+        return coeff
 
     # Read image, transform it to grayscale, get distribution and append to distribution list
     def read_in_dist(self, path):
@@ -74,8 +57,9 @@ class DistributionReader:
             return None
         else:
             plt.figure()
-            x = np.arange(0, 10, 0.1)
-            y = np.array([self.distributions[index](xi) for xi in x])
+            x = np.arange(0, 250, 0.1)
+            p = np.poly1d(self.distributions[index])
+            y = np.array([p(xi) for xi in x])
             plt.plot(x, y)
             plt.title("Distribution {}".format(index))
             plt.show()
