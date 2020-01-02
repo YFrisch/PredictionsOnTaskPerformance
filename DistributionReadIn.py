@@ -5,7 +5,6 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.optimize as opt
 
 
 class DistributionReader:
@@ -46,7 +45,11 @@ class DistributionReader:
         # Fit polynomial function to data
         coeff = np.polyfit(xs, ys, deg=self.poly_degree)
 
-        # TODO: Discretize function
+        # TODO: Quantify error of polynomial function fit (e.g. MSE)
+
+        # TODO: Consider other function fitting approaches (e.g. RBFs)
+
+        # TODO: Discretize fitted function to suit whole points in a test
 
         # return Polynomial(coeff)
         return coeff
