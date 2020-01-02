@@ -12,6 +12,10 @@ class DistributionReader:
 
     def __init__(self):
         self.distributions = np.array([0, "0", (0, 0)]).reshape((1, 3))
+        self.poly_degree = 2
+
+    def set_poly_degree(self, new):
+        self.poly_degree = new
 
     # Return discrete function from image
     def fit_dist(self, image):
@@ -40,8 +44,7 @@ class DistributionReader:
         ys = np.delete(ys, indices)
 
         # Fit polynomial function to data
-        poly_fit_deg = 3
-        coeff = np.polyfit(xs, ys, deg=poly_fit_deg)
+        coeff = np.polyfit(xs, ys, deg=self.poly_degree)
 
         # TODO: Discretize function
 
