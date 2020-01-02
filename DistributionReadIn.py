@@ -18,13 +18,18 @@ class DistributionReader:
 
         # TODO: Cut offsets from image (x-axis
 
+        print("GRAY VALUES ::: MAX: {} MIN: {}".format(np.max(image), np.min(image)))
+
+        threshold = 0.5*(np.max(image) + np.min(image))
+
         xs = np.arange(0, np.shape(image)[1])
         ys = []
+        y_scale = np.shape(image)[1]
         for x in xs:
             value = -1
             for y in np.arange(np.shape(image)[0]-1, 0, -1):
-                if image[y, x] <= 0.2:
-                    value = y
+                if image[y, x] <= threshold:
+                    value = y/y_scale
                     break
             ys.append(value)
         ys = np.array(ys)
@@ -35,7 +40,7 @@ class DistributionReader:
         ys = np.delete(ys, indices)
 
         # Fit polynomial function to data
-        poly_fit_deg = 2
+        poly_fit_deg = 3
         coeff = np.polyfit(xs, ys, deg=poly_fit_deg)
 
         # TODO: Discretize function
@@ -49,7 +54,7 @@ class DistributionReader:
         img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
         plt.figure()
         plt.title(path)
-        plt.imshow(img, cmap="gray")
+        plt.imshow(img, cmap="gray", origin='lower')
         new_dist = np.array([self.fit_dist(img), path, np.shape(img)]).reshape((1, 3))
         self.distributions = np.concatenate((self.distributions, new_dist), axis=0)
         return None
