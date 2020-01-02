@@ -11,7 +11,7 @@ import scipy.optimize as opt
 class DistributionReader:
 
     def __init__(self):
-        self.distributions = []
+        self.distributions = np.array([0, "0", (0, 0)]).reshape((1, 3))
 
     # Return discrete function from image
     def fit_dist(self, image):
@@ -47,21 +47,27 @@ class DistributionReader:
     def read_in_dist(self, path):
         img = plt.imread(path)
         img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
-        self.distributions.append(self.fit_dist(img))
+        plt.figure()
+        plt.title(path)
+        plt.imshow(img, cmap="gray")
+        new_dist = np.array([self.fit_dist(img), path, np.shape(img)]).reshape((1, 3))
+        self.distributions = np.concatenate((self.distributions, new_dist), axis=0)
         return None
 
-    # Plot a distribution with spec index
-    def plot_dist(self, index):
-        if index >= len(self.distributions):
-            print("Invalid distribution index")
+    # Plot a distribution with spec file name
+    def plot_dist(self, path):
+        index = np.where(self.distributions[:, 1] == path)[0]
+        if index.size == 0:
+            print("Distribution with the given path name not found")
             return None
         else:
+            index = index[0]
             plt.figure()
-            x = np.arange(0, 250, 0.1)
-            p = np.poly1d(self.distributions[index])
+            x = np.arange(0, self.distributions[index][2][1], 0.1)
+            p = np.poly1d(self.distributions[index][0])
             y = np.array([p(xi) for xi in x])
             plt.plot(x, y)
-            plt.title("Distribution {}".format(index))
+            plt.title("Fitted {}".format(self.distributions[index][1]))
             plt.show()
             return None
 
