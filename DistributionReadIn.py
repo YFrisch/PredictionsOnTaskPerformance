@@ -12,6 +12,7 @@ class DistributionReader:
     def __init__(self):
         self.distributions = np.array([0, "0", (0, 0)]).reshape((1, 3))
         self.poly_degree = 2
+        self.points_per_task = 5
 
     def set_poly_degree(self, new):
         self.poly_degree = new
@@ -49,9 +50,6 @@ class DistributionReader:
 
         # TODO: Consider other function fitting approaches (e.g. RBFs)
 
-        # TODO: Discretize fitted function to suit whole points in a test
-
-        # return Polynomial(coeff)
         return coeff
 
     # Read image, transform it to grayscale, get distribution and append to distribution list
@@ -82,3 +80,18 @@ class DistributionReader:
             plt.show()
             return None
 
+    # Call a dist. function with given path and input x
+    def discrete_call(self, path, x):
+        index = np.where(self.distributions[:, 1] == path)[0]
+        if index.size == 0:
+            print("Distribution with the given path name not found")
+            return -1
+        else:
+            index = index[0]
+            p = np.poly1d(self.distributions[index][0])
+            # Get discrete bin of input x
+            bins = np.arange(0, 1, 1.0/self.points_per_task)
+            ind = np.digitize(x, bins)
+            # TODO: Get discrete value p_x of that bin (with id=ind)
+            p_x = p(x)
+            return p_x
