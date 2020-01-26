@@ -13,23 +13,23 @@ class DiscreteDistributionReader:
         self.path = path
         self.points_per_task = points
         self.discrete_values = None
-        self.img_shape = None
-        self.img = None
         self.indices = None
         self.ys = None
         self.xs = None
-        self.read_in_dist(self.path, self.points_per_task)
-
+        # Read in image file at path
+        img = plt.imread(self.path)
+        img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
+        self.img_shape = np.shape(img)
+        self.img = img
+        self.discretize()
 
     # Return discrete values per point from image
     def discretize(self):
-
         image = self.img
 
         # TODO: Cut offsets from image
 
         threshold = 0.5*(np.max(image) + np.min(image))
-
         xs = np.arange(0, np.shape(image)[1])
         ys = []
         y_scale = np.shape(image)[1]
@@ -51,22 +51,9 @@ class DiscreteDistributionReader:
 
         # Indices of discrete points
         #TODO: Better step size ? RN we use the middle of the point "intervalls" for every discrete x value
-        self.indices = [int((i+0.5)*len(xs)/(self.points_per_task+1)) for i in range(0, self.points_per_task+1)]
+        #self.indices = [int((i+0.5)*len(xs)/(self.points_per_task+1)) for i in range(0, self.points_per_task+1)]
+        self.indices = np.arange(0, len(xs) + len(xs)/self.points_per_task, len(xs)/self.points_per_task, dtype=int)
         self.discrete_values = ys[self.indices]
-
-        return None
-
-    # Read image, transform it to grayscale, get discrete points and append them to itern list
-    def read_in_dist(self, path, points):
-        img = plt.imread(path)
-        img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
-        self.img_shape = np.shape(img)
-        self.img = img
-
-        self.points_per_task = points
-
-        self.discretize()
-
 
         return None
 
@@ -92,3 +79,12 @@ class DiscreteDistributionReader:
 
         plt.show()
         return None
+
+    # Return Brier-Score for discrete reached points
+    def brier_score(self, points):
+        ppt = np.zeros(shape=(self.points_per_task+1, 1))
+        ppt[points] = 1
+        bs = np.mean([(self.discrete_values[i] - ppt[i])**2 for i in np.arange(0, len(ppt))])
+        print("Brier-Score of '{}' for {} points is {}.".format(self.path, points, bs))
+        return bs
+
