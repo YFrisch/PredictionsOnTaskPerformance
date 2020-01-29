@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  28 JAN 2020 21:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  29 JAN 2020 19:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1821,10 +1821,10 @@ nged.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 39115 strings out of 492162
- 784290 string characters out of 6125292
- 932153 words of memory out of 5000000
- 42939 multiletter control sequences out of 15000+600000
+ 39103 strings out of 492162
+ 783963 string characters out of 6125292
+ 931109 words of memory out of 5000000
+ 42927 multiletter control sequences out of 15000+600000
  583218 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,19n,81p,10149b,871s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1837,7 +1837,7 @@ ocal/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></us
 r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb>
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on acs-questionnaire-geography.pdf (2 pages, 167282 bytes).
+Output written on acs-questionnaire-geography.pdf (2 pages, 166875 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
