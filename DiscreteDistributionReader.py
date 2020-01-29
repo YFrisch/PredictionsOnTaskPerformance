@@ -18,6 +18,7 @@ class DiscreteDistributionReader:
         self.xs = None
         # Read in image file at path
         img = plt.imread(self.path)
+        # Transform the image into grayscale
         img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
         self.img_shape = np.shape(img)
         self.img = img
@@ -25,18 +26,16 @@ class DiscreteDistributionReader:
 
     # Return discrete values per point from image
     def discretize(self):
-        image = self.img
-
         # TODO: Cut offsets from image
 
-        threshold = 0.5*(np.max(image) + np.min(image))
-        xs = np.arange(0, np.shape(image)[1])
+        threshold = 0.5*(np.max(self.img) + np.min(self.img))
+        xs = np.arange(0, self.img_shape[1])
         ys = []
-        y_scale = np.shape(image)[1]
+        y_scale = self.img_shape[1]
         for x in xs:
             value = -1
-            for y in np.arange(np.shape(image)[0]-1, 0, -1):
-                if image[y, x] <= threshold:
+            for y in np.arange(self.img_shape[0]-1, 0, -1):
+                if self.img[y, x] <= threshold:
                     value = y/y_scale
                     break
             ys.append(value)

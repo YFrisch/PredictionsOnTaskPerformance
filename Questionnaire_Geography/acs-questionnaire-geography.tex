@@ -19,7 +19,7 @@ identbarcolor=9c,
 		\node[rectangle, draw=black, rounded corners=0mm, minimum width=\boxWidth cm, minimum height=\boxHeight cm, line width=1pt] at (\boxWidth/2,\boxHeight/2) {};
 		
 		% x-axis tiks
-		\def\ytop{0.1}
+		\def\ytop{0}
 		\def\ybottom{-0.1}
 		\draw[line width=1pt] (0, \ytop) -- (0, \ybottom) node[anchor=north] {\large $0$};
 		\draw[line width=1pt] (0.2*\boxWidth, \ytop) -- (0.2*\boxWidth, \ybottom) node[anchor=north] {\large $1$};
@@ -29,7 +29,7 @@ identbarcolor=9c,
 		\draw[line width=1pt] (1*\boxWidth, \ytop) -- (1*\boxWidth, \ybottom) node[anchor=north] {\large $5$};
 		
 		% y-axis tiks
-		\def\xright{0.1}
+		\def\xright{0}
 		\def\xleft{-0.1}
 		\draw[line width=1pt] (\xright, 0) -- (\xleft, 0) node[anchor=east] {\large $0$};
 		\draw[line width=1pt] (\xright, 0.2*\boxHeight) -- (\xleft, 0.2*\boxHeight) node[anchor=east] {\large $0.2$};
