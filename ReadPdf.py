@@ -111,16 +111,24 @@ def box_extraction(cropped_dir_path="./Cropped/"):
 
     # ------------------- ITERATE AND CUT -------------------------- #
 
-    idx = 0
-    for c in contours:
+    # Because the algorithm always finds 2 times the same contour,
+    # where the first one is slightly to big, we skip always the first
+    skip_matching_contour = True
+
+    num_of_pdf = 0
+    for c in enumerate(contours):
         # Returns the location and width,height for every contour
         x, y, w, h = cv2.boundingRect(c)
-        # If the box height is greater then 20, widht is >80,
-        # then only save it as a box in "cropped/" folder.
+
+        # If width and height is geater than 80 pixel
+        # and it is approximately square,
+        # we save the contour.
         if 1.05 * h > w > 80 and 80 < h < 1.05 * w:
-            idx += 1
-            new_img = img[y:y + h, x:x + w]
-            cv2.imwrite(f'PDFs/pdf_{idx}.jpg', new_img)
+            if not skip_matching_contour:
+                num_of_pdf += 1
+                new_img = img[y:y + h, x:x + w]
+                cv2.imwrite(f'PDFs/pdf_{num_of_pdf}.jpg', new_img)
+            skip_matching_contour = not skip_matching_contour
 
 
 box_extraction()
