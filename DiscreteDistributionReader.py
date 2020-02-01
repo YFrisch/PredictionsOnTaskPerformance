@@ -18,8 +18,13 @@ class DiscreteDistributionReader:
         self.xs = None
         # Read in image file at path
         img = plt.imread(self.path)
+        plt.figure()
+        plt.imshow(img)
+        plt.show()
+        print("image shape before ", img.shape)
         # Transform the image into grayscale
         img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
+        print("image shape after ", img.shape)
         self.img_shape = np.shape(img)
         self.img = img
         self.discretize()
