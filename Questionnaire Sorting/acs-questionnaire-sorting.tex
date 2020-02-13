@@ -51,6 +51,19 @@ identbarcolor=9c,
 	\end{tikzpicture}
 }
 
+
+\newcommand{\sortingBoxes}{
+	\begin{tikzpicture}
+		\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} {
+			\def\yPos{-\i*.6}
+			% box
+			\node[shape=rectangle, draw=black, minimum width=4.5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.5,-.5)}]\i.}] 
+			at (0,\yPos) {};
+			\node[shape=rectangle, minimum height=5mm, minimum width=5mm, draw=black, line width=.5pt] at (2.8,\yPos) {};
+		}
+	\end{tikzpicture}
+}
+
 \newcommand{\myTask}[2]{
 	\begin{task}[]{#1}
 		\begin{minipage}{.62\textwidth}
@@ -79,15 +92,20 @@ identbarcolor=9c,
 \begin{document}
 \maketitle
 \vspace{-3mm}
+
+%%%%%% GENERAL INFORMATION %%%%%%
+
 \textbf{Assignment:}
 \begin{itemize}
 	\item Please answer each question in the questionnaire as good as possible.
 	\item Directly afterwards, draw a probability density function inside the given grid.
 	\item It is possible to achieve half points with a maximum of 5 points.
 \end{itemize}
+
+%%%%%% TASK 1 %%%%%%
 	
 \begin{task}[]{Sortieren Sie die Städte nach ihrem Längengrad (1 = nördlichste Stadt, 10 = südlichste Stadt)}
-	\begin{minipage}{.23\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\vspace{-6mm}
 		\textbf{Städte:}
 		\begin{itemize}
@@ -104,25 +122,22 @@ identbarcolor=9c,
 			\item Nürnberg
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{.39\textwidth}
+	\begin{minipage}{.35\textwidth}
 		\vspace{-4mm}
-		\begin{tikzpicture}
-			\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-				% box
-				\node[shape=rectangle, draw=black, rounded corners=0mm, minimum width=5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.9,-.5)}]\i.}] 
-				at (0,-\i*.6) {};
-		\end{tikzpicture}
+		\sortingBoxes
 	\end{minipage}
-	\begin{minipage}{.38\textwidth}
+	\begin{minipage}{.36\textwidth}
 		\probBox
 	\end{minipage}
 	\vspace{-1mm}
 \end{task}
 
+%%%%%% TASK 2 %%%%%%
+
 \begin{task}[]{Sortieren Sie die Kanzler nach ihrer Amtszeit (1 = am frühsten, 10 = am spätesten)}
-	\begin{minipage}{.23\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\vspace{-6mm}
-		\textbf{Städte:}
+		\textbf{Kanzler:}
 		\begin{itemize}
 			\itemsep0em
 			\item Erhard
@@ -137,23 +152,20 @@ identbarcolor=9c,
 			\item Kiesinger
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{.39\textwidth}
+	\begin{minipage}{.35\textwidth}
 		\vspace{-4mm}
-		\begin{tikzpicture}
-		\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-		% box
-		\node[shape=rectangle, draw=black, rounded corners=0mm, minimum width=5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.9,-.5)}]\i.}] 
-		at (0,-\i*.6) {};
-		\end{tikzpicture}
+		\sortingBoxes
 	\end{minipage}
-	\begin{minipage}{.38\textwidth}
+	\begin{minipage}{.36\textwidth}
 		\probBox
 	\end{minipage}
 	\vspace{-1mm}
 \end{task}
 
+%%%%% TASK 3 %%%%%
+
 \begin{task}[]{Sortieren Sie die Todesursachen nach ihrer Häufigkeit in Deutschland in 2017\\(1 = am häufigsten, 10 = am seltensten)}
-	\begin{minipage}{.3\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\vspace{-2mm}
 		\textbf{Krankheiten:}
 		\begin{itemize}
@@ -163,30 +175,27 @@ identbarcolor=9c,
 			\item Lungen- und Bronchialkrebs
 			\item Pneumonie
 			\item Herzinfarkt
-			\item Vorhofflimmern und Vorhofflattern
+			\item Vorhofflimmern \& Vorhofflattern
 			\item Chronische ischämische Herzkrankheit
 			\item Brustdrüsenkrebs
 			\item Hypertensive Herzkrankheit
 			\item Sonstige chronische obstruktive Lungenkrankheit
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{.32\textwidth}
+	\begin{minipage}{.35\textwidth}
 		\vspace{-4mm}
-		\begin{tikzpicture}
-		\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-		% box
-		\node[shape=rectangle, draw=black, rounded corners=0mm, minimum width=4.5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.6,-.5)}]\i.}] 
-		at (0,-\i*.6) {};
-		\end{tikzpicture}
+		\sortingBoxes
 	\end{minipage}
-	\begin{minipage}{.38\textwidth}
+	\begin{minipage}{.36\textwidth}
 		\probBox
 	\end{minipage}
 	\vspace{-1mm}
 \end{task}
 
+%%%%%% TASK 4 %%%%%
+
 \begin{task}[]{Sortieren Sie die Berufe nach ihrem Durchschnittseinkommen \\(Mittleres Bruttogehalt pro Monat in Deutschland; 1 = am höchsten, 10 = am niedrigsten)}
-	\begin{minipage}{.23\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\vspace{-6mm}
 		\textbf{Berufe:}
 		\begin{itemize}
@@ -203,23 +212,20 @@ identbarcolor=9c,
 			\item Lehrer/in Gymnasium
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{.39\textwidth}
+	\begin{minipage}{.35\textwidth}
 		\vspace{-4mm}
-		\begin{tikzpicture}
-		\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-		% box
-		\node[shape=rectangle, draw=black, rounded corners=0mm, minimum width=5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.9,-.5)}]\i.}] 
-		at (0,-\i*.6) {};
-		\end{tikzpicture}
+		\sortingBoxes
 	\end{minipage}
-	\begin{minipage}{.38\textwidth}
+	\begin{minipage}{.36\textwidth}
 		\probBox
 	\end{minipage}
 	\vspace{-1mm}
 \end{task}
 
+%%%%%% TASK 5 %%%%%
+
 \begin{task}[]{Sortieren Sie die ``Persönlichkeiten'' nach ihrer Follower-Zahl auf Instagram \\(1 = am meisten, 10 = am wenigsten)}
-	\begin{minipage}{.23\textwidth}
+	\begin{minipage}{.29\textwidth}
 		\vspace{-6mm}
 		\textbf{Persönlichkeiten:}
 		\begin{itemize}
@@ -236,16 +242,11 @@ identbarcolor=9c,
 			\item Leonel Messi
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}{.39\textwidth}
+	\begin{minipage}{.35\textwidth}
 		\vspace{-4mm}
-		\begin{tikzpicture}
-		\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-		% box
-		\node[shape=rectangle, draw=black, rounded corners=0mm, minimum width=5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.9,-.5)}]\i.}] 
-		at (0,-\i*.6) {};
-		\end{tikzpicture}
+		\sortingBoxes
 	\end{minipage}
-	\begin{minipage}{.38\textwidth}
+	\begin{minipage}{.36\textwidth}
 		\probBox
 	\end{minipage}
 	\vspace{-1mm}

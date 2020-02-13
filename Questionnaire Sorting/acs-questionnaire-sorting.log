@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  11 FEB 2020 16:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  13 FEB 2020 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**acs-questionnaire-geography.tex
-(./acs-questionnaire-geography.tex
+**acs-questionnaire-sorting.tex
+(./acs-questionnaire-sorting.tex
 LaTeX2e <2019-10-01> patch level 3
 (/usr/local/texlive/2019/texmf-dist/tex/latex/tuda-ci/tudaexercise.cls
 (/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/expl3.sty
@@ -1564,61 +1564,61 @@ Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 \vwcol@outputbox=\box68
 )
 LaTeX Font Info:    Trying to load font information for T1+XCharter-TLF on inpu
-t line 79.
+t line 92.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/xcharter/T1XCharter-TLF.fd
 File: T1XCharter-TLF.fd 2017/06/25 (autoinst) Font definitions for T1/XCharter-
 TLF.
 )
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 79.
+(Font)              scaled to size 10.0pt on input line 92.
 
-(./acs-questionnaire-geography.aux)
-\openout1 = `acs-questionnaire-geography.aux'.
+(./acs-questionnaire-sorting.aux)
+\openout1 = `acs-questionnaire-sorting.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 7
-9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 9
+2.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 79.
-LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 7
-9.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 92.
+LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 9
+2.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 79.
-LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 7
-9.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 92.
+LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 9
+2.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 )
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-Package scrbase Info: activating english \contentsname on input line 79.
-Package scrbase Info: activating english \listfigurename on input line 79.
-Package scrbase Info: activating english \listtablename on input line 79.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+Package scrbase Info: activating english \contentsname on input line 92.
+Package scrbase Info: activating english \listfigurename on input line 92.
+Package scrbase Info: activating english \listtablename on input line 92.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1680,7 +1680,7 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box70
-Package hyperref Info: Link coloring OFF on input line 79.
+Package hyperref Info: Link coloring OFF on input line 92.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -1693,12 +1693,12 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count306
 )
-LaTeX Info: Redefining \ref on input line 79.
-LaTeX Info: Redefining \pageref on input line 79.
-LaTeX Info: Redefining \nameref on input line 79.
- (./acs-questionnaire-geography.out) (./acs-questionnaire-geography.out)
+LaTeX Info: Redefining \ref on input line 92.
+LaTeX Info: Redefining \pageref on input line 92.
+LaTeX Info: Redefining \nameref on input line 92.
+ (./acs-questionnaire-sorting.out) (./acs-questionnaire-sorting.out)
 \@outlinefile=\write4
-\openout4 = `acs-questionnaire-geography.out'.
+\openout4 = `acs-questionnaire-sorting.out'.
 
 Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           Using `bookmark' together with `hyperref' is recommended,
@@ -1707,7 +1707,7 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
-(scrartcl)           before \begin{document} on input line 79.
+(scrartcl)           before \begin{document} on input line 92.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2019/12/03 v1.28 PDF bookmarks (HO)
@@ -1719,92 +1719,112 @@ Package auxhook Info: \AddLineBeginMainAux comes a little late,
 e 168.
 \BKM@id=\count307
 ))
-Package scrbase Info: activating english \sheetname on input line 79.
-Package scrbase Info: activating english \taskname on input line 79.
-Package scrbase Info: activating english \solutionname on input line 79.
-Package scrbase Info: activating english \StudentNamename on input line 79.
-Package scrbase Info: activating english \StudentIDname on input line 79.
+Package scrbase Info: activating english \sheetname on input line 92.
+Package scrbase Info: activating english \taskname on input line 92.
+Package scrbase Info: activating english \solutionname on input line 92.
+Package scrbase Info: activating english \StudentNamename on input line 92.
+Package scrbase Info: activating english \StudentIDname on input line 92.
 
 ABD: EveryShipout initializing macros ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 79.
+LaTeX Info: Redefining \selectfont on input line 92.
 LaTeX Font Info:    Trying to load font information for T1+Roboto-LF on input l
-ine 81.
+ine 94.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/roboto/T1Roboto-LF.fd
 File: T1Roboto-LF.fd 2019/12/11 (autoinst) Font definitions for T1/Roboto-LF.
 )
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 81.
+(Font)              to `T1/Roboto-LF/regular/n' on input line 94.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 10.0pt on input line 81.
+(Font)              scaled to size 10.0pt on input line 94.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' will be aliased
-(Font)              to `T1/Roboto-LF/bold/n' on input line 81.
+(Font)              to `T1/Roboto-LF/bold/n' on input line 94.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 10.0pt on input line 81.
+(Font)              scaled to size 10.0pt on input line 94.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' will be aliased
-(Font)              to `T1/Roboto-LF/bold/n' on input line 81.
+(Font)              to `T1/Roboto-LF/bold/n' on input line 94.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 20.74pt on input line 81.
+(Font)              scaled to size 20.74pt on input line 94.
 <tuda_logo.pdf, id=7, 156.49065pt x 62.59515pt>
 File: tuda_logo.pdf Graphic file (type pdf)
 <use tuda_logo.pdf>
-Package pdftex.def Info: tuda_logo.pdf  used on input line 81.
+Package pdftex.def Info: tuda_logo.pdf  used on input line 94.
 (pdftex.def)             Requested size: 156.49501pt x 62.59605pt.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 82.
+(Font)              scaled to size 10.0pt on input line 98.
 LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
-ut line 84.
+ut line 100.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
 File: TS1XCharter-TLF.fd 2017/06/25 (autoinst) Font definitions for TS1/XCharte
 r-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 84.
+(Font)              scaled to size 10.0pt on input line 100.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 89.
+(Font)              <7> on input line 107.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 89.
+(Font)              <5> on input line 107.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 117.
+(Font)              scaled to size 12.0pt on input line 130.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 117.
+(Font)              <12> on input line 130.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 117.
+(Font)              <8> on input line 130.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 117.
+(Font)              <6> on input line 130.
 
-Overfull \hbox (3.70601pt too wide) in paragraph at lines 90--121
+Overfull \hbox (8.41858pt too wide) in paragraph at lines 130--131
+[][] 
+ []
+
+
+Overfull \hbox (3.70601pt too wide) in paragraph at lines 108--134
 $[]$ $[]$ $[]$
  []
 
 
-Overfull \hbox (3.70601pt too wide) in paragraph at lines 123--154
+Overfull \hbox (8.41858pt too wide) in paragraph at lines 160--161
+[][] 
+ []
+
+
+Overfull \hbox (3.70601pt too wide) in paragraph at lines 138--164
 $[]$ $[]$ $[]$
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 155.
+(hyperref)                removing `\\' on input line 167.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--168
+Underfull \hbox (badness 5316) in paragraph at lines 178--179
+[]\T1/XCharter-TLF/m/n/10 Vorhofflimmern & Vorhof-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
 []\T1/XCharter-TLF/m/n/10 Chronische is-chämis-che
  []
 
 
-Overfull \hbox (3.7138pt too wide) in paragraph at lines 156--187
+Overfull \hbox (8.41858pt too wide) in paragraph at lines 190--191
+[][] 
+ []
+
+
+Overfull \hbox (3.70601pt too wide) in paragraph at lines 168--194
 $[]$ $[]$ $[]$
  []
 
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 187.
+(Font)              to `T1/Roboto-LF/regular/n' on input line 194.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 9.0pt on input line 187.
+(Font)              scaled to size 9.0pt on input line 194.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 187.
+(Font)              <9> on input line 194.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 187.
+(Font)              scaled to size 9.0pt on input line 194.
 [1
 
 
@@ -1812,45 +1832,50 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 logo.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 188.
+(hyperref)                removing `\\' on input line 197.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--204
-[]\T1/XCharter-TLF/m/n/10 Lehrer/in Gym-na-
+Overfull \hbox (8.41858pt too wide) in paragraph at lines 220--221
+[][] 
  []
 
 
-Overfull \hbox (3.70601pt too wide) in paragraph at lines 189--220
+Overfull \hbox (3.70601pt too wide) in paragraph at lines 198--224
 $[]$ $[]$ $[]$
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 221.
+(hyperref)                removing `\\' on input line 227.
 
 
-Overfull \hbox (3.70601pt too wide) in paragraph at lines 222--253
+Overfull \hbox (8.41858pt too wide) in paragraph at lines 250--251
+[][] 
+ []
+
+
+Overfull \hbox (3.70601pt too wide) in paragraph at lines 228--254
 $[]$ $[]$ $[]$
  []
 
 [2] [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 265.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 265.
- (./acs-questionnaire-geography.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 265.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 265.
-Package rerunfilecheck Info: File `acs-questionnaire-geography.out' has not cha
-nged.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
+ (./acs-questionnaire-sorting.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
+Package rerunfilecheck Info: File `acs-questionnaire-sorting.out' has not chang
+ed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 39430 strings out of 492162
- 790093 string characters out of 6125292
- 948129 words of memory out of 5000000
- 43253 multiletter control sequences out of 15000+600000
+ 39431 strings out of 492162
+ 790058 string characters out of 6125292
+ 956442 words of memory out of 5000000
+ 43254 multiletter control sequences out of 15000+600000
  583218 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,19n,81p,10149b,908s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,19n,81p,10147b,908s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}{/
 usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_uy5hgr.enc}{/usr
 /local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_q7u3cc.enc}</usr/lo
@@ -1860,7 +1885,7 @@ ocal/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></us
 r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb>
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on acs-questionnaire-geography.pdf (3 pages, 190084 bytes).
+Output written on acs-questionnaire-sorting.pdf (3 pages, 190684 bytes).
 PDF statistics:
  80 PDF objects out of 1000 (max. 8388607)
  67 compressed objects within 1 object stream

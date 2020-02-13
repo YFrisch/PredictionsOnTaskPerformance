@@ -18,4 +18,5 @@ Repository for the Applied Cognitive Science Project at TU Darmstadt WS2019/2020
 ## Questions:
 
 1. Are 10 items to much? Humans can only hold 7 ± 2 items in short term memory.
-2. Exchange social media question?
+2. Maybe 10 instead of 5 questions (to compensate)?
+3. Exchange social media question?
