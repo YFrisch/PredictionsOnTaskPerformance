@@ -1,10 +1,10 @@
 # Main Python File
-from DiscreteDistributionReader import DiscreteDistributionReader
+from src.DiscreteDistributionReader import DiscreteDistributionReader
 
 # dr = DiscreteDistributionReader(path="curve.png", points=5)
-dr1 = DiscreteDistributionReader(path="pdf_1.jpg", points=5)
-dr2 = DiscreteDistributionReader(path="pdf_2.jpg", points=5)
-dr3 = DiscreteDistributionReader(path="pdf_3.jpg", points=5)
+dr1 = DiscreteDistributionReader(path="../assets/PDFs/pdf_1.jpg", points=5)
+dr2 = DiscreteDistributionReader(path="../assets/PDFs/pdf_2.jpg", points=5)
+dr3 = DiscreteDistributionReader(path="../assets/PDFs/pdf_3.jpg", points=5)
 
 dr1.plot()
 dr2.plot()

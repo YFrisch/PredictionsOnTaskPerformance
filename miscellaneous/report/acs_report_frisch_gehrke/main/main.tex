@@ -1,0 +1,52 @@
+\documentclass[
+pdfa=false,  % to avoid compilation error
+color=9c,
+logo=body,
+class=article,
+logofile=../logos/tuda_logo.pdf
+]{tudapub}
+
+% ---------- Packages ---------- % 
+
+\usepackage[main=english, ngerman]{babel}
+\usepackage{lipsum} % for dummy text
+\usepackage{subfiles} % Best loaded last in the preamble
+
+
+% ---------- Notes ---------- % 
+
+% TODO: Do we want two columns?
+
+
+% ---------- Make Title ---------- % 
+
+\author{Yannik P. Frisch, Maximilian A. Gehrke}
+\title{Predictions on Task Performance}
+\date{March 10, 2020}
+\subtitle{Applied Cognitive Science}
+\addTitleBoxLogo*{\includegraphics[width=.7\linewidth]{../logos/ccs_logo.png}}
+
+
+\begin{document}
+\maketitle
+
+% ---------- Abstract ---------- % 
+\begin{abstract}
+	\lipsum
+\end{abstract}
+
+\section{Introduction}
+	\subfile{../sections/introduction.tex}
+
+\section{Method}
+	\subfile{../sections/introduction.tex}
+
+\section{Results}
+	\subfile{../sections/introduction.tex}
+
+\section{Discussion}
+	\subfile{../sections/discussion.tex}
+
+
+
+\end{document}

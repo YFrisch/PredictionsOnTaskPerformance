@@ -10,3 +10,6 @@ __pycache__
 .log
 .out
 .synctex.gz
+
+# Ignore the data to build the data recognition neural network
+DR_Data/

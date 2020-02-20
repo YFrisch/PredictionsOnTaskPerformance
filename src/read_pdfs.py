@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-folder_path = f'Subjects'
+folder_path = f'../Subjects'
 picture_name = f'subject_2'
 
 
@@ -73,12 +73,12 @@ def box_extraction(cropped_dir_path="./Cropped/"):
     # Morphological operation to detect verticle lines from an image
     img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=3)
     verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=3)
-    cv2.imwrite("PDFs/verticle_lines.jpg", verticle_lines_img)
+    cv2.imwrite("../assets/PDFs/verticle_lines.jpg", verticle_lines_img)
 
     # Morphological operation to detect horizontal lines from an image
     img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=3)
     horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=3)
-    cv2.imwrite("PDFs/horizontal_lines.jpg", horizontal_lines_img)
+    cv2.imwrite("../assets/PDFs/horizontal_lines.jpg", horizontal_lines_img)
 
     # ------------------------ COMBINING LINES ------------------------------ #
 
@@ -98,7 +98,7 @@ def box_extraction(cropped_dir_path="./Cropped/"):
     # FOR DEBUGGING
     # Enable this line to see verticle and horizontal
     # lines in the image which is used to find boxes
-    cv2.imwrite("PDFs/img_final_bin.jpg", img_final_bin)
+    cv2.imwrite("../assets/PDFs/img_final_bin.jpg", img_final_bin)
 
     # ------------------- FIND AND SORT CONTOURS ---------------------------- #
 
