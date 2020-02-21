@@ -127,18 +127,46 @@ identbarcolor=9c,
 
 %%%%%% GENERAL INFORMATION %%%%%%
 
+\textbf{VP-Code}
+\begin{itemize}
+	\begin{minipage}{.45\textwidth}
+		\vspace{-2cm}
+		\itemsep.55em
+		\item Zweiter Buchstabe des Vornamens des Vaters
+		\item Vorletzter Buchstabe des Vornamens der Mutter
+		\item Letzter Buchstabe ihres Nachnamens
+		\item Vorletzter Buchstabe Ihres Vornamens	
+	\end{minipage}
+		\begin{tikzpicture}
+			\foreach \i in {1, 2, 3, 4} {
+				\def\yPos{-2 -\i*.6}
+				\node[shape=rectangle, draw=black, minimum width=5mm, minimum height=5mm, line width=.5pt] 
+				at (0,\yPos) {};
+			}
+		\end{tikzpicture}
+	\begin{minipage}{.55\textwidth}
+		
+	\end{minipage}
+\end{itemize}
+
 \textbf{Aufgabe:}
 \begin{itemize}
 	\item Im Folgenden werden Sie dazu aufgefordert Begriffe in eine bestimmte Reihenfolge zu sortieren.
 	\item Schreiben Sie dafür die Begriffe in die rechteckigen Kästchen in der Mitte jeder Aufgabe.\\Bitte lassen Sie die kleinen Quadrate auf alle Fälle frei!
-	\item Nachdem Sie die Begriffe einer Aufgabe sortiert haben, zeichnen Sie bitte eine Wahrscheinlichkeitsverteilung in das große Quadrat auf der rechten Seite.
-	\item Eine Wahrscheinlichkeitsverteilung ordnen einer Menge Zahlen zwischen 0 und 1 zu. In diesem Fall heißt dies, sie sollen bestimmen, wie sicher Sie sich sind, dass Sie die Aufgabe 100\% korrekt gelöst haben (=1 = 100\%sicehr, 0 = 0\% sicher). 
+	\item Nachdem Sie die Begriffe einer Aufgabe sortiert haben, zeichnen Sie bitte die Wahrscheinlichkeitsverteilung Ihrer erwarteten Leistung in das  Quadrat auf der rechten Seite.
+	
 \end{itemize}
+
+\textbf{Wahrscheinlichkeitsverteilungen:}
+\begin{itemize}
+	\item Eine Wahrscheinlichkeitsverteilung ordnen jedem item auf der x-Achse einen Wahrscheinlichkeitswert (0-1) auf der y-Achse zu.
+\end{itemize}
+\newpage
 
 %%%%%% TASK 1 %%%%%%
 	
 \sortingTask{
-	Sortieren Sie die Städte nach ihrem Längengrad (1 = nördlichste Stadt, 10 = südlichste Stadt)
+	Sortieren Sie die Städte nach ihrem Längengrad (1 = nördlichste Stadt, 10 = südlichste Stadt).
 }{
 	\textbf{Städte:}
 	\begin{itemize}
@@ -154,7 +182,7 @@ identbarcolor=9c,
 %%%%%% TASK 2 %%%%%%
 
 \sortingTask{
-	Sortieren Sie die Kanzler nach ihrer Amtszeit (1 = am frühsten, 10 = am spätesten)
+	Sortieren Sie die Kanzler nach ihrer Amtszeit (1 = am frühsten, 5 = am spätesten).
 }{
 	\textbf{Kanzler:}
 	\begin{itemize}
@@ -170,7 +198,7 @@ identbarcolor=9c,
 %%%%% TASK 3 %%%%%
 
 \sortingTask{
-	Sortieren Sie die Todesursachen nach ihrer Häufigkeit in Deutschland in 2017\\(1 = am häufigsten, 10 = am seltensten)
+	Sortieren Sie die Todesursachen für Frauen in Deutschland in 2017 nach ihrer Häufigkeit\\(1 = am häufigsten, 5 = am seltensten).
 }{
 	\textbf{Krankheiten:}
 	\begin{itemize}
@@ -186,7 +214,7 @@ identbarcolor=9c,
 %%%%%% TASK 4 %%%%%
 
 \sortingTask{
-	Sortieren Sie die Berufe nach ihrem Durchschnittseinkommen \\(Mittleres Bruttogehalt pro Monat in Deutschland; 1 = am höchsten, 10 = am niedrigsten)
+	Sortieren Sie die Berufe nach ihrem Durchschnittseinkommen \\(Mittleres Bruttogehalt pro Monat in Deutschland; 1 = am höchsten, 5 = am niedrigsten).
 }{
 	\textbf{Berufe:}
 	\begin{itemize}
@@ -202,7 +230,7 @@ identbarcolor=9c,
 %%%%%% TASK 5 %%%%%
 
 \sortingTask{
-	Sortieren Sie die Sprachen nach der Anzahl ihrer Muttersprachler (1 = am meisten, 5 = am wenigsten)
+	Sortieren Sie die Sprachen nach der Anzahl ihrer Muttersprachler (1 = am meisten, 5 = am wenigsten).
 }{
 	\textbf{Sprachen:}
 	\begin{itemize}
@@ -218,7 +246,7 @@ identbarcolor=9c,
 %%%%%% TASK 6 %%%%%
 
 \sortingTask{
-	Sortieren Sie das Obst nach ihrer Kalorienanzahl (1 = am wenigsten pro 100g, 5 = am meisten pro 100g)
+	Sortieren Sie das Obst nach ihrer Kalorienanzahl pro 100g (1 = am wenigsten, 5 = am meisten).
 }{
 	\textbf{Obst:}
 	\begin{itemize}
@@ -234,7 +262,7 @@ identbarcolor=9c,
 %%%%%% TASK 7 %%%%%	
 
 \sortingTask{
-	Bestimmen Sie die Ausstattung privater deutscher Haushalte mit folgenden Haushaltsgeräten im Jahr 2017 (1 = am häufigsten, 5 = am seltensten)
+	Bestimmen Sie, welche der folgenden Geräte im Jahr 2017 in deutschen Haushalten am häufigsten vertreten waren (1 = am häufigsten, 5 = am seltensten).
 }{
 	\textbf{Haushaltsgeräte:}
 	\begin{itemize}
@@ -249,14 +277,51 @@ identbarcolor=9c,
 
 \subsection*{\normalsize Bitte zeichnen Sie in das folgende Feld ein, wie gut Sie die bisherigen Aufgaben beantwortet haben.}
 \begin{center}
-	\vspace{7mm}
-	\probBox
+
+\begin{tikzpicture}[scale=1]
+% Variables
+\def\boxHeight{5} % in cm
+\def\boxWidth{15} % in cm
+
+\def\xlabel{Prozent korrekt}
+
+% Box
+\node[rectangle, draw=black, rounded corners=0mm, minimum width=\boxWidth cm, minimum height=\boxHeight cm, line width=1pt] at (\boxWidth/2,\boxHeight/2) {};
+
+% x-axis tiks
+\def\ytop{0}
+\def\ybottom{-0.1}
+\draw[line width=1pt] (0, \ytop) -- (0, \ybottom) node[anchor=north] {\large $0$};
+\draw[line width=1pt] (0.2*\boxWidth, \ytop) -- (0.2*\boxWidth, \ybottom) node[anchor=north] {\large $20$};
+\draw[line width=1pt] (0.4*\boxWidth, \ytop) -- (0.4*\boxWidth, \ybottom) node[anchor=north] {\large $40$};
+\draw[line width=1pt] (0.6*\boxWidth, \ytop) -- (0.6*\boxWidth, \ybottom) node[anchor=north] {\large $60$};
+\draw[line width=1pt] (0.8*\boxWidth, \ytop) -- (0.8*\boxWidth, \ybottom) node[anchor=north] {\large $80$};
+\draw[line width=1pt] (1*\boxWidth, \ytop) -- (1*\boxWidth, \ybottom) node[anchor=north] {\large $100$};
+
+% y-axis tiks
+\def\xright{0}
+\def\xleft{-0.1}
+\draw[line width=1pt] (\xright, 0) -- (\xleft, 0) node[anchor=east] {\large $0$};
+\draw[line width=1pt] (\xright, 0.2*\boxHeight) -- (\xleft, 0.2*\boxHeight) node[anchor=east] {\large $0.2$};
+\draw[line width=1pt] (\xright, 0.4*\boxHeight) -- (\xleft, 0.4*\boxHeight) node[anchor=east] {\large $0.4$};
+\draw[line width=1pt] (\xright, 0.6*\boxHeight) -- (\xleft, 0.6*\boxHeight) node[anchor=east] {\large $0.6$};
+\draw[line width=1pt] (\xright, 0.8*\boxHeight) -- (\xleft, 0.8*\boxHeight) node[anchor=east] {\large $0.8$};
+\draw[line width=1pt] (\xright, 1*\boxHeight) -- (\xleft, 1*\boxHeight) node[anchor=east] {\large $1$};	
+
+% Draw grid lines
+% \draw[step=.5cm, color=gray] (0,0) grid (\boxWidth, \boxHeight);
+
+% Captions
+\node[] at (\boxWidth/2, -.8) {\xlabel}; % x-axis
+\node[rotate=90] at (-1.1, \boxHeight/2) {Wahrscheinlichkeit}; % y-axis
+\end{tikzpicture}
+
 \end{center}
 
 %%%%%% TASK 8 %%%%%
 
 \sortingTask{
-	Nennen und ordnen Sie die 5 Europäischen Städte mit den meisten Einwohnern \\(1 = am meisten, 5 = am wenigsten)
+	Nennen und ordnen Sie die fünf europäischen Städte mit den meisten Einwohnern \\(1 = am meisten, 5 = am wenigsten).
 }{	
 	\textbf{Notizen:}
 	
