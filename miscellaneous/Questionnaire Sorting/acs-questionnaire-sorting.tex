@@ -14,8 +14,8 @@ identbarcolor=9c,
 \newcommand{\probBox}{
 	\begin{tikzpicture}[scale=1]
 		% Variables
-		\def\boxHeight{5} % in cm
-		\def\boxWidth{5} % in cm
+		\def\boxHeight{4.5} % in cm
+		\def\boxWidth{4.5} % in cm
 		
 		\def\xlabel{Prozent korrekt}
 		
@@ -54,13 +54,26 @@ identbarcolor=9c,
 
 \newcommand{\sortingBoxes}{
 	\begin{tikzpicture}
-		\foreach \i in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} {
-			\def\yPos{-\i*.6}
+		\foreach \i in {1, 2, 3, 4, 5} {
+			\def\yPos{-\i*.8}
 			% box
-			\node[shape=rectangle, draw=black, minimum width=4.5cm, minimum height=.5cm, line width=.5pt, label={[shift={(-2.5,-.5)}]\i.}] 
+			\node[shape=rectangle, draw=black, minimum width=4.5cm, minimum height=.7cm, line width=.5pt, label={[shift={(-2.5,-.6)}]\i.}] 
 			at (0,\yPos) {};
-			\node[shape=rectangle, minimum height=5mm, minimum width=5mm, draw=black, line width=.5pt] at (2.8,\yPos) {};
+			
+			\node[shape=rectangle, draw=black, minimum width=7mm, minimum height=7mm, line width=.5pt] 
+			at (3.4,\yPos) {};
+			
+			\draw (2.7,-0.45) -- (2.7, -4.35);
+			
+			
 		}
+	\end{tikzpicture}
+}
+
+\newcommand{\evalBoxes}{
+	\begin{tikzpicture}[scale=1]
+		\node[shape=rectangle, draw=black, minimum height=4cm, minimum width=7mm] at (14, 8) {};
+		
 	\end{tikzpicture}
 }
 
@@ -83,6 +96,25 @@ identbarcolor=9c,
 	}
 }
 
+% TEMPLATE for the sorting task
+\newcommand{\sortingTask}[2] {
+	\begin{task}[]{#1}
+		\begin{minipage}{.25\textwidth}
+			\vspace{-6mm}
+			#2
+			\hfill
+		\end{minipage}
+		\begin{minipage}{.4\textwidth}
+			\vspace{-4mm}
+			\sortingBoxes
+		\end{minipage}
+		\begin{minipage}{.35\textwidth}
+			\probBox
+		\end{minipage}
+		\vspace{-1mm}
+	\end{task}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Predictions on Task Performance\\- Sorting -}
@@ -97,171 +129,141 @@ identbarcolor=9c,
 
 \textbf{Aufgabe:}
 \begin{itemize}
-	\item Im Folgenden werden Sie dazu aufgefordert bestimmte Begriffe in einer vorgegebenen Reihenfolge zu sortieren.
-	\item Schreiben Sie dafür die Begriffe in die rechteckigen Kästchen in der Mitte jeder Aufgabe.
+	\item Im Folgenden werden Sie dazu aufgefordert Begriffe in eine bestimmte Reihenfolge zu sortieren.
+	\item Schreiben Sie dafür die Begriffe in die rechteckigen Kästchen in der Mitte jeder Aufgabe.\\Bitte lassen Sie die kleinen Quadrate auf alle Fälle frei!
 	\item Nachdem Sie die Begriffe einer Aufgabe sortiert haben, zeichnen Sie bitte eine Wahrscheinlichkeitsverteilung in das große Quadrat auf der rechten Seite.
-	\item Bitte lassen Sie die kleinen Quadrate auf alle Fälle frei!
+	\item Eine Wahrscheinlichkeitsverteilung ordnen einer Menge Zahlen zwischen 0 und 1 zu. In diesem Fall heißt dies, sie sollen bestimmen, wie sicher Sie sich sind, dass Sie die Aufgabe 100\% korrekt gelöst haben (=1 = 100\%sicehr, 0 = 0\% sicher). 
 \end{itemize}
 
 %%%%%% TASK 1 %%%%%%
 	
-\begin{task}[]{Sortieren Sie die Städte nach ihrem Längengrad (1 = nördlichste Stadt, 10 = südlichste Stadt)}
-	\begin{minipage}{.29\textwidth}
-		\vspace{-6mm}
-		\textbf{Städte:}
-		\begin{itemize}
-			\itemsep0em
-			\item Kiel
-			\item Hamburg
-			\item Bremen
-			\item Berlin
-			\item Hannover
-			\item Rotterdam
-			\item London
-			\item Köln
-			\item FFM
-			\item Nürnberg
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}{.35\textwidth}
-		\vspace{-4mm}
-		\sortingBoxes
-	\end{minipage}
-	\begin{minipage}{.36\textwidth}
-		\probBox
-	\end{minipage}
-	\vspace{-1mm}
-\end{task}
+\sortingTask{
+	Sortieren Sie die Städte nach ihrem Längengrad (1 = nördlichste Stadt, 10 = südlichste Stadt)
+}{
+	\textbf{Städte:}
+	\begin{itemize}
+		\itemsep0em
+		\item Hamburg
+		\item Kiel
+		\item Hannover
+		\item Bremen
+		\item Göttingen
+	\end{itemize}
+}
 
 %%%%%% TASK 2 %%%%%%
 
-\begin{task}[]{Sortieren Sie die Kanzler nach ihrer Amtszeit (1 = am frühsten, 10 = am spätesten)}
-	\begin{minipage}{.29\textwidth}
-		\vspace{-6mm}
-		\textbf{Kanzler:}
-		\begin{itemize}
-			\itemsep0em
-			\item Erhard
-			\item Adenauer
-			\item Scheel
-			\item Kohl
-			\item Brandt
-			\item Schröder
-			\item Schmidt
-			\item Merkel
-			\item Bismarck
-			\item Kiesinger
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}{.35\textwidth}
-		\vspace{-4mm}
-		\sortingBoxes
-	\end{minipage}
-	\begin{minipage}{.36\textwidth}
-		\probBox
-	\end{minipage}
-	\vspace{-1mm}
-\end{task}
+\sortingTask{
+	Sortieren Sie die Kanzler nach ihrer Amtszeit (1 = am frühsten, 10 = am spätesten)
+}{
+	\textbf{Kanzler:}
+	\begin{itemize}
+		\itemsep0em
+		\item Adenauer
+		\item Kohl
+		\item Kiesinger
+		\item Brandt
+		\item Schmidt
+	\end{itemize}
+}
 
 %%%%% TASK 3 %%%%%
 
-\begin{task}[]{Sortieren Sie die Todesursachen nach ihrer Häufigkeit in Deutschland in 2017\\(1 = am häufigsten, 10 = am seltensten)}
-	\begin{minipage}{.29\textwidth}
-		\vspace{-2mm}
-		\textbf{Krankheiten:}
-		\begin{itemize}
-			\itemsep0em
-			\item Herzinsuffizienz
-			\item Demenz
-			\item Lungen- und Bronchialkrebs
-			\item Pneumonie
-			\item Herzinfarkt
-			\item Vorhofflimmern \& Vorhofflattern
-			\item Chronische ischämische Herzkrankheit
-			\item Brustdrüsenkrebs
-			\item Hypertensive Herzkrankheit
-			\item Sonstige chronische obstruktive Lungenkrankheit
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}{.35\textwidth}
-		\vspace{-4mm}
-		\sortingBoxes
-	\end{minipage}
-	\begin{minipage}{.36\textwidth}
-		\probBox
-	\end{minipage}
-	\vspace{-1mm}
-\end{task}
+\sortingTask{
+	Sortieren Sie die Todesursachen nach ihrer Häufigkeit in Deutschland in 2017\\(1 = am häufigsten, 10 = am seltensten)
+}{
+	\textbf{Krankheiten:}
+	\begin{itemize}
+		\itemsep0em
+		\item Lungenentzündung
+		\item Herzversagen
+		\item Demenz
+		\item Herzinfarkt
+		\item Brustdrüsenkrebs
+	\end{itemize}
+}
 
 %%%%%% TASK 4 %%%%%
 
-\begin{task}[]{Sortieren Sie die Berufe nach ihrem Durchschnittseinkommen \\(Mittleres Bruttogehalt pro Monat in Deutschland; 1 = am höchsten, 10 = am niedrigsten)}
-	\begin{minipage}{.29\textwidth}
-		\vspace{-6mm}
-		\textbf{Berufe:}
-		\begin{itemize}
-			\itemsep0em
-			\item Koch/Köchin
-			\item Informatiker/in
-			\item Bürokaufmann/-frau
-			\item Friseur/-in
-			\item Psychologe/-in
-			\item Bankkaufmann/-frau
-			\item Altenpfleger/-in
-			\item Fahrlehrer/-in
-			\item Arzt/Ärztin
-			\item Lehrer/in Gymnasium
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}{.35\textwidth}
-		\vspace{-4mm}
-		\sortingBoxes
-	\end{minipage}
-	\begin{minipage}{.36\textwidth}
-		\probBox
-	\end{minipage}
-	\vspace{-1mm}
-\end{task}
+\sortingTask{
+	Sortieren Sie die Berufe nach ihrem Durchschnittseinkommen \\(Mittleres Bruttogehalt pro Monat in Deutschland; 1 = am höchsten, 10 = am niedrigsten)
+}{
+	\textbf{Berufe:}
+	\begin{itemize}
+		\itemsep0em
+		\item Altenpfleger/-in
+		\item Psychologe/-in
+		\item Informatiker/-in
+		\item Arzt / Ärztin
+		\item Koch / Köchin
+	\end{itemize}
+}
 
 %%%%%% TASK 5 %%%%%
 
-\begin{task}[]{Sortieren Sie die ``Persönlichkeiten'' nach ihrer Follower-Zahl auf Instagram \\(1 = am meisten, 10 = am wenigsten)}
-	\begin{minipage}{.29\textwidth}
-		\vspace{-6mm}
-		\textbf{Persönlichkeiten:}
-		\begin{itemize}
-			\itemsep0em
-			\item Selena Gomez
-			\item Kim Kardashian
-			\item Neymar Jr.
-			\item Ariana Grande
-			\item Beyonce
-			\item The Rock
-			\item Kylie Jenner
-			\item Christiano Ronaldo
-			\item Instagram
-			\item Leonel Messi
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}{.35\textwidth}
-		\vspace{-4mm}
-		\sortingBoxes
-	\end{minipage}
-	\begin{minipage}{.36\textwidth}
-		\probBox
-	\end{minipage}
-	\vspace{-1mm}
-\end{task}
+\sortingTask{
+	Sortieren Sie die Sprachen nach der Anzahl ihrer Muttersprachler (1 = am meisten, 5 = am wenigsten)
+}{
+	\textbf{Sprachen:}
+	\begin{itemize}
+		\itemsep0em
+		\item Hindi
+		\item Arabisch
+		\item Mandarin-Chinesisch 
+		\item Spanisch
+		\item Englisch
+	\end{itemize}
+}
 
+%%%%%% TASK 6 %%%%%
+
+\sortingTask{
+	Sortieren Sie das Obst nach ihrer Kalorienanzahl (1 = am wenigsten pro 100g, 5 = am meisten pro 100g)
+}{
+	\textbf{Obst:}
+	\begin{itemize}
+		\itemsep0em
+		\item Wassermelone
+		\item Rhababer
+		\item Kiwi 
+		\item Pfirsich
+		\item Apfel
+	\end{itemize}
+}
+
+%%%%%% TASK 7 %%%%%	
+
+\sortingTask{
+	Bestimmen Sie die Ausstattung privater deutscher Haushalte mit folgenden Haushaltsgeräten im Jahr 2017 (1 = am häufigsten, 5 = am seltensten)
+}{
+	\textbf{Haushaltsgeräte:}
+	\begin{itemize}
+		\itemsep0em
+		\item Kaffeemaschine
+		\item Mikrowellengerät
+		\item Geschirrspülmaschine
+		\item Gefriertruhe
+		\item Waschmaschine
+	\end{itemize}
+}
+
+\subsection*{\normalsize Bitte zeichnen Sie in das folgende Feld ein, wie gut Sie die bisherigen Aufgaben beantwortet haben.}
+\begin{center}
+	\vspace{7mm}
+	\probBox
+\end{center}
+
+%%%%%% TASK 8 %%%%%
+
+\sortingTask{
+	Nennen und ordnen Sie die 5 Europäischen Städte mit den meisten Einwohnern \\(1 = am meisten, 5 = am wenigsten)
+}{	
+	\textbf{Notizen:}
 	
-
-
-
-
-
-%\myTask{Farbkreis}{
-%		Schreiben Sie die Namen der korrekten Farben in den Farbkreis.
-%}
+	\vspace{.5mm}
+	
+	\fbox{\color{white}\rule{3.5cm}{3.7cm}\color{black}}
+}
 
 
 \end{document}

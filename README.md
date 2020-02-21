@@ -24,10 +24,11 @@ Repository for the Applied Cognitive Science Project at TU Darmstadt WS2019/2020
 * Transform read curves into probability distributions
 * Discretize probability distributions
 
-
 ## Questions:
-
 1. Maybe 10 instead of 5 questions?
+2. Zwei Fragebögen? Für offen und sortieren? Sonst gesamtfrage verzerrt.
+3. VP Code?
+4. Informed Consent?
 
 
 ## Notes / Discussion:
@@ -41,3 +42,5 @@ Repository for the Applied Cognitive Science Project at TU Darmstadt WS2019/2020
 8. How many questions, how many participants.
 9. Questions in specific areas or overall.
 10. Do we test what we want to test?
+11. Fragenreihenfolge randomisiert
+12. Ein leichtes Item um zu schauen, wie die leute reagieren, wenn sie sich sicher sind.

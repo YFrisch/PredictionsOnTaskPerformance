@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 
-folder_path = f'../Subjects'
-picture_name = f'subject_2'
+folder_path = f'../assets/subjects'
+picture_name = f'subject_10'
 
 
 def sort_contours(cnts, method="left-to-right"):
