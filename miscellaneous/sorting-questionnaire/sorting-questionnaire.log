@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  22 FEB 2020 18:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  22 FEB 2020 19:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1791,6 +1791,8 @@ File: example_distribution_2.png Graphic file (type png)
 <use example_distribution_2.png>
 Package pdftex.def Info: example_distribution_2.png  used on input line 180.
 (pdftex.def)             Requested size: 120.35547pt x 90.26492pt.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 185.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
 (Font)              to `T1/Roboto-LF/regular/n' on input line 187.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
@@ -1882,11 +1884,11 @@ Package rerunfilecheck Info: File `sorting-questionnaire.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 39453 strings out of 492162
- 790912 string characters out of 6125292
+ 39457 strings out of 492162
+ 791007 string characters out of 6125292
  952774 words of memory out of 5000000
- 43262 multiletter control sequences out of 15000+600000
- 588003 words of font info for 53 fonts, out of 8000000 for 9000
+ 43264 multiletter control sequences out of 15000+600000
+ 594365 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,19n,81p,10143b,908s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}{/
@@ -1895,14 +1897,15 @@ usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_uy5hgr.enc}{/usr
 cal/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb></usr/loc
 al/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb></usr/l
 ocal/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb>
-</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
-sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-Output written on sorting-questionnaire.pdf (4 pages, 250149 bytes).
+r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb
+></usr/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman
+.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.
+pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
+b></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+Output written on sorting-questionnaire.pdf (4 pages, 287457 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
+ 115 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  14 named destinations out of 1000 (max. 500000)
  102 words of extra memory for PDF output out of 10000 (max. 10000000)
 
