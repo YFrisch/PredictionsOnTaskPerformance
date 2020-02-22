@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import os
+import matplotlib.pyplot as plt
 
 folder_path = f'assets/subjects'
 picture_name = f'subject_10'
@@ -42,9 +43,8 @@ def box_extraction(cropped_dir_path="./Cropped/"):
     https://medium.com/coinmonks/a-box-detection-algorithm-
     for-any-image-containing-boxes-756c15d7ed26
     """
-
     # Read the image
-    img = cv2.imread(f'{folder_path}/{picture_name}.pdf', 0)
+    img = cv2.imread(f'{folder_path}/{picture_name}.jpg', 0)
 
     # Thresholding the image
     (thresh, img_bin) = cv2.threshold(img, 128, 255,
@@ -72,13 +72,15 @@ def box_extraction(cropped_dir_path="./Cropped/"):
     # ------------------- MORPHOLOGICAL OPERATIONS -------------------------- #
 
     # Morphological operation to detect verticle lines from an image
-    img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=3)
-    verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=3)
+    # Iterations determines (somehow) how long edges can be to be detected
+    # I put from 3 to 2 to detect the small squares with the digits
+    img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=2)
+    verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=2)
     cv2.imwrite("assets/PDFs/verticle_lines.jpg", verticle_lines_img)
 
     # Morphological operation to detect horizontal lines from an image
-    img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=3)
-    horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=3)
+    img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=2)
+    horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=2)
     cv2.imwrite("assets/PDFs/horizontal_lines.jpg", horizontal_lines_img)
 
     # ------------------------ COMBINING LINES ------------------------------ #
@@ -112,24 +114,36 @@ def box_extraction(cropped_dir_path="./Cropped/"):
 
     # ------------------- ITERATE AND CUT -------------------------- #
 
+    # TODO: Find out, why it always finds two contours
     # Because the algorithm always finds 2 times the same contour,
     # where the first one is slightly to big, we skip always the first
-    skip_matching_contour = False
+    skip_matching_pdf = True
+    skip_matching_digit = True
 
     num_of_pdf = 0
+    num_of_digit = 0
     for c in contours:
         # Returns the location and width,height for every contour
         x, y, w, h = cv2.boundingRect(c)
 
+        # EXTRACT PDFs
         # If width and height is geater than 80 pixel
         # and it is approximately square,
         # we save the contour.
-        if 1.1 * h > w > 80 and 80 < h < 1.1 * w:
-            if not skip_matching_contour:
+        if 1.05 * h > w > 80 and 80 < h < 1.05 * w:
+            if not skip_matching_pdf:
                 num_of_pdf += 1
                 new_img = img[y:y + h, x:x + w]
                 cv2.imwrite(f'assets/PDFs/pdf_{num_of_pdf}.jpg', new_img)
-            # skip_matching_contour = not skip_matching_contour
+            skip_matching_pdf = not skip_matching_pdf
+
+        # EXTRACT DIGITS
+        elif 1.1 * h > w and h < 1.1 * w:
+            if not skip_matching_digit:
+                num_of_digit += 1
+                new_img = img[y:y + h, x:x + w]
+                cv2.imwrite(f'assets/digits/digit_{num_of_digit}.jpg', new_img)
+            skip_matching_digit = not skip_matching_digit
 
 
 box_extraction()
