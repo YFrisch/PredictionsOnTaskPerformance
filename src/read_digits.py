@@ -20,7 +20,7 @@ master_im = cv2.imread(f'assets/digits/digit_1.jpg')
 # plt.show()
 
 # Read the image
-img = cv2.imread(f'assets/test11.jpg')
+img = cv2.imread(f'assets/6.jpg')
 
 # Convert to gray scale
 # If your image is not already grayscale :
@@ -33,7 +33,7 @@ tresh, img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
 img = np.array(img)
 
-delete_white_borders = False
+delete_white_borders = True
 if delete_white_borders:
     # Delete white horizontal rows
     h, w = img.shape
@@ -55,8 +55,8 @@ if delete_white_borders:
 
 h, w = img.shape
 
-fx = 30/30
-fy = 30/30
+fx = 30/h
+fy = 30/h
 
 # Resize the image if necessary
 # - Put fx=1 and fy=1 for no resize
