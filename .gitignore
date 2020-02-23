@@ -13,3 +13,6 @@ __pycache__
 
 # Ignore the data to build the data recognition neural network
 DR_Data/
+
+# Ignore Jupyter Notebooks
+# .ipynb_checkpoints

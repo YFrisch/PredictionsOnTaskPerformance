@@ -74,13 +74,13 @@ def box_extraction(cropped_dir_path="./Cropped/"):
     # Morphological operation to detect verticle lines from an image
     # Iterations determines (somehow) how long edges can be to be detected
     # I put from 3 to 2 to detect the small squares with the digits
-    img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=2)
-    verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=2)
+    img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=3)
+    verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=3)
     cv2.imwrite("assets/PDFs/verticle_lines.jpg", verticle_lines_img)
 
     # Morphological operation to detect horizontal lines from an image
-    img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=2)
-    horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=2)
+    img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=3)
+    horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=3)
     cv2.imwrite("assets/PDFs/horizontal_lines.jpg", horizontal_lines_img)
 
     # ------------------------ COMBINING LINES ------------------------------ #
@@ -118,7 +118,6 @@ def box_extraction(cropped_dir_path="./Cropped/"):
     # Because the algorithm always finds 2 times the same contour,
     # where the first one is slightly to big, we skip always the first
     skip_matching_pdf = True
-    skip_matching_digit = True
 
     num_of_pdf = 0
     num_of_digit = 0
@@ -136,14 +135,6 @@ def box_extraction(cropped_dir_path="./Cropped/"):
                 new_img = img[y:y + h, x:x + w]
                 cv2.imwrite(f'assets/PDFs/pdf_{num_of_pdf}.jpg', new_img)
             skip_matching_pdf = not skip_matching_pdf
-
-        # EXTRACT DIGITS
-        elif 1.1 * h > w and h < 1.1 * w:
-            if not skip_matching_digit:
-                num_of_digit += 1
-                new_img = img[y:y + h, x:x + w]
-                cv2.imwrite(f'assets/digits/digit_{num_of_digit}.jpg', new_img)
-            skip_matching_digit = not skip_matching_digit
 
 
 box_extraction()
