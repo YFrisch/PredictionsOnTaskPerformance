@@ -1,5 +1,5 @@
 # Main Python File
-from src.DiscreteDistributionReader import DiscreteDistributionReader
+from src.discrete_distribution_reader import DiscreteDistributionReader
 
 # dr = DiscreteDistributionReader(path="curve.png", points=5)
 dr1 = DiscreteDistributionReader(path="../assets/PDFs/pdf_1.jpg", points=5)
