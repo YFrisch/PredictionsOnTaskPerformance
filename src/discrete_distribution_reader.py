@@ -21,7 +21,7 @@ class DiscreteDistributionReader:
         self.xs = None
         # Read in image file at path
         self.img = plt.imread(self.path)
-        # Greyscale transformatio
+        # Greyscale transformation
         # self.img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
         self.img_shape = np.shape(self.img)
         self.discretize()
@@ -30,7 +30,7 @@ class DiscreteDistributionReader:
     def discretize(self):
         # TODO: Cut offsets from image?
         # TODO: Better threshold?
-        threshold = 240
+        threshold = 237
         print(self.img_shape)
         xs = np.arange(1, self.img_shape[1])
         ys = []
@@ -45,15 +45,24 @@ class DiscreteDistributionReader:
         ys = np.array(ys)
 
         # Cut data where y == -1 (no dark pixels)
+        step = 3
+        for c in np.arange(0, len(ys)):
+            c_low = np.clip(c, 0, None)
+            c_up = np.clip(c, None, c + step)
+            if ys[c] == -1:
+                if not all(ys[np.arange(c_low, c_up+1, 1)]) == -1:
+                    ys[c] = np.mean(ys[np.arange(c_low, c_up + 1, 1)])
+
         indices = np.where(ys == -1)[0]
         self.xs = np.delete(xs, indices)
         self.ys = np.delete(ys, indices)
+
         print("xs {} ys {}".format(xs.shape, ys.shape))
 
         # Indices of discrete points
         steps = np.floor(len(xs)/(self.points_per_task+1))
         print("Steps: ", steps)
-        self.indices = np.arange(0, len(xs)-steps, steps, dtype=int)
+        self.indices = np.arange(0+(steps/2), len(xs)-(steps/2), steps, dtype=int)
         print("Indices: ", self.indices)
         self.discrete_values = 1 - ys[self.indices]
         self.normalized_discrete_values = self.discrete_values/sum(self.discrete_values)
