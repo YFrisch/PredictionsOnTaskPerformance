@@ -15,4 +15,4 @@ __pycache__
 DR_Data/
 
 # Ignore Jupyter Notebooks
-# .ipynb_checkpoints
+.ipynb_checkpoints
