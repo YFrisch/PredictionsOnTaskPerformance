@@ -3,8 +3,10 @@ import cv2
 import os
 import matplotlib.pyplot as plt
 
-folder_path = f'assets/subjects'
-picture_name = f'subject_10'
+
+subject_code = f'AAAA'
+folder_path = f'assets/subjects/subject_{subject_code}/'
+
 
 
 def sort_contours(cnts, method="left-to-right"):
@@ -37,21 +39,21 @@ def sort_contours(cnts, method="left-to-right"):
     return (cnts, boundingBoxes)
 
 
-def box_extraction(cropped_dir_path="./Cropped/"):
+def extract_pdfs(image_array, dst_folder):
     """
     Mainly from the internet.
     https://medium.com/coinmonks/a-box-detection-algorithm-
     for-any-image-containing-boxes-756c15d7ed26
     """
     # Read the image
-    img = cv2.imread(f'{folder_path}/{picture_name}.jpg', 0)
+    img = cv2.imread(f'{folder_path}/subject_{subject_code}/raw.jpg', 0)
 
     # Thresholding the image
     (thresh, img_bin) = cv2.threshold(img, 128, 255,
                                       cv2.THRESH_BINARY | cv2.THRESH_OTSU)
     # Invert the image
     img_bin = 255 - img_bin
-    cv2.imwrite(f'{folder_path}/{picture_name}_binary.jpg', img_bin)
+    cv2.imwrite(f'{folder_path}/{subject_code}_binary.jpg', img_bin)
 
     # -------------------------- KERNEL ------------------------------------- #
 
@@ -137,4 +139,8 @@ def box_extraction(cropped_dir_path="./Cropped/"):
             skip_matching_pdf = not skip_matching_pdf
 
 
-box_extraction()
+image_array = [folder_path + f'raw/subject_AAAA_p1.jpg',
+               folder_path + f'raw/subject_AAAA_p2.jpg',
+               folder_path + f'raw/subject_AAAA_p3.jpg']
+
+extract_pdfs()
