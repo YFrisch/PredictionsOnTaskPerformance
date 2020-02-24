@@ -1,0 +1,65 @@
+\documentclass[
+ngerman,
+accentcolor=9c,% Farbe für Hervorhebungen auf Basis der Deklarationen in den
+identbarcolor=9c,
+]{tudaexercise}
+
+\usepackage[main=ngerman, english]{babel}
+\usepackage{tikz}
+\usepackage{wasysym} % für die benutzten Symbole
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\boxheight{1.2cm}
+
+\title{Predictions on Task Performance\\- Demographic data -}
+
+\begin{document}
+\maketitle
+
+\textbf{Versuchspersonen-Code:}
+\begin{itemize}
+	\begin{minipage}{.45\textwidth}
+		\vspace{-2cm}
+		\itemsep.55em
+		\item Zweiter Buchstabe des Vornamens Ihres Vaters
+		\item Vorletzter Buchstabe des Vornamens Ihrer Mutter
+		\item Letzter Buchstabe Ihres Nachnamens
+		\item Vorletzter Buchstabe Ihres Vornamens	
+	\end{minipage}
+	\begin{tikzpicture}
+	\foreach \i in {1, 2, 3, 4} {
+		\def\yPos{-2 -\i*.6}
+		\node[shape=rectangle, draw=black, minimum width=5mm, minimum height=5mm, line width=.5pt] 
+		at (0,\yPos) {};
+	}
+	\end{tikzpicture}
+	\begin{minipage}{.55\textwidth}
+	\end{minipage}
+\end{itemize}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\noindent\textbf{Demographische Daten:}
+
+\begin{itemize}
+	\item Geschlecht: ~\Square ~männlich, \Square ~weiblich, \Square ~divers
+	\item Alter:
+	\item Beruf:
+	\item Studienfach:
+	\item Nationalität:
+\end{itemize}
+
+\vspace{8mm}
+
+\par\noindent\rule{\textwidth}{.4pt}
+
+\vspace{8mm}
+
+\textbf{Feedack:}
+
+\fbox{\color{white}\rule{.99\textwidth}{7cm}\color{black}}
+
+\end{document}

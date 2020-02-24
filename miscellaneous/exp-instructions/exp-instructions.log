@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  22 FEB 2020 19:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  24 FEB 2020 13:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1364,73 +1364,73 @@ r-TLF.
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 13.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 20.
+(Font)              scaled to size 10.0pt on input line 22.
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 24--26
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 26--28
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 27--29
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 29--31
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 30--32
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 32--34
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 33--35
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 35--37
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 36--38
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 38--40
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 39--41
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 41--43
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 42--44
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 44--46
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 45--47
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 47--49
 [] 
  []
 
 
-Overfull \hbox (1.68129pt too wide) in paragraph at lines 48--50
+Overfull \hbox (1.68129pt too wide) in paragraph at lines 50--52
 [] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 51.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 51.
+(Font)              to `T1/Roboto-LF/regular/n' on input line 53.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 9.0pt on input line 51.
+(Font)              scaled to size 9.0pt on input line 53.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 51.
+(Font)              <9> on input line 53.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 51.
+(Font)              <6> on input line 53.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 51.
+(Font)              <5> on input line 53.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 51.
+(Font)              scaled to size 9.0pt on input line 53.
 [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 51.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
 
 (./exp-instructions.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 51.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 51.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 53.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 53.
 Package rerunfilecheck Info: File `exp-instructions.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
@@ -1450,7 +1450,7 @@ al/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb></usr/l
 ocal/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></us
 r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb>
 
-Output written on exp-instructions.pdf (1 page, 123692 bytes).
+Output written on exp-instructions.pdf (1 page, 123824 bytes).
 PDF statistics:
  35 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream
