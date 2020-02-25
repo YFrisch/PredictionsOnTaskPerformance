@@ -5,10 +5,11 @@
 | Tabea      |                 |
 | Lisa S.    |                 |
 | Marius     |                 |
-| Noah       |                 |
+| Noah       |       X         |
 | Fabian T.  |                 |
 | Susi       |                 |
 | Tim S.     |                 |
 | Anna R.    |                 |
 | Jenny      |                 |
 | Kasha      |                 |
+| Sushi      |                 |
