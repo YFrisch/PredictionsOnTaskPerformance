@@ -6,13 +6,16 @@
 # TODO: Check y values of discrete points; R.n. the need to get transformed by (1-...)
 
 import numpy as np
+import os
 import matplotlib.pyplot as plt
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 
 class DiscreteDistributionReader:
 
     def __init__(self, path, points):
-        self.path = path
+        self.path = BASE_DIR + "/" + path
         self.points_per_task = points
         self.discrete_values = None
         self.normalized_discrete_values = None
