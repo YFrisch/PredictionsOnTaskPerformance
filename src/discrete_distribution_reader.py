@@ -33,8 +33,8 @@ class DiscreteDistributionReader:
     def discretize(self):
         # TODO: Cut offsets from image?
         # TODO: Better threshold?
-        threshold = 237
-        print(self.img_shape)
+        # threshold = 237
+        threshold = np.max(self.img) - (np.max(self.img)-np.min(self.img))/5.0
         xs = np.arange(1, self.img_shape[1])
         ys = []
         y_scale = self.img_shape[0]
@@ -47,15 +47,24 @@ class DiscreteDistributionReader:
             ys.append(value)
         ys = np.array(ys)
 
-        # Cut data where y == -1 (no dark pixels)
-        step = 3
+        # TODO: Extrapolate missing data
+        """
+        step = 5
         for c in np.arange(0, len(ys)):
             c_low = np.clip(c, 0, None)
             c_up = np.clip(c, None, c + step)
             if ys[c] == -1:
-                if not all(ys[np.arange(c_low, c_up+1, 1)]) == -1:
-                    ys[c] = np.mean(ys[np.arange(c_low, c_up + 1, 1)])
+                current_pixels = np.copy(ys[np.arange(c_low, c_up+1, 1)])
+                print(current_pixels)
+                if not all(current_pixels) == -1:
+                    # Use average of not -1 values for extrapolation
+                    values_for_expol = np.delete(current_pixels, np.where(current_pixels == -1)[0])
+                    print(values_for_expol)
+                    
+                    ys[c] = np.mean(values_for_expol)
+        """
 
+        # Cut data where y == -1 (no dark pixels)
         indices = np.where(ys == -1)[0]
         self.xs = np.delete(xs, indices)
         self.ys = np.delete(ys, indices)

@@ -33,6 +33,11 @@ dr8 = DDR(path=f'{folder_path}/pdfs/pdf_task_8.jpg', points=5)
 # drx = DDR(path=f'{folder_path}/pdfs/pdf_task_x.jpg', points=5)
 
 dr1.plot()
+dr2.plot()
+dr3.plot()
+dr4.plot()
+dr5.plot()
+dr6.plot()
 
 # --------------- Calculate Brier Score --------------- #
 
