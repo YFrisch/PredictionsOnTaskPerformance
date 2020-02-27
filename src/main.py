@@ -1,6 +1,5 @@
 # Main Python File
 import os
-
 from src.discrete_distribution_reader import DiscreteDistributionReader as DDR
 from src.read_pdfs import extract_pdfs
 
@@ -18,6 +17,7 @@ image_array = [f'{folder_path}/raw/subject_{subject_code}_p1.jpg',
 extract_pdfs(image_path_array=image_array, dst_folder=BASE_DIR + "/" + f'{folder_path}/pdfs/')
 
 # --------------- Simulate Distribution --------------- #
+
 dr = DDR(subject_code)
-dr.plot(task_id=4)
-dr.brier_score(task_id=4, vpn_points_for_task=4)
+dr.plot(task_id=1)
+dr.brier_score(task_id=1, vpn_points_for_task=4)
