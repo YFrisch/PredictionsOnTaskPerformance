@@ -49,8 +49,6 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
         # Read the image in grayscale (0 == grayscale)
         img = cv2.imread(BASE_DIR + "/" + im_path, 0)
 
-        cv2.imshow("test", img)
-
         # Thresholding the image
         (thresh, img_bin) = cv2.threshold(img, 128, 255,
                                           cv2.THRESH_BINARY | cv2.THRESH_OTSU)

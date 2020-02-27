@@ -1,120 +1,156 @@
-"""
-    This script is used to read-in hand-drawn distributions about the confidence of a user about the points on a certain
-    task
+""" This module is implementing a "discrete distribution reader" capable of reading drawn
+    probability density functions (pdfs) and storing their values.
+
+    The values are discretized for a fixed amount of points, and normalized afterwards to
+    fit to a discrete probability density function.
+
+    Plotting is implemented for a given task id.
+
+    Only argument is a 4-letter subject (vpn) code.
+
+    # TODO: Add source
+    The "brier score" can be calculated for a given task id and actual points of the vpn.
 """
 
-# TODO: Check y values of discrete points; R.n. the need to get transformed by (1-...)
+__author__ = 'Yannik Frisch'
+__date__ = '27-02-2020'
 
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+from collections import defaultdict
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 
 class DiscreteDistributionReader:
 
-    def __init__(self, path, points):
-        self.path = BASE_DIR + "/" + path
-        self.points_per_task = points
-        self.discrete_values = None
-        self.normalized_discrete_values = None
-        self.indices = None
-        self.ys = None
-        self.xs = None
-        # Read in image file at path
-        self.img = plt.imread(self.path)
-        # Greyscale transformation
-        # self.img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
-        self.img_shape = np.shape(self.img)
+    def __init__(self, vpn_code):
+        self.vpn_code = vpn_code
+        print("\n------------------------------")
+        print("# Created distribution reader for vpn {}.".format(vpn_code))
+        self.confidence_images, self.img_shapes = self.read_in_confidence_images()
+        print("# Read in drawn confidence distributions.")
+        self.points_per_task = 5
+        self.indices = defaultdict(np.ndarray)
+        self.ys = defaultdict(np.ndarray)
+        self.xs = defaultdict(np.ndarray)
+        self.discrete_values = defaultdict(np.ndarray)
+        self.normalized_discrete_values = defaultdict(np.ndarray)
         self.discretize()
+        print("# Discretized distributions.")
+        print("------------------------------")
 
-    # Return discrete values per point from image
+    def read_in_confidence_images(self):
+        """ This method reads in 8 files named 'pdf_task_i.jpg' from the vpn subfolder
+            and stores the inside self.confidence_images.
+        """
+        confidence_images = []
+        img_shapes = []
+        for i in range(1, 9):
+            img = plt.imread(BASE_DIR + "/assets/subjects/subject_" + self.vpn_code
+                             + "/pdfs/pdf_task_" + str(i) + ".jpg")
+            # Greyscale transformation
+            # img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
+            confidence_images.append(img)
+            img_shapes.append(np.shape(img))
+        return confidence_images, img_shapes
+
     def discretize(self):
-        # TODO: Cut offsets from image?
-        # TODO: Better threshold?
-        # threshold = 237
-        threshold = np.max(self.img) - (np.max(self.img)-np.min(self.img))/5.0
-        xs = np.arange(1, self.img_shape[1])
-        ys = []
-        y_scale = self.img_shape[0]
-        for x in xs:
-            value = -1
-            for y in np.arange(0, self.img_shape[0], 1):
-                if self.img[y, x] <= threshold:
-                    value = y/y_scale
-                    break
-            ys.append(value)
-        ys = np.array(ys)
+        """ This function stores the pixel values ('continous' pdf) from the images
+            in self.confidence_images in self.xs and self.ys.
 
-        # TODO: Extrapolate missing data
+            Discrete values for every possible point of a task are stored in self.discrete_values
+            respectively self.normalized_discrete_values.
+
+            The indices from which the discrete pdf values are taken are also stored for every task
+            in self.indices.
         """
-        step = 5
-        for c in np.arange(0, len(ys)):
-            c_low = np.clip(c, 0, None)
-            c_up = np.clip(c, None, c + step)
-            if ys[c] == -1:
-                current_pixels = np.copy(ys[np.arange(c_low, c_up+1, 1)])
-                print(current_pixels)
-                if not all(current_pixels) == -1:
-                    # Use average of not -1 values for extrapolation
-                    values_for_expol = np.delete(current_pixels, np.where(current_pixels == -1)[0])
-                    print(values_for_expol)
-                    
-                    ys[c] = np.mean(values_for_expol)
-        """
+        for i in range(0, len(self.confidence_images)):
+            img = self.confidence_images[i]
+            # TODO: Cut offsets from image?
+            # TODO: Better threshold?
+            # threshold = 237
+            threshold = np.max(img) - (np.max(img)-np.min(img))/5.0
+            x_raw = np.arange(1, self.img_shapes[i][1])
+            y_raw = []
+            y_scale = self.img_shapes[i][0]
+            for x in x_raw:
+                value = -1
+                for y in np.arange(0, self.img_shapes[i][0], 1):
+                    if img[y, x] <= threshold:
+                        value = y/y_scale
+                        break
+                y_raw.append(value)
+            y_raw = np.array(y_raw)
 
-        # Cut data where y == -1 (no dark pixels)
-        indices = np.where(ys == -1)[0]
-        self.xs = np.delete(xs, indices)
-        self.ys = np.delete(ys, indices)
+            # TODO: Extrapolate missing data
+            """
+            step = 5
+            for c in np.arange(0, len(ys)):
+                c_low = np.clip(c, 0, None)
+                c_up = np.clip(c, None, c + step)
+                if ys[c] == -1:
+                    current_pixels = np.copy(ys[np.arange(c_low, c_up+1, 1)])
+                    print(current_pixels)
+                    if not all(current_pixels) == -1:
+                        # Use average of not -1 values for extrapolation
+                        values_for_expol = np.delete(current_pixels, np.where(current_pixels == -1)[0])
+                        print(values_for_expol)
+                        
+                        ys[c] = np.mean(values_for_expol)
+            """
 
-        print("xs {} ys {}".format(xs.shape, ys.shape))
+            # Cut data where y == -1 (no dark pixels)
+            indices = np.where(y_raw == -1)[0]
+            self.xs[i] = np.delete(x_raw, indices)
+            self.ys[i] = np.delete(y_raw, indices)
 
-        # Indices of discrete points
-        steps = np.floor(len(xs)/(self.points_per_task+1))
-        print("Steps: ", steps)
-        self.indices = np.arange(0+(steps/2), len(xs)-(steps/2), steps, dtype=int)
-        print("Indices: ", self.indices)
-        self.discrete_values = 1 - ys[self.indices]
-        self.normalized_discrete_values = self.discrete_values/sum(self.discrete_values)
+            # Indices of discrete points
+            steps = np.floor(len(self.xs[i])/(self.points_per_task+1))
+            self.indices[i] = np.arange(0+(steps/2), len(self.xs[i])-(steps/2), steps, dtype=int)
+            self.discrete_values[i] = 1 - self.ys[i][self.indices[i]]
+            self.normalized_discrete_values[i] = self.discrete_values[i]/sum(self.discrete_values[i])
 
         return None
 
     # Plot the discrete values for each point of the task
-    def plot(self):
+    def plot(self, task_id):
+        """ Plots the original image, discrete data and normalized pdf values for a given task id.
+        """
         # Creates two subplots and unpacks the output array immediately
         f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 5))
-        f.suptitle(self.path)
-
+        f.suptitle(self.vpn_code + ": Task " + str(task_id))
         ax1.set_title("Original image")
-        ax1.imshow(self.img, cmap="gray", origin='upper')
+        ax1.imshow(self.confidence_images[task_id], cmap="gray", origin='upper')
 
         # TODO: y-Axis should show 0.0 - 1.0 instead of 0.0 - max
         # TODO: x-Axis should show the discrete points rather than the pixel values
-        ax2.scatter(self.xs, 1-self.ys, color='blue', alpha=0.1)
-        ax2.scatter(self.indices, self.discrete_values, color='red', s=120, alpha=1)
+        ax2.scatter(self.xs[task_id], 1-self.ys[task_id], color='blue', alpha=0.1)
+        ax2.scatter(self.indices[task_id], self.discrete_values[task_id], color='red', s=120, alpha=1)
         for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
             # TODO: Better alignment for annotations
-            ax2.annotate(txt, (self.indices[i], self.discrete_values[i]))
+            ax2.annotate(txt, (self.indices[task_id][i], self.discrete_values[task_id][i]))
         ax2.set_ylabel("Confidence")
         ax2.set_xlabel("Reached points")
         ax2.set_title("Discrete values")
 
-        ax3.scatter(self.indices, self.normalized_discrete_values, color='green', s=120, alpha=1)
+        ax3.scatter(self.indices[task_id], self.normalized_discrete_values[task_id], color='green', s=120, alpha=1)
         ax3.set_title("Normalized discrete values")
         for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
             # TODO: Better alignment for annotations
-            ax3.annotate(txt, (self.indices[i], self.normalized_discrete_values[i]))
+            ax3.annotate(txt, (self.indices[task_id][i], self.normalized_discrete_values[task_id][i]))
 
         plt.show()
         return None
 
     # Return Brier-Score for discrete reached points
-    def brier_score(self, points):
+    def brier_score(self, task_id, vpn_points_for_task):
+        """ Returns the brier score for this vpn for the given task id and the given amount of actual reached points.
+        """
         ppt = np.zeros(shape=(self.points_per_task+1, 1))
-        ppt[points] = 1
-        bs = np.mean([((1-self.discrete_values[i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
-        # print("Brier-Score of '{}' for {} points is {}.".format(self.path, points, bs))
+        ppt[vpn_points_for_task] = 1
+        bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
+        print("\nBrier-Score of '{}' for {} points is {}.".format(self.vpn_code, vpn_points_for_task, np.round(bs, 3)))
         return bs
 
