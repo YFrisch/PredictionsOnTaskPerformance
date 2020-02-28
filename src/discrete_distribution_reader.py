@@ -69,37 +69,35 @@ class DiscreteDistributionReader:
         for i in range(0, len(self.confidence_images)):
             img = self.confidence_images[i]
             # TODO: Cut offsets from image?
-            # TODO: Better threshold?
+            # TODO: Better threshold? Global threshold for img or local for each column?
             # threshold = 237
             threshold = np.max(img) - (np.max(img)-np.min(img))/5.0
             x_raw = np.arange(1, self.img_shapes[i][1])
             y_raw = []
             y_scale = self.img_shapes[i][0]
-            for x in x_raw:
+            for xc in np.arange(0, len(x_raw)):
                 value = -1
+                # threshold = np.max(img[:, x_raw[xc]]) - (np.max(img[:, x_raw[xc]]) - np.min(img[:, x_raw[xc]])) / 5.0
                 for y in np.arange(0, self.img_shapes[i][0], 1):
-                    if img[y, x] <= threshold:
+                    if img[y, x_raw[xc]] <= threshold:
                         value = y/y_scale
                         break
                 y_raw.append(value)
             y_raw = np.array(y_raw)
 
-            # TODO: Extrapolate missing data
-            """
-            step = 5
-            for c in np.arange(0, len(ys)):
-                c_low = np.clip(c, 0, None)
-                c_up = np.clip(c, None, c + step)
-                if ys[c] == -1:
-                    current_pixels = np.copy(ys[np.arange(c_low, c_up+1, 1)])
-                    print(current_pixels)
-                    if not all(current_pixels) == -1:
+            # TODO: Extrapolate missing data; Not working yet
+            step = 1
+            for c in np.arange(0, len(y_raw)):
+                c_low = np.clip(c - step, 0, None)
+                c_up = np.clip(c + step, None, len(y_raw)-1)
+                if y_raw[c] == -1:
+                    current_pixels = np.copy(y_raw[np.arange(c_low, c_up+1, 1)])
+                    if not all(current_pixels == -1) or not all(current_pixels == 0):
                         # Use average of not -1 values for extrapolation
                         values_for_expol = np.delete(current_pixels, np.where(current_pixels == -1)[0])
-                        print(values_for_expol)
-                        
-                        ys[c] = np.mean(values_for_expol)
-            """
+                        y_raw[c] = np.mean(values_for_expol)
+                    else:
+                        y_raw[c] = 1
 
             # Cut data where y == -1 (no dark pixels)
             indices = np.where(y_raw == -1)[0]
@@ -107,8 +105,7 @@ class DiscreteDistributionReader:
             self.ys[i] = np.delete(y_raw, indices)
 
             # Indices of discrete points
-            steps = np.floor(len(self.xs[i])/(self.points_per_task+1))
-            self.indices[i] = np.arange(0+(steps/2), len(self.xs[i])-(steps/2), steps, dtype=int)
+            self.indices[i] = np.linspace(10, len(self.xs[i])-10, self.points_per_task+1).astype('i8')
             self.discrete_values[i] = 1 - self.ys[i][self.indices[i]]
             self.normalized_discrete_values[i] = self.discrete_values[i]/sum(self.discrete_values[i])
 
@@ -116,6 +113,7 @@ class DiscreteDistributionReader:
 
     # Plot the discrete values for each point of the task
     def plot(self, task_id):
+        task_id = task_id - 1
         """ Plots the original image, discrete data and normalized pdf values for a given task id.
         """
         # Creates two subplots and unpacks the output array immediately
@@ -124,13 +122,11 @@ class DiscreteDistributionReader:
         ax1.set_title("Original image")
         ax1.imshow(self.confidence_images[task_id], cmap="gray", origin='upper')
 
-        # TODO: y-Axis should show 0.0 - 1.0 instead of 0.0 - max
-        # TODO: x-Axis should show the discrete points rather than the pixel values
+        # TODO: x-Axis should show the discrete points (0-1) rather than the pixel values
         ax2.scatter(self.xs[task_id], 1-self.ys[task_id], color='blue', alpha=0.1)
         ax2.scatter(self.indices[task_id], self.discrete_values[task_id], color='red', s=120, alpha=1)
         for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
-            # TODO: Better alignment for annotations
-            ax2.annotate(txt, (self.indices[task_id][i], self.discrete_values[task_id][i]))
+            ax2.annotate(txt, (self.indices[task_id][i]+5, self.discrete_values[task_id][i]-0.05))
         ax2.set_ylabel("Confidence")
         ax2.set_xlabel("Reached points")
         ax2.set_title("Discrete values")
@@ -138,8 +134,7 @@ class DiscreteDistributionReader:
         ax3.scatter(self.indices[task_id], self.normalized_discrete_values[task_id], color='green', s=120, alpha=1)
         ax3.set_title("Normalized discrete values")
         for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
-            # TODO: Better alignment for annotations
-            ax3.annotate(txt, (self.indices[task_id][i], self.normalized_discrete_values[task_id][i]))
+            ax3.annotate(txt, (self.indices[task_id][i]+5, self.normalized_discrete_values[task_id][i]-0.01))
 
         plt.show()
         return None

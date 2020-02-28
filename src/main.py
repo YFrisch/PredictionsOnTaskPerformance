@@ -7,17 +7,27 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 # --------------- Read PDFs --------------- #
 
-subject_code = f'RNZK'
-folder_path = f'assets/subjects/subject_{subject_code}'
+subject_code = r'RSHA'
+folder_path = r'/assets/subjects/subject_{}'.format(str(subject_code))
 
-image_array = [f'{folder_path}/raw/subject_{subject_code}_p1.jpg',
-               f'{folder_path}/raw/subject_{subject_code}_p2.jpg',
-               f'{folder_path}/raw/subject_{subject_code}_p3.jpg']
+image_array = [r'{}/raw/subject_{}_p1.jpg'.format(folder_path, subject_code),
+               r'{}/raw/subject_{}_p2.jpg'.format(folder_path, subject_code),
+               r'{}/raw/subject_{}_p3.jpg'.format(folder_path, subject_code)]
 
-extract_pdfs(image_path_array=image_array, dst_folder=BASE_DIR + "/" + f'{folder_path}/pdfs/')
+dst_path = BASE_DIR + folder_path + r"/pdfs/"
+extract_pdfs(image_path_array=image_array, dst_folder=dst_path)
 
 # --------------- Simulate Distribution --------------- #
 
 dr = DDR(subject_code)
 dr.plot(task_id=1)
-dr.brier_score(task_id=1, vpn_points_for_task=4)
+dr.plot(task_id=2)
+dr.plot(task_id=3)
+dr.plot(task_id=4)
+dr.plot(task_id=5)
+dr.plot(task_id=6)
+dr.plot(task_id=7)
+dr.plot(task_id=8)
+
+
+
