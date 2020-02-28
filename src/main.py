@@ -7,7 +7,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 # --------------- Read PDFs --------------- #
 
-subject_code = r'RSHA'
+subject_code = r'ETLA'
 folder_path = r'/assets/subjects/subject_{}'.format(str(subject_code))
 
 image_array = [r'{}/raw/subject_{}_p1.jpg'.format(folder_path, subject_code),

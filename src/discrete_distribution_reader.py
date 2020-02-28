@@ -126,7 +126,7 @@ class DiscreteDistributionReader:
         ax2.scatter(self.xs[task_id], 1-self.ys[task_id], color='blue', alpha=0.1)
         ax2.scatter(self.indices[task_id], self.discrete_values[task_id], color='red', s=120, alpha=1)
         for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
-            ax2.annotate(txt, (self.indices[task_id][i]+5, self.discrete_values[task_id][i]-0.05))
+            ax2.annotate(txt, (self.indices[task_id][i]+5, self.discrete_values[task_id][i]-0.02))
         ax2.set_ylabel("Confidence")
         ax2.set_xlabel("Reached points")
         ax2.set_title("Discrete values")
