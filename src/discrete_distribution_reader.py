@@ -120,11 +120,12 @@ class DiscreteDistributionReader:
         """
         # Creates two subplots and unpacks the output array immediately
         f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 5))
-        f.suptitle(self.vpn_code + ": Task " + str(task_id))
+        f.suptitle(self.vpn_code + ": Task " + str(task_id + 1))
         ax1.set_title("Original image")
         ax1.imshow(self.confidence_images[task_id], cmap="gray", origin='upper')
 
         # TODO: x-Axis should show the discrete points (0-1) rather than the pixel values
+        # TODO: y-Axis should show whole range from (0-1) rather than (0-max)
         ax2.scatter(self.xs[task_id], 1-self.ys[task_id], color='blue', alpha=0.1)
         ax2.scatter(self.indices[task_id], self.discrete_values[task_id], color='red', s=120, alpha=1)
         for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
