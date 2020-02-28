@@ -52,6 +52,8 @@ class DiscreteDistributionReader:
                              + "/pdfs/pdf_task_" + str(i) + ".jpg")
             # Greyscale transformation
             # img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
+            # Cropping image by 5 pixels each side
+            img = img[5:-5, 5:-5]
             confidence_images.append(img)
             img_shapes.append(np.shape(img))
         return confidence_images, img_shapes
@@ -71,13 +73,13 @@ class DiscreteDistributionReader:
             # TODO: Cut offsets from image?
             # TODO: Better threshold? Global threshold for img or local for each column?
             # threshold = 237
-            threshold = np.max(img) - (np.max(img)-np.min(img))/5.0
+            threshold = np.max(img) - (np.max(img)-np.min(img))/3.0
             x_raw = np.arange(1, self.img_shapes[i][1])
             y_raw = []
             y_scale = self.img_shapes[i][0]
             for xc in np.arange(0, len(x_raw)):
                 value = -1
-                # threshold = np.max(img[:, x_raw[xc]]) - (np.max(img[:, x_raw[xc]]) - np.min(img[:, x_raw[xc]])) / 5.0
+                #threshold = np.max(img[:, x_raw[xc]]) - (np.max(img[:, x_raw[xc]]) - np.min(img[:, x_raw[xc]])) / 3.0
                 for y in np.arange(0, self.img_shapes[i][0], 1):
                     if img[y, x_raw[xc]] <= threshold:
                         value = y/y_scale
