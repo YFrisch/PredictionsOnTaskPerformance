@@ -1,4 +1,5 @@
-""" This module is implementing a "discrete distribution reader" capable of reading drawn
+"""
+    This module is implementing a "discrete distribution reader" capable of reading drawn
     probability density functions (pdfs) and storing their values.
 
     The values are discretized for a fixed amount of points, and normalized afterwards to

@@ -1,4 +1,10 @@
-# Main Python File
+"""
+    Main Python File
+"""
+
+__author__ = 'Yannik Frisch, Maximilian A. Gehrke'
+__date__ = '01-03-2020'
+
 import os
 import sys
 import numpy as np
@@ -64,33 +70,34 @@ subjects_folder_path = f'assets/subjects/'
 subject_dirs_ = os.listdir(subjects_folder_path)
 
 # Delete folders that do not start with "subject" (e.g. Apple hidden .DS_Store)
-subject_dirs = []
-for sd in subject_dirs_:
-    if sd.startswith("subject_"):
-        subject_dirs.append(sd)
+subjects = []
+for subject_dir in subject_dirs_:
+    if subject_dir.startswith("subject_"):
+        subjects.append(subject_dir[8:])
+
+print(subjects)
 
 # --------------- Read PDFs --------------- #
 
 # Iterate over all subjects and read the pdfs
-for sd in subject_dirs:
+for subject in subjects:
 
     # Create array with a seperate string for each file that we
     # want to read for this subject.
     images_array = []
     for fs in file_suffixes:
         images_array.append(f'{subjects_folder_path}'
-                            f'{sd}/raw/{sd}{fs}')
+                            f'subject_{subject}/raw/subject_{subject}{fs}')
 
     # Convert pdf to jpg if it is not already available in jpg
     # Note: The "poppler" package needs to be installed
     for img in images_array:
         if not os.path.exists(img):
-            print(f'{img[:-3]}pdf')
             files = pdf2image.convert_from_path(f'{img[:-3]}pdf')
             files[0].save(img, f'jpeg')
 
     # Path where we save the probability density functions
-    dst_path = f'{subjects_folder_path}{sd}/pdfs/'
+    dst_path = f'{subjects_folder_path}subject_{subject}/pdfs/'
 
     # Create 'pdfs'-folder if it does not exist
     if not os.path.exists(dst_path):
@@ -113,18 +120,18 @@ for sd in subject_dirs:
 # 2D array with subject dir as first entry and answers dictionary as second
 subject_answers = []
 
-for subject_dir in subject_dirs:
-    path_to_csv = f'{subjects_folder_path}{subject_dir}/' \
-                  f'{subject_dir}_answers.csv'
+for subject in subjects:
+    path_to_csv = f'{subjects_folder_path}subject_{subject}/' \
+                  f'subject_{subject}_answers.csv'
     if os.path.exists(path_to_csv):
         answers = pd.read_csv(path_to_csv, sep=',')
         answers = answers.set_index('task').T.to_dict(f'list')
 
-        subject_answers.append([subject_dir, answers])
+        subject_answers.append([subject, answers])
 
 # --------------- Print Scoring --------------- #
 
-for subject_dir, answers in subject_answers:
+for subject, answers in subject_answers:
     for i in range(1, 9):
         print(score(answers[f'task_{i}'], 5))
 
