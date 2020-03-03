@@ -6,7 +6,6 @@ import pdf2image
 from src.discrete_distribution_reader import DiscreteDistributionReader as DDR
 from src.read_pdfs import extract_pdfs
 
-# TODO: Yannik, bitte teste mal, ob das bei dir jetzt funktioniert
 
 '''
     Because the working directory is dependent on the configuration of the 
@@ -42,14 +41,10 @@ def score(answers, points_per_task):
         return array[idx]
 
     task_norm = np.linalg.norm(x=(np.array([1, 2, 3, 4, 5]) - answers), ord=2)
-    print("Task norm: ", task_norm)
     max_norm = np.linalg.norm(x=(np.array([1, 2, 3, 4, 5]) - np.array([5, 4, 3, 2, 1])), ord=2)
-    print("Max norm: ", max_norm)
     # We use a min 0 points and a max of points_per_task
     intervals = np.linspace(0, max_norm, points_per_task+1)
-    print("Intervals: ", intervals)
     rating = points_per_task - np.where(intervals == find_nearest(intervals, task_norm))[0][0]
-    print("Rating: ", rating)
     return rating
 
 
@@ -100,15 +95,9 @@ for sd in subject_dirs:
 
 # --------------- Simulate Distribution --------------- #
 #
-# dr = DDR(subject_code)
-# dr.plot(task_id=1)
-# dr.plot(task_id=2)
-# dr.plot(task_id=3)
-# dr.plot(task_id=4)
-# dr.plot(task_id=5)
-# dr.plot(task_id=6)
-# dr.plot(task_id=7)
-# dr.plot(task_id=8)
+dr = DDR(vpn_code='LIKN')
+dr.plot(task_ids=[1, 2, 3, 4, 5, 6, 7, 8])
+
 
 
 
