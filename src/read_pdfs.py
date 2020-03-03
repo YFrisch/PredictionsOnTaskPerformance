@@ -1,3 +1,7 @@
+__author__ = 'Maximilian A. Gehrke'
+__date__ = '01-03-2020'
+
+
 import numpy as np
 import cv2
 import os
@@ -48,7 +52,7 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
         # Read the image in grayscale (0 == grayscale)
         img = cv2.imread(im_path, 0)
 
-        im_width, im_height = img.shape[:2]
+        im_height, im_width = img.shape[:2]
 
         # Thresholding the image
         (thresh, img_bin) = cv2.threshold(img, 128, 255,
@@ -120,46 +124,86 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
 
         # ------------------- ITERATE AND CUT -------------------------- #
 
-        # TODO: Find out, why it always finds two contours
-        # Because the algorithm always finds 2 times the same contour,
-        # where the first one is slightly to big, we skip always the first
-        skip_matching_pdf = True
-        skip_overall_pdf = False
-
-        test_counter = 0
+        task_pdf_values = []
+        overall_pdf_values = []
 
         for c in contours:
             # Returns the location and width,height for every contour
             x, y, w, h = cv2.boundingRect(c)
 
             # EXTRACT PDFs
-            # If width and height is geater than 80 pixel
-            # and it is approximately square,
-            # we save the contour.
-            if 1.08 * h > w > 80 and 80 < h < 1.08 * w:
-                if not skip_matching_pdf:
-                    pdf_task_counter += 1
-                    new_img = img[y:y + h, x:x + w]
-                    if not cv2.imwrite(f'{dst_folder}pdf_task_'
-                                       f'{pdf_task_counter}.jpg', new_img):
-                        print("Could not save image.")
-                skip_matching_pdf = not skip_matching_pdf
+            # Din A4: 29.7cm x 21cm
+            # pdf-square: 4.5cm x 4.5cm
+            # percentage of height: 29.7cm / 4.5cm = 0.15152%
+            # percentage of width: 21cm / 4.5cm = 0.21429
+            if im_width * 0.5 < x \
+                    and im_height * 0.20 > h > im_height * 0.10 \
+                        and im_width * 0.25 > w > 0.15 \
+                            and 1.08 * h > w and 1.08 * w > h:
+                task_pdf_values.append([x, y, w, h])
 
             # Save overall task performance
             # The field is wider and rectangular
-            elif h > 80 and im_width * 0.8 > w > im_width * 0.4:
-                if not skip_overall_pdf:
-                    new_img = img[y:y + h, x:x + w]
-                    saving_path = f'{dst_folder}pdf_task1to7_{test_counter}.jpg'
-                    test_counter += 1
+            # Din A4: 29.7cm x 21cm
+            # pdf-rectangle: 5cm x 14.4cm
+            # percentage of height: 29.7cm / 5cm = 0.16835
+            # percentage of width: 21cm / 14.4 = 0.68571
+            #   => here is something off. it is more around 0.5.
+            elif im_height * 0.2 > h > im_height * 0.1 \
+                    and im_width * 0.75 > w > im_width * 0.4:
+                overall_pdf_values.append([x, y, w, h])
 
-                    # # ONLY ONE OVERALL PDF
-                    # # Make sure the file does not exist already
-                    # # If so, either someone forgot to delete it
-                    # # or the program detected two pdfs that would fit
-                    # if os.path.exists(saving_path):
-                    #     raise ValueError(f'The file {saving_path} '
-                    #                      f'already exists')
+        # Check if we found the same contour just shifted a little
+        # If so, always take the smallest
+        for i in range(len(task_pdf_values)):
+            x, y, w, h = task_pdf_values[i]
+            y_next = 0
+            x_next = 0
+            if i != len(task_pdf_values)-1:
+                x_next, y_next, _, _ = task_pdf_values[i+1]
 
-                    cv2.imwrite(saving_path, new_img)
-                skip_overall_pdf = False
+            # The margin in which we assign the contours to the same object
+            margin_h = im_height * 0.03
+            margin_x = im_width * 0.03
+
+            # Save if the distance between two contours is larger than margin
+            # Also always save the last contour. Because it is already ordered
+            # the last contour will always be smaller than the others.
+            if np.abs(y - y_next) > margin_h \
+                    or np.abs(x - x_next) > margin_x \
+                        or i == len(task_pdf_values) - 1:
+                pdf_task_counter += 1
+                new_img = img[y:y + h, x:x + w]
+                saving_path = f'{dst_folder}pdf_task_' \
+                              f'{pdf_task_counter}.jpg'
+                if not cv2.imwrite(saving_path, new_img):
+                    print("Could not save image.")
+
+        already_saved_overall_pdf = False
+
+        for i in range(1, len(overall_pdf_values)):
+            x, y, w, h = overall_pdf_values[i]
+            y_next = 0
+            if i != len(overall_pdf_values)-1:
+                _, y_next, _, _ = overall_pdf_values[i+1]
+
+            # The margin in which we label the contour as the same
+            margin_h = im_height * 0.03
+
+            # Save if the distance between two contours is larger than margin
+            # Also always save the last contour. Because it is already ordered
+            # the last contour will always be smaller than the others.
+            if np.abs(y - y_next) > margin_h \
+                    or i == len(overall_pdf_values) - 1:
+
+                new_img = img[y:y + h, x:x + w]
+                saving_path = f'{dst_folder}pdf_task1to7.jpg'
+
+                cv2.imwrite(saving_path, new_img)
+
+                if already_saved_overall_pdf:
+                    raise RuntimeWarning(f'Found more than one overall pdf '
+                                         f'score, last one overwrites the '
+                                         f'others.')
+
+                already_saved_overall_pdf = True

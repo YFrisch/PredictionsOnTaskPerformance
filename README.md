@@ -12,6 +12,7 @@ Repository for the Applied Cognitive Science Project at TU Darmstadt WS2019/2020
 9. Include an open guess question: e.g. size of cities in Europe.
 10. Shorten each question to 5 items
 11. Delete social media question
+12. Delete notes-square on questionnaire
 
 --
 

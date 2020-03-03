@@ -133,7 +133,8 @@ for subject in subjects:
 
 for subject, answers in subject_answers:
     for i in range(1, 9):
-        print(score(answers[f'task_{i}'], 5))
+        pass
+        # print(score(answers[f'task_{i}'], 5))
 
 # --------------- Simulate Distribution --------------- #
 #
