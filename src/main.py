@@ -1,10 +1,22 @@
 # Main Python File
 import os
+import sys
 import numpy as np
+import pdf2image
 from src.discrete_distribution_reader import DiscreteDistributionReader as DDR
 from src.read_pdfs import extract_pdfs
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+# TODO: Yannik, bitte teste mal, ob das bei dir jetzt funktioniert
+
+'''
+    Because the working directory is dependent on the configuration of the 
+    python IDE each person is using, we make sure that the current
+    working directory is set to the 'PredictionsOnTaskPerformance' folder
+    and not the 'src' folder.
+'''
+current_folder = os.path.basename(os.getcwd())
+if current_folder == f'src':
+    os.chdir(f'..')
 
 
 # --------------- Scoring Function --------------- #
@@ -46,30 +58,57 @@ def score(answers, points_per_task):
 
 # --------------- Read PDFs --------------- #
 
-# subject_code = r'RNZK'
-# subject_code = r'RSHA'
-subject_code = r'ETLA'
+# Specify all the file suffixes (difference between folder name and file name)
+# for each file that should be read. The pdfs will be read and annotated
+# in the order the files appear in the array.
+file_suffixes = [f'_p1.jpg', f'_p2.jpg', f'_p3.jpg']
+print(os.getcwd())
 
-folder_path = r'/assets/subjects/subject_{}'.format(str(subject_code))
+# Getting all the subdirectory names in the subjects folder
+subjects_folder_path = f'assets/subjects/'
+subject_dirs_ = os.listdir(subjects_folder_path)
 
-image_array = [r'{}/raw/subject_{}_p1.jpg'.format(folder_path, subject_code),
-               r'{}/raw/subject_{}_p2.jpg'.format(folder_path, subject_code),
-               r'{}/raw/subject_{}_p3.jpg'.format(folder_path, subject_code)]
+# Delete folders that do not start with "subject" (e.g. Apple hidden .DS_Store)
+subject_dirs = []
+for sd in subject_dirs_:
+    if sd.startswith("subject_"):
+        subject_dirs.append(sd)
 
-dst_path = BASE_DIR + folder_path + r"/pdfs/"
-extract_pdfs(image_path_array=image_array, dst_folder=dst_path)
+# Iterate over all subjects and read the pdfs
+for sd in subject_dirs:
+    images_array = []
+    for fs in file_suffixes:
+        images_array.append(f'{subjects_folder_path}'
+                            f'{sd}/raw/{sd}{fs}')
+
+    # Convert pdf to jpg if it is not already available in jpg
+    # Note: The "poppler" package needs to be installed
+    for img in images_array:
+        if not os.path.exists(img):
+            print(f'{img[:-3]}pdf')
+            files = pdf2image.convert_from_path(f'{img[:-3]}pdf')
+            files[0].save(img, f'jpeg')
+
+    dst_path = f'{subjects_folder_path}{sd}/pdfs/'
+
+    # Create 'pdfs'-folder for if it does not exist
+    if not os.path.exists(dst_path):
+        os.mkdir(dst_path)
+
+    # Extract pdfs and save into pdf folder
+    extract_pdfs(image_path_array=images_array, dst_folder=dst_path)
 
 # --------------- Simulate Distribution --------------- #
-
-dr = DDR(subject_code)
-dr.plot(task_id=1)
-dr.plot(task_id=2)
-dr.plot(task_id=3)
-dr.plot(task_id=4)
-dr.plot(task_id=5)
-dr.plot(task_id=6)
-dr.plot(task_id=7)
-dr.plot(task_id=8)
+#
+# dr = DDR(subject_code)
+# dr.plot(task_id=1)
+# dr.plot(task_id=2)
+# dr.plot(task_id=3)
+# dr.plot(task_id=4)
+# dr.plot(task_id=5)
+# dr.plot(task_id=6)
+# dr.plot(task_id=7)
+# dr.plot(task_id=8)
 
 
 

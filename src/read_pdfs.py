@@ -4,9 +4,6 @@ import os
 import pathlib as pl
 import matplotlib.pyplot as plt
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
-
-
 def sort_contours(cnts, method="left-to-right"):
     """
     From the internet.
@@ -49,7 +46,7 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
     for im_num, im_path in enumerate(image_path_array):
 
         # Read the image in grayscale (0 == grayscale)
-        img = cv2.imread(BASE_DIR + r"{}".format(im_path), 0)
+        img = cv2.imread(im_path, 0)
 
         # Thresholding the image
         (thresh, img_bin) = cv2.threshold(img, 128, 255,
@@ -134,10 +131,11 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
             # If width and height is geater than 80 pixel
             # and it is approximately square,
             # we save the contour.
-            if 1.05 * h > w > 80 and 80 < h < 1.05 * w:
+            if 1.1 * h > w > 80 and 80 < h < 1.1 * w:
                 if not skip_matching_pdf:
                     pdf_task_counter += 1
                     new_img = img[y:y + h, x:x + w]
-                    if not cv2.imwrite("{}pdf_task_{}.jpg".format(dst_folder, pdf_task_counter), new_img):
+                    if not cv2.imwrite(f'{dst_folder}pdf_task_'
+                                       f'{pdf_task_counter}.jpg', new_img):
                         print("Could not save image.")
                 skip_matching_pdf = not skip_matching_pdf
