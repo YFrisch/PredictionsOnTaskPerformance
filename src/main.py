@@ -3,6 +3,7 @@ import os
 import sys
 import numpy as np
 import pdf2image
+import pandas as pd
 from src.discrete_distribution_reader import DiscreteDistributionReader as DDR
 from src.read_pdfs import extract_pdfs
 
@@ -56,13 +57,12 @@ def score(answers, points_per_task):
 # score(answers=np.array([1, 3, 5, 2, 4]), points_per_task=5)
 # TODO: Use score function to calculate the brier score for the answers.
 
-# --------------- Read PDFs --------------- #
+# --------------- Folder & File Names --------------- #
 
 # Specify all the file suffixes (difference between folder name and file name)
 # for each file that should be read. The pdfs will be read and annotated
 # in the order the files appear in the array.
 file_suffixes = [f'_p1.jpg', f'_p2.jpg', f'_p3.jpg']
-print(os.getcwd())
 
 # Getting all the subdirectory names in the subjects folder
 subjects_folder_path = f'assets/subjects/'
@@ -74,8 +74,13 @@ for sd in subject_dirs_:
     if sd.startswith("subject_"):
         subject_dirs.append(sd)
 
+# --------------- Read PDFs --------------- #
+
 # Iterate over all subjects and read the pdfs
 for sd in subject_dirs:
+
+    # Create array with a seperate string for each file that we
+    # want to read for this subject.
     images_array = []
     for fs in file_suffixes:
         images_array.append(f'{subjects_folder_path}'
@@ -89,14 +94,44 @@ for sd in subject_dirs:
             files = pdf2image.convert_from_path(f'{img[:-3]}pdf')
             files[0].save(img, f'jpeg')
 
+    # Path where we save the probability density functions
     dst_path = f'{subjects_folder_path}{sd}/pdfs/'
 
-    # Create 'pdfs'-folder for if it does not exist
+    # Create 'pdfs'-folder if it does not exist
     if not os.path.exists(dst_path):
         os.mkdir(dst_path)
 
-    # Extract pdfs and save into pdf folder
+    # Extract pdfs and save
     extract_pdfs(image_path_array=images_array, dst_folder=dst_path)
+
+
+# --------------- Read Answer CSV --------------- #
+'''
+    Read the answers of the csv file and put them into a dictionary.
+    The keys are 'task_1', 'task_2', ... and each entry is a list of
+    the correct position of each answer for the specific task in
+    ascending order.
+    Example: subject wrote [A, C, E, B, D] correct would be 
+    [A, B, C, D, E] so the list for that task is [1, 3, 5, 2, 4].
+'''
+
+# 2D array with subject dir as first entry and answers dictionary as second
+subject_answers = []
+
+for subject_dir in subject_dirs:
+    path_to_csv = f'{subjects_folder_path}{subject_dir}/' \
+                  f'{subject_dir}_answers.csv'
+    if os.path.exists(path_to_csv):
+        answers = pd.read_csv(path_to_csv, sep=',')
+        answers = answers.set_index('task').T.to_dict(f'list')
+
+        subject_answers.append([subject_dir, answers])
+
+# --------------- Print Scoring --------------- #
+
+for subject_dir, answers in subject_answers:
+    for i in range(1, 9):
+        print(score(answers[f'task_{i}'], 5))
 
 # --------------- Simulate Distribution --------------- #
 #

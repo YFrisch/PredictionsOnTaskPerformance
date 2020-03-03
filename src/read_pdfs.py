@@ -48,6 +48,8 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
         # Read the image in grayscale (0 == grayscale)
         img = cv2.imread(im_path, 0)
 
+        im_width, im_height = img.shape[:2]
+
         # Thresholding the image
         (thresh, img_bin) = cv2.threshold(img, 128, 255,
                                           cv2.THRESH_BINARY | cv2.THRESH_OTSU)
@@ -122,6 +124,9 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
         # Because the algorithm always finds 2 times the same contour,
         # where the first one is slightly to big, we skip always the first
         skip_matching_pdf = True
+        skip_overall_pdf = False
+
+        test_counter = 0
 
         for c in contours:
             # Returns the location and width,height for every contour
@@ -131,7 +136,7 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
             # If width and height is geater than 80 pixel
             # and it is approximately square,
             # we save the contour.
-            if 1.1 * h > w > 80 and 80 < h < 1.1 * w:
+            if 1.08 * h > w > 80 and 80 < h < 1.08 * w:
                 if not skip_matching_pdf:
                     pdf_task_counter += 1
                     new_img = img[y:y + h, x:x + w]
@@ -139,3 +144,22 @@ def extract_pdfs(image_path_array, dst_folder, debugging=False):
                                        f'{pdf_task_counter}.jpg', new_img):
                         print("Could not save image.")
                 skip_matching_pdf = not skip_matching_pdf
+
+            # Save overall task performance
+            # The field is wider and rectangular
+            elif h > 80 and im_width * 0.8 > w > im_width * 0.4:
+                if not skip_overall_pdf:
+                    new_img = img[y:y + h, x:x + w]
+                    saving_path = f'{dst_folder}pdf_task1to7_{test_counter}.jpg'
+                    test_counter += 1
+
+                    # # ONLY ONE OVERALL PDF
+                    # # Make sure the file does not exist already
+                    # # If so, either someone forgot to delete it
+                    # # or the program detected two pdfs that would fit
+                    # if os.path.exists(saving_path):
+                    #     raise ValueError(f'The file {saving_path} '
+                    #                      f'already exists')
+
+                    cv2.imwrite(saving_path, new_img)
+                skip_overall_pdf = False
