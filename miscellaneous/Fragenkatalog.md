@@ -97,5 +97,17 @@ Nennen und ordnen Sie die 5 euopäischen Städte mit den meisten Einwohnern
 3. London
 4. St. Petersburg
 5. Berlin
+6. Madrid
+7. Kiew
+8. Rom
+9. Paris
+10. Minsk
+11. Wien
+12. Hamburg
+13. Bukarest
+14. Warschau
+15. Budapest
+16. Barcelona
+17. München
 
 `Quelle: Wikipedia`
