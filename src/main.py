@@ -137,24 +137,23 @@ for subject, answers in subject_answers.items():
     for i in task_ids:
         scores.append(score_sorting_task(answers[f'task_{i}'], pts_per_task))
 
+    subject_task_scores[subject] = scores
+
     scores = pd.DataFrame(scores,
                           columns=[f'points (max {pts_per_task})'],
                           index=[f'task_1', f'task_2', f'task_3', f'task_4',
                                  f'task_5', f'task_6', f'task_7', f'task_8'])
-
     save_path = f'{subjects_folder_path}subject_{subject}' \
                 f'/analysis/task_scores.csv'
     scores.to_csv(save_path, sep=f',')
-
-    subject_task_scores[subject] = scores
-
 
 print(f'------------------------------\n')
 
 
 # --------------- Simulate Distribution --------------- #
 
-dr = DDR(vpn_code='ATDA', task_scores=subject_task_scores.get('ATDA'))
+
+dr = DDR(vpn_code=subject, task_scores=subject_task_scores.get(f'ATDA'))
 dr.plot(task_ids=task_ids)
 
 
