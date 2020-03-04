@@ -152,8 +152,13 @@ class DiscreteDistributionReader:
         """
         # Read-in points per task
         path = BASE_DIR + f'/assets/subjects/subject_{self.vpn_code}/analysis/{self.vpn_code}_brier_scores.csv'
-        panda_df = pd.DataFrame([self.brier_score_for_task(task_id=id, vpn_points_for_task=score) for
-                                           id, score in enumerate(self.task_scores)])
+        print(type(self.task_scores))
+        brier_scores = [self.brier_score_for_task(task_id=t_id, vpn_points_for_task=points)
+                        for t_id, points in enumerate(self.task_scores)]
+        panda_df = pd.DataFrame(brier_scores,
+                                columns=[f'Brier Score'],
+                                index=[f'task_1', f'task_2', f'task_3', f'task_4',
+                                        f'task_5', f'task_6', f'task_7', f'task_8'])
         panda_df.to_csv(path, sep=',')
 
     def brier_score_for_task(self, task_id, vpn_points_for_task):

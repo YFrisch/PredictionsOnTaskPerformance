@@ -154,9 +154,8 @@ print(f'------------------------------\n')
 
 # --------------- Simulate Distribution --------------- #
 
-for subject in subjects:
-    dr = DDR(vpn_code=subject, task_scores=subject_task_scores[subject])
-    dr.plot(task_ids=task_ids)
+dr = DDR(vpn_code='ATDA', task_scores=subject_task_scores.get('ATDA'))
+dr.plot(task_ids=task_ids)
 
 
 
