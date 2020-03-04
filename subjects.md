@@ -1,16 +1,15 @@
 # Versuchspersonen
 
-| Name       | Bereits erhoben | |
-| ---------- | --------------- | |
-| Lisa S.    |                 | |
-| Marius     |                 | |
-| Noah       |       X         | |
-| Fabian T.  |                 | 27.2. |
-| Susi       |       X         | |
-| Tim S.     |                 | |
-| Anna R.    |                 | 27.2. |
-| Sushi      |       X         | |
-| Felix      |                 | |
-| Denise     |       X         | |
-| Dad        |       X         | |
-| Yves       |                 | Kennt Frage? |
+| Name       | Bereits erhoben |
+| ---------- | --------------- |
+| Noah       |       X         |
+| Fabian T.  |       X         |
+| Susi       |       X         |
+| Tim S.     |                 |
+| Anna R.    |       X         |
+| Sushi      |       X         |
+| Felix      |                 |
+| Denise     |       X         |
+| Dad        |       X         |
+| Yves       |                 |
+| Lisa       |                 |

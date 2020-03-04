@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  3 MAR 2020 17:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  3 MAR 2020 19:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1397,7 +1397,37 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 35.
 (../sections/introduction.tex) (../sections/introduction.tex)
-(../sections/introduction.tex) (../sections/discussion.tex)
+(../sections/introduction.tex) (../sections/discussion.tex
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 9.0pt on input line 6.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
+(Font)              to `T1/Roboto-LF/regular/n' on input line 8.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 8.0pt on input line 8.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
+(Font)              to `T1/Roboto-LF/regular/n' on input line 8.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 10.95pt on input line 8.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 10.95pt on input line 8.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 8.
+ [2
+
+
+
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
+ut line 8.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
+File: TS1XCharter-TLF.fd 2017/06/25 (autoinst) Font definitions for TS1/XCharte
+r-TLF.
+)
+LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 8.
+)
 
 Package TUDaPub Warning: You did not provide a Label for key introduction.
 (TUDaPub)                Either you need to recompile your document or add a
@@ -1419,24 +1449,7 @@ Package TUDaPub Warning: You did not provide a Label for key discussion.
 (TUDaPub)                label using \IMRADlabel.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 52.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 52.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 8.0pt on input line 52.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 52.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 10.95pt on input line 52.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 52.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 52.
-[2
-
-
-
-
-] [3]
+[3]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 52.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 52.
@@ -1445,24 +1458,25 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29166 strings out of 492162
- 578917 string characters out of 6125292
+ 29198 strings out of 492162
+ 579755 string characters out of 6125292
  978916 words of memory out of 5000000
- 33211 multiletter control sequences out of 15000+600000
- 598678 words of font info for 54 fonts, out of 8000000 for 9000
+ 33236 multiletter control sequences out of 15000+600000
+ 605768 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,20n,77p,10150b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}{/
-usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_uy5hgr.enc}</usr
-/local/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb></usr/
-local/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb></us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><
-/usr/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.p
-fb>
-Output written on main.pdf (3 pages, 206987 bytes).
+ 56i,20n,79p,10150b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_q7u3cc.enc}{
+/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}{/usr
+/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_uy5hgr.enc}</usr/lo
+cal/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb></usr/loc
+al/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb></usr/l
+ocal/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></us
+r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb>
+
+Output written on main.pdf (3 pages, 217149 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  9 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

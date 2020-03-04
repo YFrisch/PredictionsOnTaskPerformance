@@ -89,12 +89,24 @@ for subject in subjects:
         images_array.append(f'{subjects_folder_path}'
                             f'subject_{subject}/raw/subject_{subject}{fs}')
 
-    # Convert pdf to jpg if it is not already available in jpg
-    # Note: The "poppler" package needs to be installed
-    for img in images_array:
-        if not os.path.exists(img):
-            files = pdf2image.convert_from_path(f'{img[:-3]}pdf')
-            files[0].save(img, f'jpeg')
+    # First option: one pdf of the whole experiment
+    # 1. page: explanation (incl. subject code), 2. - 4. page: experiment
+    multiple_pdf_path = f'{subjects_folder_path}subject_{subject}' \
+                        f'/raw/subject_{subject}.pdf'
+    if os.path.exists(multiple_pdf_path):
+        files = pdf2image.convert_from_path(multiple_pdf_path)
+        # skip first page (only explanation)
+        for i in range(1, len(files)):
+            file = files[i]
+            fs = file_suffixes[i-1]
+            file.save(f'{multiple_pdf_path[:-4]}{fs}', f'jpeg')
+    else:
+        # Convert pdf to jpg if it is not already available in jpg
+        # Note: The "poppler" package needs to be installed
+        for img_path in images_array:
+            if not os.path.exists(img_path):
+                files = pdf2image.convert_from_path(f'{img_path[:-3]}pdf')
+                files[0].save(img_path, f'jpeg')
 
     # Path where we save the probability density functions
     dst_path = f'{subjects_folder_path}subject_{subject}/pdfs/'
@@ -129,16 +141,27 @@ for subject in subjects:
 
         subject_answers.append([subject, answers])
 
-# --------------- Print Scoring --------------- #
+# --------------- Save Scoring --------------- #
+
+pts_per_task = 5
 
 for subject, answers in subject_answers:
+    scores = []
+    analysis_path = f'{subjects_folder_path}subject_{subject}/analysis/'
+    if not os.path.exists(analysis_path):
+        os.mkdir(analysis_path)
     for i in range(1, 9):
-        pass
-        # print(score(answers[f'task_{i}'], 5))
+        scores.append(score(answers[f'task_{i}'], pts_per_task))
+
+    scores = pd.DataFrame(scores,
+                          columns=[f'points (max {pts_per_task})'],
+                          index=[f'task_1', f'task_2', f'task_3', f'task_4',
+                                 f'task_5', f'task_6', f'task_7', f'task_8'])
+    scores.to_csv(f'{analysis_path}task_scores.csv', sep=f',')
 
 # --------------- Simulate Distribution --------------- #
 #
-dr = DDR(vpn_code='LIKN')
+dr = DDR(vpn_code='DTEA')
 dr.plot(task_ids=[1, 2, 3, 4, 5, 6, 7, 8])
 
 
