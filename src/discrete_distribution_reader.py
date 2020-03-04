@@ -18,6 +18,8 @@ __date__ = '27-02-2020'
 
 import numpy as np
 import os
+import csv
+import pandas as pd
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
@@ -26,13 +28,14 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 class DiscreteDistributionReader:
 
-    def __init__(self, vpn_code):
+    def __init__(self, vpn_code, task_scores):
         self.vpn_code = vpn_code
         print("\n------------------------------")
         print("# Created distribution reader for vpn {}.".format(vpn_code))
         self.confidence_images, self.img_shapes = self.read_in_confidence_images()
         print("# Read in drawn confidence distributions.")
         self.points_per_task = 5
+        self.task_scores =task_scores
         self.indices = defaultdict(np.ndarray)
         self.ys = defaultdict(np.ndarray)
         self.xs = defaultdict(np.ndarray)
@@ -40,11 +43,16 @@ class DiscreteDistributionReader:
         self.normalized_discrete_values = defaultdict(np.ndarray)
         self.discretize()
         print("# Discretized distributions.")
+        self.save_prob_to_csv()
+        print("# Saved discrete values to .csv file.")
+        self.save_brier_to_csv()
+        print("# Saved brier scores to .csv file.")
         print("------------------------------")
 
     def read_in_confidence_images(self):
         """ This method reads in 8 files named 'pdf_task_i.jpg' from the vpn subfolder
             and stores the inside self.confidence_images.
+        :returnn: confidence_images, img_shapes: list of read-in image per task and shape per image
         """
         confidence_images = []
         img_shapes = []
@@ -68,6 +76,7 @@ class DiscreteDistributionReader:
 
             The indices from which the discrete pdf values are taken are also stored for every task
             in self.indices.
+        :return: None
         """
         for i in range(0, len(self.confidence_images)):
             img = self.confidence_images[i]
@@ -117,7 +126,6 @@ class DiscreteDistributionReader:
                 else:
                     continue
 
-
             # Cut data where y == -1 (no dark pixels)
             indices = np.where(y_raw == -1)[0]
             self.xs[i] = np.delete(x_raw, indices)
@@ -130,12 +138,41 @@ class DiscreteDistributionReader:
 
         return None
 
-    # Plot the discrete values for each point of the task
+    def save_prob_to_csv(self):
+        """ Saves the discrete probability confidence values for each task to a csv file.
+        :return: None
+        """
+        path = BASE_DIR + f'/assets/subjects/subject_{self.vpn_code}/analysis/{self.vpn_code}_probabilities.csv'
+        panda_df = pd.DataFrame.from_dict(self.normalized_discrete_values, orient='index')
+        panda_df.to_csv(path, sep=',')
+
+    def save_brier_to_csv(self):
+        """ Saves the brier score of a subject for each task to a csv file.
+        :return: None
+        """
+        # Read-in points per task
+        path = BASE_DIR + f'/assets/subjects/subject_{self.vpn_code}/analysis/{self.vpn_code}_brier_scores.csv'
+        panda_df = pd.DataFrame([self.brier_score_for_task(task_id=id, vpn_points_for_task=score) for
+                                           id, score in enumerate(self.task_scores)])
+        panda_df.to_csv(path, sep=',')
+
+    def brier_score_for_task(self, task_id, vpn_points_for_task):
+        """ Returns the brier score for this vpn for the given task id and the given amount of actual reached points.
+        :return: bs, the Brier Score
+        """
+        ppt = np.zeros(shape=(self.points_per_task+1, 1))
+        ppt[vpn_points_for_task] = 1
+        bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
+        print("\nBrier-Score of '{}' for {} points is {}.".format(self.vpn_code, vpn_points_for_task, np.round(bs, 3)))
+        return bs
+
     def plot(self, task_ids):
+        """ Plots the original image, discrete data and normalized pdf values for a given task id.
+        :return: None
+        """
         for id in task_ids:
             id = id - 1
-            """ Plots the original image, discrete data and normalized pdf values for a given task id.
-            """
+
             # Creates two subplots and unpacks the output array immediately
             f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 5))
             f.suptitle(self.vpn_code + ": Task " + str(id + 1))
@@ -159,14 +196,4 @@ class DiscreteDistributionReader:
 
             plt.show()
         return None
-
-    # Return Brier-Score for discrete reached points
-    def brier_score(self, task_id, vpn_points_for_task):
-        """ Returns the brier score for this vpn for the given task id and the given amount of actual reached points.
-        """
-        ppt = np.zeros(shape=(self.points_per_task+1, 1))
-        ppt[vpn_points_for_task] = 1
-        bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
-        print("\nBrier-Score of '{}' for {} points is {}.".format(self.vpn_code, vpn_points_for_task, np.round(bs, 3)))
-        return bs
 
