@@ -142,10 +142,9 @@ class DiscreteDistributionReader:
             ax1.set_title("Original image")
             ax1.imshow(self.confidence_images[id], cmap="gray", origin='upper')
 
-            # TODO: x-Axis should show the discrete points (0-1) rather than the pixel values
-            # TODO: y-Axis should show whole range from (0-1) rather than (0-max)
             ax2.scatter(self.xs[id], 1 - self.ys[id], color='blue', alpha=0.1)
             ax2.scatter(self.indices[id], self.discrete_values[id], color='red', s=120, alpha=1)
+            ax2.set_ylim(top=1)
             for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
                 ax2.annotate(txt, (self.indices[id][i] + 5, self.discrete_values[id][i] - 0.02))
             ax2.set_ylabel("Confidence")
@@ -154,6 +153,7 @@ class DiscreteDistributionReader:
 
             ax3.scatter(self.indices[id], self.normalized_discrete_values[id], color='green', s=120, alpha=1)
             ax3.set_title("Normalized discrete values")
+            ax3.set_ylim(top=1)
             for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
                 ax3.annotate(txt, (self.indices[id][i] + 5, self.normalized_discrete_values[id][i] - 0.01))
 
