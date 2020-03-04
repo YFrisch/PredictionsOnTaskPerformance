@@ -80,8 +80,6 @@ class DiscreteDistributionReader:
         """
         for i in range(0, len(self.confidence_images)):
             img = self.confidence_images[i]
-            # TODO: Cut offsets from image?
-            # TODO: Better threshold? Global threshold for img or local for each column?
             # threshold = 237
             threshold = np.max(img) - (np.max(img)-np.min(img))/3.0
             x_raw = np.arange(1, self.img_shapes[i][1])
