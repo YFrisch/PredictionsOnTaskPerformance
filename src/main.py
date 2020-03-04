@@ -153,7 +153,7 @@ print(f'------------------------------\n')
 # --------------- Simulate Distribution --------------- #
 
 
-dr = DDR(vpn_code=subject, task_scores=subject_task_scores.get(f'ATDA'))
+dr = DDR(vpn_code=f'ATDA', task_scores=subject_task_scores.get(f'ATDA'))
 dr.plot(task_ids=task_ids)
 
 
