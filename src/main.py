@@ -150,10 +150,8 @@ for subject, answers in subject_answers.items():
 print(f'------------------------------\n')
 
 # --------------- Simulate Distribution --------------- #
-
-
-dr = DDR(vpn_code=f'ATDA', task_scores=subject_task_scores.get(f'ATDA'))
-dr.plot(task_ids=task_ids)
+for s in subjects:
+    dr = DDR(vpn_code=s, task_scores=subject_task_scores.get(s))
 
 
 
