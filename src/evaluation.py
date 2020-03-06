@@ -32,27 +32,42 @@ for subject in subjects:
     path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_brier_scores.csv'
     if os.path.exists(path_to_csv):
-        answers = pd.read_csv(path_to_csv, sep=',')
-        #answers = answers.to_dict(orient=f'list')
-        answers = answers.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_brier_scores[subject] = answers
+        pandas_frame = pd.read_csv(path_to_csv, sep=',')
+        bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
+        subject_brier_scores[subject] = bs
 
 print("# Read in brier scores.")
 
 
 # --------------- EVALUATE DATA --------------- #
 
-brier_over_task = np.empty((1, len(subject_brier_scores.get(subjects[0]))))
-for s in subjects:
-    bs = np.array(list(subject_brier_scores.get(s).values())).T
-    brier_over_task = np.concatenate((brier_over_task, bs), axis=0)
+def plot_average_brier_score():
+    brier_over_task = np.empty((1, len(subject_brier_scores.get(subjects[0]))))
+    for s in subjects:
+        bs = np.array(list(subject_brier_scores.get(s).values())).T
+        brier_over_task = np.concatenate((brier_over_task, bs), axis=0)
 
-plt.figure()
-for i in range(0, brier_over_task.shape[1]):
-    plt.bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
-            color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
-plt.title("Average brier score per task.")
-plt.xlabel("Task ID")
-plt.ylabel("Avg. Brier Score")
-plt.show()
+    plt.figure()
+    for i in range(0, brier_over_task.shape[1]):
+        plt.bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
+                color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
+    plt.title("Average brier score per task.")
+    plt.xlabel("Task ID")
+    plt.ylabel("Avg. Brier Score")
+    plt.show()
+    return None
 
+
+def plot_vpn(vpn_code):
+    bs = np.array(list(subject_brier_scores.get(vpn_code).values())).T.squeeze()
+    plt.figure()
+    for i in range(0, len(bs)):
+        plt.bar(x=i+1, height=bs[i], color='green', align='center', alpha=0.3)
+    plt.title(f"Brier Scores of {vpn_code}")
+    plt.xlabel("Task ID")
+    plt.ylabel("Brier Score")
+    plt.show()
+    return None
+
+
+plot_vpn(f'ATDA')

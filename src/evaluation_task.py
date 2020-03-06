@@ -26,7 +26,7 @@ for subject_dir in subject_dirs_:
 print("# Read in subjects: ", subjects)
 
 # Dictionary of dictionaries
-subject_brier_scores = {}
+subject_task_scores = {}
 
 for subject in subjects:
     path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
@@ -35,24 +35,41 @@ for subject in subjects:
         answers = pd.read_csv(path_to_csv, sep=',')
         #answers = answers.to_dict(orient=f'list')
         answers = answers.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_brier_scores[subject] = answers
+        subject_task_scores[subject] = answers
 
 print("# Read in brier scores.")
 
 
 # --------------- EVALUATE DATA --------------- #
+def plot_average_points_per_task():
+    points_over_task = np.empty((1, len(subject_task_scores.get(subjects[0]))))
+    for s in subjects:
+        ts = np.array(list(subject_task_scores.get(s).values())).T
+        points_over_task = np.concatenate((points_over_task, ts), axis=0)
 
-brier_over_task = np.empty((1, len(subject_brier_scores.get(subjects[0]))))
-for s in subjects:
-    bs = np.array(list(subject_brier_scores.get(s).values())).T
-    brier_over_task = np.concatenate((brier_over_task, bs), axis=0)
+    plt.figure()
+    for i in range(0, points_over_task.shape[1]):
+        plt.bar(x=i+1, height=np.mean(points_over_task[:, i]), yerr=np.std(points_over_task[:, i]),
+                color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
+    plt.title("Average points per task.")
+    plt.xlabel("Task ID")
+    plt.ylabel("Average Points")
+    plt.show()
+    return None
 
-plt.figure()
-for i in range(0, brier_over_task.shape[1]):
-    plt.bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
-            color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
-plt.title("Average points per task.")
-plt.xlabel("Task ID")
-plt.ylabel("Points")
-plt.show()
+
+def vpn_points_confidence(vpn_code):
+    ts = np.array(list(subject_task_scores.get(vpn_code).values())).T.squeeze()
+    plt.figure()
+    for i in range(0, len(ts)):
+        plt.bar(x=i+1, height=ts[i], color='red', align='center', alpha=0.3)
+    plt.title(f"Points of {vpn_code} per task")
+    plt.xlabel("Task ID")
+    plt.yticks(np.arange(0, 6, 1))
+    plt.ylabel("Points")
+    plt.show()
+    return None
+
+
+vpn_points_confidence(f'UENN')
 
