@@ -1,18 +1,18 @@
 # PyCharm environment
-.idea
-__pycache__
+*.idea
+*__pycache__
 
 # Mac files
-.DS_Store
+*.DS_Store
 
 # LaTex files
-.aux
-.log
-.out
-.synctex.gz
+*.aux
+*.log
+*.out
+*.synctex.gz
 
 # Ignore the data to build the data recognition neural network
 DR_Data/
 
 # Ignore Jupyter Notebooks
-.ipynb_checkpoints
+*.ipynb_checkpoints
