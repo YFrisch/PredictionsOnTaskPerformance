@@ -3,25 +3,48 @@
 % Put everything that shall appear in the introduction
 % inside this document environment.
 \begin{document}
-<<<<<<< HEAD
-	
-=======
+	The question of how to predict peoples performance on a task has been of great interest in the psychology literature. To be able to make qualified statements about this ability, one has to define it first.
+	This can be achieved by the framework of \textit{metacognition} including the terms \textit{metacognitive sensitivity}, \textit{metacognitive bias} and \textit{metacoognitive efficiency} [x].\\
+	The first is used to express how good a subject is at differing between his or her own correct and incorrect answers. A useful initial approach is the $2x2$ confidence-accuracy table, labeled "type 2 SDT table" by [x] that is the equivalent of the usual "type-1" SDT table [x] applied to the \textit{metacognition} framework. Common measures of the association between the rows and the colums of the table in the type-1 case are the $\phi$-correlation [x] and the Goodman-Kruskall gamma coefficient $G$ [x]. It is well known that both measurements are affected by (metacognitive?) bias [x], and [x] showed that this also holds for the type-2 application of the measurements.\\
+	A standard way to remove the influence of the bias would be using $d'$ [x] which will be constant given different biases and also has several approaches to metacognitive sensitivity [x]. But type-2 $d'$ is also affected by changes in the metacognitive bias (HOW?)[x].\\
+	One way to remove this issue is the use of non-parametric analysis, that does not make the equal-variance gaussian assumptions, e.g. ROC analysis [x], that can be applied to type-2 data.\\
+	A further complication for using the above methods to measure metacognitive sensitivity is the fact that all these measures are affected by the task performance (HOW?) [x].
+	\\
 \begin{itemize}
-	\item Measuring metacognition is important because .. ?
-	\item Metacognitive sensitivity ?
-	\item Metacognitive bias?
-	\item Metacognitive efficiency?
-	\item Useful starting point for all measures of metacognitive sensitivity: 2x2 confidence-accuracy table ("type 2" SDT table)
-	\item Simplest measure of association between rows and columns of the table is the phi$(\phi)$ correlation.
-	\item $G$: Goodman-Kruskall gamma coefficient
-	\item Both are affected by metacognitive bias
-	\item Standard way to remove influence of bias: Apply STD ($d'$)
-	\item $d'$ will be constant given different biases
-	\item Several approaches to metacognitive sensitivity
-	\item But type 2 $d'$ is also affected by changes in metacognitive bias
-	\item One solution: Apply non-parametric analysis that does not make equal-variance gaussian assumptions (e.g. use ROC analysis)
-	\item Can be applied to type 2 data.
-	\item Further complication: $\phi$, $G$, $d'$ and type 2 ROC are affected by the task performance.
+	\item One solution approach: Use psychophysical techniques to control for differences in performance
+	\item Alternative approach: Explicitly model the connection between performance and metacognition
+	\item Meta-$d'$ measure exploits the fact that given gaussian variance assumptions at type 1 level, the shapes of the type 2 distribution are known even if they are not themselves gaussian.
+	\item Therefore max type 2 performance is constrained by one's type 1 performance
+	\item Given a particular type 1 variance structure and bias, the form of the type 2 ROC is completely determined.
+	\item Given the subject's actual type 2 performance, we can obatin the underlying type 1 sensitivity, labeled meta-$d'$.
+	\item meta-$d'$ is robust to changes in bias and recovers simulated changes in metacognitive sensitivity
+	\item For a metacognitively ideal observer, meta-$d'$ should be equal to $d'$
+	\item We can define "metacognitive efficiency" as meta-$d'/d'$
+	\item Efficiency of 1 encodes an ideal value
+	\item Closely related measure is meta-$d' - d'$ or $log(meta d'/d')$
+	\item Unable to discriminate between different causes of a change in metacognitive efficiency (Trial-to-trial variability in the placement of confidence criteria results in decreasing efficiency as well as additional noise in the evidence used to make the confidence rating does).
+	\item Similar bias-free approach to model metacognitive accuracy is the "Stoachastic Detection and Retrieval Model" (SDRM)
+	\item[] \begin{itemize}
+				\item Measures metacognitive acccuracy
+				\item Also able to model different potential causes of metacognitive inaccuracy
+			\end{itemize}
+	\item Different approach to the above: Use 'one-shot' discrepancy measures to quantify metacognition: Compare general confidence rating (generally; asked before the trial) with performance on a variety of tasks. BUT: Using a single rating of performance, it is not possible to distinct bias from sensitivity, nor measure efficiency.
+	\item In contrast, collecting trial-by-trial measures of performance and metacognitive judgements allows to get a picture of an individiuals bias, sensitivity and efficiency.
+	\item Metacognitive confidence can be formalized as a \textbf{probability judgement} directed towards one's own actions.
+	\item [] \begin{itemize}
+			\item Metacognition has a normative interpretation as the accuracy of a probability judgement about one's own performance.
+			\item Advantage of this framework: Meaningful measure of bias can be elicited.
+			\item "Probability Score": $PS = (f - c)^2$
+			\item $f$: probability rating
+			\item $c$: actual occurence (c=1/0 for binary events)
+			\item "Brier Score": Mean value of the PS averaged across estimates.
+			\item Brier score is analogous to $\phi$.
+			\item Can be decomposed into: $PS = O + C -R$
+			\item $O$: "Outcome index", reflecting the variance of the outcome event $c$
+			\item $C$: "Calibration", the goodness of fit between probability assessments and the corresponding proportion of correct responses. Quantifies the discrepancy between the mean performance level in a category (e.g. $60\%$) and its associated rating (e.g. $80\%$).
+			\item $R$: "Resolution, the variance of the probability assessments. Measuring the extent to which correct and incorrect answers are assigned to different probability categorices (Is substracted; larger variance is better).
+		\end{itemize}
+	
 \end{itemize}
->>>>>>> 69cdd759640d3d4700ace452e6e9b80947f67eaa
+
 \end{document}
