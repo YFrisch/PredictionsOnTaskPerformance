@@ -35,6 +35,44 @@
 
 	\subsection{Processing Pipeline}
 	
+	
+	\begin{tikzpicture}
+		% PDF box
+		\node[rectangle, draw=black, rounded corners=2mm, minimum width=3cm, minimum height=1cm, line width=1pt] 
+		at (0,10) {\Large PDF file};
+		
+		% PDF arrow
+		\draw[thick,arrows={-open triangle 45}]  (-7, 10) -- node [pos=.5, above] {scan questionnaire} (-1.8, 10);
+		
+		\draw[thick,arrows={-triangle 45}]  (0, 9.4) -- (0, 8.6);
+		
+		% JPG box
+		\node[rectangle, draw=black, rounded corners=2mm, minimum width=3cm, minimum height=1cm, line width=1pt]  (jpgbox)
+		at (0,8) {\Large JPG};
+		
+		% JPG arrow
+		\draw[thick,arrows={-open triangle 45}]  (-7, 8) -- node [pos=.5, above] {photograph questionnaire} (-1.8, 8);
+		
+		\node[inner sep=0pt] (dist1) at (-4.6,5)
+		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_1.png}};
+		
+		\node[inner sep=0pt] (dist2) at (-0.6,5)
+		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_4.png}};
+		
+		\node[inner sep=0pt] (dist3) at (4.6,5)
+		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_5.png}};
+		
+		\node at (2, 5) {\Huge ...};
+		
+		\draw[thick,arrows={-triangle 45}]  (0, 7.4) -- (0, 7) -- (-4.6, 7) -- (-4.6, 6.5);
+		
+		\draw[thick,arrows={-triangle 45}]  (0, 7.4) -- (0, 7) -- (-0.6, 7) -- (-0.6, 6.5);
+				
+		\draw[thick,arrows={-triangle 45}]  (0, 7.4) -- (0, 7) -- (4.6, 7) -- (4.6, 6.5);
+		
+	\end{tikzpicture}
+	
+	
 	\subsection{Extracting Probability Density Functions}
 	
 	To extract the probability density functions from a scanned PDF into an image, we used computer vision to detect the probability density functions on the JPEG and simply cut out the detected regions from the JPEG. The cutout process is fairly easy. In python, images are stored as an array of numbers. As soon as we get the area of the pdf as pixels, we can simply enter these pixel indices in the array and extract that part of the image. Then we save it using OpenCV a free computer vision library in python.
@@ -43,6 +81,17 @@
 	
 	To detect squares, we need to detect vertical and horizontal lines first. We did exactly that and looked at all contours that could be build with horizontal and vertical lines. This will output all lines on their own, but also all triangles, rectangles and squares. Everything that forms a contour. Now we sorted the contours. It is important to sort the contours (or later pdfs), regarding their position on the page. To the computer all pdfs look the same, so we have to make sure that we assign the correct pdf to the correct task. Because all tasks are ordered in ascending order, we can sort the pdfs from north to south.
 	
-	Next, we had to find the correct square from the contours. We did this by iterating over the contours and testing each contour on some
+	Next, we had to find the correct square from the contours. We did this by iterating over the contours and testing each contour regarding some constraints.
+	
+	\begin{enumerate}
+		\item The horizontal and vertical length of the contour had to be approximately the same length. We allowed for exactly 8\% variation. So one side could be up to 8\% longer than the other side. This factor is necessary, because of the difficulty to scan a paper perfectly aligned.
+		\item The coordinate system has a height of 4.5cm. A Din A4 paper is exactly 29.7cm high. This means that each pdf takes about 0.15\% of the height of the image. Allowing for some deviation, the height of the contour had to be between 10 and 20\% of the height of the JPEG. 
+		\item The coordinate system has a width of 4.5cm. A Din A4 paper is exactly 21cm wide. This means that each pdf takes about 0.21\% of the width of the image. Allowing for some deviation, the width of the contour had to be between 15 and 25\% of the width of the JPEG. 
+		\item Last, we excluded all contours which were lying on the left half of the page.
+	\end{enumerate}
+
+	\noindent Constraint 1 makes sure that we find squares. Constraint 2 and 3 make sure we find the squares with the correct size. Constraint 4 makes sure that we do not take any squares from the left side of the page. We designed the questionnaire in a way that all pdfs are located at the right half of the page.
+	
+	Because we calculate the extraction of the pdfs with percentages relative to the size of a Din A4 paper, it is independent of the DPI and resolution of the scanner or photo camera with which the questionnaire is copied.
 
 \end{document}

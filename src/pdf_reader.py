@@ -136,7 +136,7 @@ def extract_pdfs_(image_path_array, dst_folder, debugging=False):
             # Din A4: 29.7cm x 21cm
             # pdf-square: 4.5cm x 4.5cm
             # percentage of height: 29.7cm / 4.5cm = 0.15152%
-            # percentage of width: 21cm / 4.5cm = 0.21429
+            # percentage of width: 21cm / 4.5cm = 0.21429%
             if im_width * 0.5 < x \
                     and im_height * 0.20 > h > im_height * 0.10 \
                         and im_width * 0.25 > w > 0.15 \
