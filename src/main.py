@@ -1,6 +1,7 @@
 """
     Main Python File
 """
+from __future__ import print_function
 
 __author__ = 'Yannik Frisch, Maximilian A. Gehrke'
 __date__ = '01-03-2020'
@@ -36,6 +37,7 @@ pts_per_task = 5
 
 # --------------- INITIALIZE --------------- #
 print(f'Initializing ... ', end=f'')
+sys.stdout.flush()
 
 # Get subject codes
 subjects = src.utils.extract_subject_codes_from_folders(subjects_folder_path)
@@ -49,16 +51,18 @@ print(f'Done!')
 
 # --------------- PREPROCESSING --------------- #
 print(f'Preprocessing ... ', end=f'')
+sys.stdout.flush()
 src.utils.convert_pdf_to_jpg(subjects, subjects_folder_path, file_suffixes)
 extract_pdfs(subjects, subjects_folder_path, file_suffixes)
 subject_answers = read_answers_from_csv(subjects, subjects_folder_path)
 subject_task_scores = apply_scoring(subject_answers, task_ids,
                                     pts_per_task, subjects_folder_path)
+
 print(f'Done!')
 # --------------- Simulate Distribution --------------- #
 for s in subjects:
     dr = DDR(vpn_code=s, task_scores=subject_task_scores.get(s))
-
+    dr.plot(task_ids=[9])
 
 
 

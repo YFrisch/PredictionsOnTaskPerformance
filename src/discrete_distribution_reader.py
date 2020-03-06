@@ -9,7 +9,7 @@
 
     Only argument is a 4-letter subject (vpn) code.
 
-    # TODO: Add source
+    https://www.statisticshowto.datasciencecentral.com/brier-score/
     The "brier score" can be calculated for a given task id and actual points of the vpn.
 """
 
@@ -18,7 +18,7 @@ __date__ = '27-02-2020'
 
 import numpy as np
 import os
-import csv
+import cv2
 import pandas as pd
 import matplotlib.pyplot as plt
 from collections import defaultdict
@@ -33,6 +33,7 @@ class DiscreteDistributionReader:
         print("\n------------------------------")
         print("# Created distribution reader for vpn {}.".format(vpn_code))
         self.confidence_images, self.img_shapes = self.read_in_confidence_images()
+        self.overall_confidence_img, self.o_img_shape = self.read_in_overall_confidence_image()
         print("# Read in drawn confidence distributions.")
         self.points_per_task = 5
         self.task_scores =task_scores
@@ -51,8 +52,8 @@ class DiscreteDistributionReader:
 
     def read_in_confidence_images(self):
         """ This method reads in 8 files named 'pdf_task_i.jpg' from the vpn subfolder
-            and stores the inside self.confidence_images.
-        :returnn: confidence_images, img_shapes: list of read-in image per task and shape per image
+            and stores them inside self.confidence_images.
+        :return: confidence_images, img_shapes: list of read-in image per task and shape per image
         """
         confidence_images = []
         img_shapes = []
@@ -67,6 +68,25 @@ class DiscreteDistributionReader:
             img_shapes.append(np.shape(img))
         return confidence_images, img_shapes
 
+    def read_in_overall_confidence_image(self):
+        """ This method reads in the file named 'pdf_task_i.jpg' from the vpn subfolder
+            and stores it inside self.overall_confidence_image.
+        :return: overall_confidence_image, o_img_shape: read-in overall confidence and shape of that image
+        """
+        img = plt.imread(BASE_DIR + "/assets/subjects/subject_" + self.vpn_code
+                         + "/pdfs/pdf_task1to7.jpg")
+        self.confidence_images.append(img)
+        self.img_shapes.append(img.shape)
+        # Greyscale transformation
+        # img = np.dot(img[..., :3], [0.2989, 0.5870, 0.1140])
+        # Cropping image by 10 pixels each side
+        img = img[10:-10, 10:-10]
+
+        # Smoothening kernel
+        k = np.ones((20, 20), np.float32)/2.5
+        img = cv2.filter2D(img, -1, kernel=k)
+        return img, img.shape
+
     def discretize(self):
         """ This function stores the pixel values ('continous' pdf) from the images
             in self.confidence_images in self.xs and self.ys.
@@ -80,8 +100,13 @@ class DiscreteDistributionReader:
         """
         for i in range(0, len(self.confidence_images)):
             img = self.confidence_images[i]
-            # threshold = 237
-            threshold = np.max(img) - (np.max(img)-np.min(img))/3.0
+            # Adaptive threshold for last image (overall confidence)
+            if i < len(self.confidence_images) - 1:
+                threshold = np.max(img) - (np.max(img)-np.min(img)) / 3.0
+            else:
+                print(np.max(img))
+                print(np.min(img))
+                threshold = 100
             x_raw = np.arange(1, self.img_shapes[i][1])
             y_raw = []
             y_scale = self.img_shapes[i][0]
@@ -99,26 +124,26 @@ class DiscreteDistributionReader:
             for c in np.arange(0, len(y_raw)):
                 if y_raw[c] == -1:
                     c_up = c
-                    up_succesfull = False
+                    up_successful = False
                     while c_up < len(y_raw)-1:
                         c_up += 1
                         if y_raw[c_up] != -1:
                             y_raw[c] = y_raw[c_up]
-                            up_succesfull = True
+                            up_successful = True
                             break
-                    if up_succesfull:
+                    if up_successful:
                         c = c_up
                         continue
                     else:
                         c_low = c
-                        low_succesfull = False
+                        low_successful = False
                         while c_low > 0:
                             c_low -= 1
                             if y_raw[c_low] != -1:
                                 y_raw[c] = y_raw[c_low]
-                                low_succesfull = True
+                                low_successful = True
                                 break
-                        if low_succesfull:
+                        if low_successful:
                             y_raw[c:] = y_raw[c]
                             break
                 else:
@@ -165,11 +190,11 @@ class DiscreteDistributionReader:
         ppt = np.zeros(shape=(self.points_per_task+1, 1))
         ppt[vpn_points_for_task] = 1
         bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
-        # print("\nBrier-Score of '{}' for {} points is {}.".format(self.vpn_code, vpn_points_for_task, np.round(bs, 3)))
         return bs
 
     def plot(self, task_ids):
         """ Plots the original image, discrete data and normalized pdf values for a given task id.
+            The overall confidence can be plotted by maximum task id + 1
         :return: None
         """
         for id in task_ids:
@@ -184,6 +209,7 @@ class DiscreteDistributionReader:
             ax2.scatter(self.xs[id], 1 - self.ys[id], color='blue', alpha=0.1)
             ax2.scatter(self.indices[id], self.discrete_values[id], color='red', s=120, alpha=1)
             ax2.set_ylim(top=1)
+            ax2.set_ylim(bottom=0)
             for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
                 ax2.annotate(txt, (self.indices[id][i] + 5, self.discrete_values[id][i] - 0.02))
             ax2.set_ylabel("Confidence")
@@ -193,6 +219,7 @@ class DiscreteDistributionReader:
             ax3.scatter(self.indices[id], self.normalized_discrete_values[id], color='green', s=120, alpha=1)
             ax3.set_title("Normalized discrete values")
             ax3.set_ylim(top=1)
+            ax3.set_ylim(bottom=0)
             for i, txt in enumerate(np.arange(0, self.points_per_task+1)):
                 ax3.annotate(txt, (self.indices[id][i] + 5, self.normalized_discrete_values[id][i] - 0.01))
 

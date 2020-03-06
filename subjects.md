@@ -5,11 +5,11 @@
 | Noah       |       X         |
 | Fabian T.  |       X         |
 | Susi       |       X         |
-| Tim S.     |                 |
+| Tim S.     |       x         |
 | Anna R.    |       X         |
 | Sushi      |       X         |
-| Felix      |                 |
+| Felix      |       x         |
 | Denise     |       X         |
 | Dad        |       X         |
-| Yves       |                 |
+| Yves       |       x         |
 | Lisa       |                 |
