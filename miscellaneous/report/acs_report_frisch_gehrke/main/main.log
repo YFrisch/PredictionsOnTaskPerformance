@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  3 MAR 2020 19:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.27)  6 MAR 2020 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1179,74 +1179,94 @@ Package: subfiles 2019/10/30 v1.5 Multi-file projects (package)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/import/import.sty
 Package: import 2009/03/23  v 5.1
 ))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen164
+\captionmargin@=\dimen165
+\captionwidth=\dimen166
+\caption@tempdima=\dimen167
+\caption@indent=\dimen168
+\caption@parindent=\dimen169
+\caption@hangindent=\dimen170
+Package caption Info: KOMA-Script document class detected.
+)
+Package caption Info: KOMA-Script document class.
+\c@caption@flags=\count267
+\c@continuedfloat=\count268
+Package caption Info: hyperref package is loaded.
+)
 LaTeX Font Info:    Trying to load font information for T1+XCharter-TLF on inpu
-t line 30.
+t line 32.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/xcharter/T1XCharter-TLF.fd
 File: T1XCharter-TLF.fd 2017/06/25 (autoinst) Font definitions for T1/XCharter-
 TLF.
 )
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 30.
+(Font)              scaled to size 9.0pt on input line 32.
 
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
-0.
+2.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 32.
 LaTeX Font Info:    Trying to load font information for T2A+cmr on input line 3
-0.
+2.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/cyrillic/t2acmr.fd
 File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 32.
 LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 3
-0.
+2.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 )
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-Package scrbase Info: activating english \contentsname on input line 30.
-Package scrbase Info: activating english \listfigurename on input line 30.
-Package scrbase Info: activating english \listtablename on input line 30.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+Package scrbase Info: activating english \contentsname on input line 32.
+Package scrbase Info: activating english \listfigurename on input line 32.
+Package scrbase Info: activating english \listtablename on input line 32.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count267
-\scratchdimen=\dimen164
+\scratchcounter=\count269
+\scratchdimen=\dimen171
 \scratchbox=\box51
-\nofMPsegments=\count268
-\nofMParguments=\count269
+\nofMPsegments=\count270
+\nofMParguments=\count271
 \everyMPshowfont=\toks18
-\MPscratchCnt=\count270
-\MPscratchDim=\dimen165
-\MPnumerator=\count271
-\makeMPintoPDFobject=\count272
+\MPscratchCnt=\count272
+\MPscratchDim=\dimen172
+\MPnumerator=\count273
+\makeMPintoPDFobject=\count274
 \everyMPtoPDFconversion=\toks19
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1257,8 +1277,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@mv@tabular=\count273
-\c@mv@boldtabular=\count274
+\c@mv@tabular=\count275
+\c@mv@boldtabular=\count276
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1296,7 +1316,7 @@ e
 
 \TUDa@headline_box=\box52
 \AtBeginShipoutBox=\box53
-Package hyperref Info: Link coloring OFF on input line 30.
+Package hyperref Info: Link coloring OFF on input line 32.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -1307,11 +1327,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count275
+\c@section@level=\count277
 )
-LaTeX Info: Redefining \ref on input line 30.
-LaTeX Info: Redefining \pageref on input line 30.
-LaTeX Info: Redefining \nameref on input line 30.
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \nameref on input line 32.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -1323,7 +1343,7 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
-(scrartcl)           before \begin{document} on input line 30.
+(scrartcl)           before \begin{document} on input line 32.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2019/12/03 v1.28 PDF bookmarks (HO)
@@ -1333,46 +1353,48 @@ File: bkm-pdftex.def 2019/12/03 v1.28 bookmark driver for pdfTeX (HO)
 Package auxhook Info: \AddLineBeginMainAux comes a little late,
 (auxhook)             because the main .aux file is already opened on input lin
 e 168.
-\BKM@id=\count276
+\BKM@id=\count278
 ))
-Package scrbase Info: activating english \authorandname on input line 30.
+Package scrbase Info: activating english \authorandname on input line 32.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for T1+Roboto-LF on input l
-ine 32.
+ine 34.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/roboto/T1Roboto-LF.fd
 File: T1Roboto-LF.fd 2019/12/11 (autoinst) Font definitions for T1/Roboto-LF.
 )
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 32.
+(Font)              to `T1/Roboto-LF/regular/n' on input line 34.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 9.0pt on input line 32.
+(Font)              scaled to size 9.0pt on input line 34.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' will be aliased
-(Font)              to `T1/Roboto-LF/bold/n' on input line 32.
+(Font)              to `T1/Roboto-LF/bold/n' on input line 34.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 9.0pt on input line 32.
+(Font)              scaled to size 9.0pt on input line 34.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' will be aliased
-(Font)              to `T1/Roboto-LF/bold/n' on input line 32.
+(Font)              to `T1/Roboto-LF/bold/n' on input line 34.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 36.0pt on input line 32.
+(Font)              scaled to size 36.0pt on input line 34.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 32.
+(Font)              scaled to size 12.0pt on input line 34.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 32.
+(Font)              scaled to size 12.0pt on input line 34.
 <../logos/tuda_logo.pdf, id=4, 156.49065pt x 62.59515pt>
 File: ../logos/tuda_logo.pdf Graphic file (type pdf)
 <use ../logos/tuda_logo.pdf>
-Package pdftex.def Info: ../logos/tuda_logo.pdf  used on input line 32.
+Package pdftex.def Info: ../logos/tuda_logo.pdf  used on input line 34.
 (pdftex.def)             Requested size: 156.49501pt x 62.59605pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 32.
+(Font)              <9> on input line 34.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 32.
+(Font)              <6> on input line 34.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 32.
+(Font)              <5> on input line 34.
 <../logos/ccs_logo.png, id=5, 186.6975pt x 99.37125pt>
 File: ../logos/ccs_logo.png Graphic file (type png)
 <use ../logos/ccs_logo.png>
-Package pdftex.def Info: ../logos/ccs_logo.png  used on input line 32.
+Package pdftex.def Info: ../logos/ccs_logo.png  used on input line 34.
 (pdftex.def)             Requested size: 96.39735pt x 51.3079pt.
  [1
 
@@ -1386,38 +1408,82 @@ Package tocbasic Warning: Usage of deprecated command `\iftocfeature'.
 (tocbasic)                The command has been renamed because of a
 (tocbasic)                recommendation of The LaTeX Project Team.
 (tocbasic)                Please replace `\iftocfeature' by `\Iftocfeature' on 
-input line 35.
+input line 37.
 
 LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' will be aliased
-(Font)              to `T1/Roboto-LF/bold/n' on input line 35.
+(Font)              to `T1/Roboto-LF/bold/n' on input line 37.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 10.95pt on input line 35.
+(Font)              scaled to size 10.95pt on input line 37.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 35.
+(Font)              <10.95> on input line 37.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 35.
-(../sections/introduction.tex) (../sections/introduction.tex)
-(../sections/introduction.tex) (../sections/discussion.tex
+(Font)              <8> on input line 37.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
+(Font)              to `T1/Roboto-LF/regular/n' on input line 44.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 8.0pt on input line 44.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
+(Font)              to `T1/Roboto-LF/regular/n' on input line 44.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 10.95pt on input line 44.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 10.95pt on input line 44.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 44.
+[2
+
+
+
+
+] (../sections/introduction.tex) [3] (../sections/method.tex
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 6.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 8.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 8.0pt on input line 8.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' will be aliased
-(Font)              to `T1/Roboto-LF/regular/n' on input line 8.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 10.95pt on input line 8.
+(Font)              scaled to size 9.0pt on input line 7.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' will be aliased
+(Font)              to `T1/Roboto-LF/bold/n' on input line 9.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
+(Font)              scaled to size 10.0pt on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 9.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 8.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 8.
- [2
+(Font)              scaled to size 6.0pt on input line 11.
 
 
+Package caption Warning: \label without proper reference on input line 16.
+See the caption package documentation for explanation.
 
 
-]
+LaTeX Warning: Reference `fig:example-task' on page 4 undefined on input line 1
+3.
+
+<../assets/example-task-1.png, id=32, 700.6175pt x 271.0125pt>
+File: ../assets/example-task-1.png Graphic file (type png)
+<use ../assets/example-task-1.png>
+Package pdftex.def Info: ../assets/example-task-1.png  used on input line 19.
+(pdftex.def)             Requested size: 326.17699pt x 126.1725pt.
+LaTeX Font Info:    Trying to load font information for T1+RobotoSlab-TLF on in
+put line 20.
+(/usr/local/texlive/2019/texmf-dist/tex/latex/roboto/T1RobotoSlab-TLF.fd
+File: T1RobotoSlab-TLF.fd 2019/12/11 (autoinst) Font definitions for T1/RobotoS
+lab-TLF.
+)
+LaTeX Font Info:    Font shape `T1/RobotoSlab-TLF/m/n' will be aliased
+(Font)              to `T1/RobotoSlab-TLF/regular/n' on input line 20.
+
+
+Package caption Warning: \label without proper reference on input line 28.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:example-task2' on page 4 undefined on input line 
+25.
+
+<../assets/example-task-8.png, id=34, 711.65875pt x 287.0725pt>
+File: ../assets/example-task-8.png Graphic file (type png)
+<use ../assets/example-task-8.png>
+Package pdftex.def Info: ../assets/example-task-8.png  used on input line 31.
+(pdftex.def)             Requested size: 326.17699pt x 131.5731pt.
+[4 <../assets/example-task-1.png> <../assets/example-task-8.png>]) [5]
+(../sections/results.tex) [6] (../sections/discussion.tex
 LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
 ut line 8.
 
@@ -1448,35 +1514,41 @@ Package TUDaPub Warning: You did not provide a Label for key discussion.
 (TUDaPub)                Either you need to recompile your document or add a
 (TUDaPub)                label using \IMRADlabel.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 52.
-[3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 52.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 66.
+[7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 66.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 52.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 52.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 66.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 66.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 29198 strings out of 492162
- 579755 string characters out of 6125292
- 978916 words of memory out of 5000000
- 33236 multiletter control sequences out of 15000+600000
- 605768 words of font info for 58 fonts, out of 8000000 for 9000
+ 30365 strings out of 492162
+ 601872 string characters out of 6125292
+ 890530 words of memory out of 5000000
+ 34375 multiletter control sequences out of 15000+600000
+ 622743 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,20n,79p,10150b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,20n,106p,10150b,639s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_q7u3cc.enc}{
-/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}{/usr
-/local/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_uy5hgr.enc}</usr/lo
-cal/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb></usr/loc
-al/texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb></usr/l
-ocal/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb>
-
-Output written on main.pdf (3 pages, 217149 bytes).
+/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_j2bk2t.enc}{/usr
+/local/texlive/2019/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc}{/usr/loc
+al/texlive/2019/texmf-dist/fonts/enc/dvips/xcharter/xch_uy5hgr.enc}</usr/local/
+texlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb></usr/local/t
+exlive/2019/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb></usr/local
+/texlive/2019/texmf-dist/fonts/type1/google/roboto/RobotoSlab-Regular.pfb></usr
+/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></
+usr/local/texlive/2019/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pf
+b>
+Output written on main.pdf (7 pages, 326820 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 114 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
 

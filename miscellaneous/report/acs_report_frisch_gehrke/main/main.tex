@@ -11,6 +11,8 @@ logofile=../logos/tuda_logo.pdf
 \usepackage[main=english, ngerman]{babel}
 \usepackage{lipsum} % for dummy text
 \usepackage{subfiles} % Best loaded last in the preamble
+\usepackage{caption} % To center captions
+
 
 
 % ---------- Notes ---------- % 
@@ -21,7 +23,7 @@ logofile=../logos/tuda_logo.pdf
 % ---------- Make Title ---------- % 
 
 \author{Yannik P. Frisch, Maximilian A. Gehrke}
-\title{Predictions on Task Performance}
+\title{How to use probability density functions to track performance self-assessment}
 \date{March 10, 2020}
 \subtitle{Applied Cognitive Science}
 \addTitleBoxLogo*{\includegraphics[width=.7\linewidth]{../logos/ccs_logo.png}}
@@ -32,19 +34,31 @@ logofile=../logos/tuda_logo.pdf
 
 % ---------- Abstract ---------- % 
 \begin{abstract}
-	\lipsum
+	Several studies suggest that humans are rather poor when judging their performance after they have fulfilled a task. Probability density functions is a good way to measure the own evaluation of performance. To our knowledge, this has not yet been implemented. Which is why we wanted to test if and how one can use probability density functions in an experiment to extract the self-evaluation of task performance.
+	
+	We designed a questionnaire where subjects have to draw probability density functions after executing simple sorting tasks. We evaluated each task using a norm scoring function and assigned each task 5 points. Last, we calculated the Brier score, a score for measuring uncertainty, and came to the conclusion that humans are about average in evaluating their performance.
+	
+	The main aspect of this report is the design of a questionnaire which uses probability density functions to assess performance self-evaluation. 
 \end{abstract}
 
+\newpage
 \section{Introduction}
+	\label{sec:introduction}
 	\subfile{../sections/introduction.tex}
-
+	
+\newpage
 \section{Method}
-	\subfile{../sections/introduction.tex}
-
+	\label{sec:method}
+	\subfile{../sections/method.tex}
+	
+\newpage
 \section{Results}
-	\subfile{../sections/introduction.tex}
-
+	\label{sec:results}
+	\subfile{../sections/results.tex}
+	
+\newpage
 \section{Discussion}
+	\label{sec:discussion}
 	\subfile{../sections/discussion.tex}
 
 
