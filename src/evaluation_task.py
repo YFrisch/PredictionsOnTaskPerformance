@@ -1,4 +1,4 @@
-""" This file is used for several evaluations and plots of the calculated brier scores of the subjects.
+""" This file is used for several evaluations and plots of the achieved task scores of the subjects.
 """
 
 # --------------- IMPORTS ETC --------------- #
@@ -32,10 +32,9 @@ for subject in subjects:
     path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_task_scores.csv'
     if os.path.exists(path_to_csv):
-        answers = pd.read_csv(path_to_csv, sep=',')
-        #answers = answers.to_dict(orient=f'list')
-        answers = answers.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_task_scores[subject] = answers
+        scores = pd.read_csv(path_to_csv, sep=',')
+        scores = scores.set_index('Unnamed: 0').T.to_dict(f'list')
+        subject_task_scores[subject] = scores
 
 print("# Read in brier scores.")
 
