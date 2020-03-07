@@ -11,24 +11,24 @@
 	A further complication for using the above methods to measure metacognitive sensitivity is the fact that all these measures are affected by the task performance (HOW?) [x]. This can be adressed by excplicitly modeling the connection between a subject's performance and metacognition. The meta-$d'$ measure [x] makes use of the fact that given gaussian variance assumptions (?) at type-1 level, the shapes of the type-2 distributions are known even if they are not themselves gaussian (WHY ?). Therefore the optimal type-2 performance is constrained by one's type-1 performance. E.g. given a particular type-1 variance structure and bias, the form of the type-2 ROC is completely determined. So, given a subject's actual type-2 performance, one could obtain the underlying type-1 sensitivity, labeled meta-$d'$ [x], that is robust to changes in the bias and recovers simulated changes in metacognitive sensitivity. For a metacognitively ideal observer, meta-$d'$ should be equal to $d'$. To measure this ideality, [] defined \textit{metacognitive efficiency} as meta-$d'/d'$, or by the more stable variants meta-$d'-d'$ or $log$meta-$d'/d'$. However, this measurement is unable to discriminate between different causes of a change in metacognitive efficience. E.g. trial-to-trial variability in the placement of confidence criteria results in decreasing efficiency as well as additional noise in the evidence used to make the confidence rating. A similar bias-free approach to model metacogntivie accuracy ist the \textit{Stochastic Detection and Retrieval Model (SDRM)} which we do not want to cover here.\\
 	A somewhat different approach uses so-called \textit{one-shot} discrepancy measures to quantify metacognition. A general confidence rating (e.g. asked before the trial) is compared to the actual performance on a variety of tasks, but it should be clear from the above (WHY ?) that using a single rating of performance will not result in a good distinction between the bias and the sensitivity, nor will it enable to measure the efficiency. In contrasst, collecting trial-by-trial measures of performance and metacognitive judgements allows to get a picture of an individuals bias, sensitivity and efficiency.\\
 	To get a different view-point on the domain, one could formalize metacognitive confidence as a probability judgement directed towards one's own actions.
-	\\
-\begin{itemize}
-
-	\item Metacognitive confidence can be formalized as a \textbf{probability judgement} directed towards one's own actions.
-	\item [] \begin{itemize}
-			\item Metacognition has a normative interpretation as the accuracy of a probability judgement about one's own performance.
-			\item Advantage of this framework: Meaningful measure of bias can be elicited.
-			\item "Probability Score": $PS = (f - c)^2$
-			\item $f$: probability rating
-			\item $c$: actual occurence (c=1/0 for binary events)
-			\item "Brier Score": Mean value of the PS averaged across estimates.
-			\item Brier score is analogous to $\phi$.
-			\item Can be decomposed into: $PS = O + C -R$
-			\item $O$: "Outcome index", reflecting the variance of the outcome event $c$
-			\item $C$: "Calibration", the goodness of fit between probability assessments and the corresponding proportion of correct responses. Quantifies the discrepancy between the mean performance level in a category (e.g. $60\%$) and its associated rating (e.g. $80\%$).
-			\item $R$: "Resolution, the variance of the probability assessments. Measuring the extent to which correct and incorrect answers are assigned to different probability categorices (Is substracted; larger variance is better).
-		\end{itemize}
 	
-\end{itemize}
+	\newpage
+	\subsection{Formalizing metacognition as probability judgements}
+	
+	\textit{Metacognition} has a normative interpretation as the accuracy of a probability judgement about one's own performance and one advantage is the possibility to elicit a meaningful measure of the bias. A lot of literature is a availabe on how to measure this accuracy, but in the following we want to focus on one of them, called the \textit{Brier Score}. To define this score, [x] first defined the \textit{Probability Score (PS)} as the squared difference between a probability rating $f$ for an event, and it's actual occurence $c$ (0 or 1 for binary events).
+	\begin{displaymath}
+			PS = (f - c)^2
+	\end{displaymath}
+	The \textit{Brier Score (BS)} can then be defined as the mean value of the PS averaged across all estimates. 
+	\begin{displaymath}
+			BS = \frac{1}{N}\sum_i(f_i - c_i)^2
+	\end{displaymath}
+	This score is the equivalent of the $\phi$ measurement explained above and can be decomposed, shown by [x], by:
+	\begin{displaymath}
+		BS = O + C - R
+	\end{displaymath}
+	where $O$ is the \textit{Outcome index}, reflecting the variance of the outcome event $c$. The \textit{Calibration} expresses the goodness of fit between the probability assessments and the corresponding proportion of correct responses. It quantifies the discrepancy between the mean performance level in categorcy (e.g. $60\%$) and its associated rating (e.g. $80\%$). Last, the \textit{Resolution} $R$ encodes the variance of the probability assessments, measuring the extent to which correct and incorrect answers are assigned to different probability categories (EXPLAIN THESE FURTHER).\\
+	The next chapter gives an overview on how we measured the brier score of several subjects for different tasks, before we present the results of our measurements and finally come to a conclusion on our atttempt to measure metacognition.
+	
 
 \end{document}
