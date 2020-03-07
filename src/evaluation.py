@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+import src.utils
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
 
@@ -136,12 +138,22 @@ def plot_vpn_probabilities(vpn_code):
     plt.colorbar()
     return None
 
+src.utils.create_folder(BASE_DIR + f'/assets/results/')
+src.utils.create_folder(BASE_DIR + f'/assets/results/probabilites/')
+src.utils.create_folder(BASE_DIR + f'/assets/results/task_scores/')
+src.utils.create_folder(BASE_DIR + f'/assets/results/brier_scores/')
 
 # TODO: Get that shit in subplots of ONE figure
-subj = f'UENN'
-plot_vpn_probabilities(subj)
-plot_vpn_task_scores(subj)
-plot_vpn_brier_scores(subj)
+for subject in subjects:
+    plot_vpn_probabilities(subject)
+    plt.savefig(BASE_DIR + f'/assets/results/probabilites/{subject}_probs.png')
+    plt.close()
+    plot_vpn_task_scores(subject)
+    plt.savefig(BASE_DIR + f'/assets/results/task_scores/{subject}_task_scores.png')
+    plt.close()
+    plot_vpn_brier_scores(subject)
+    plt.savefig(BASE_DIR + f'/assets/results/brier_scores/{subject}_brier_scores.png')
+    plt.close()
+
 #plot_average_task_scores()
 #plot_average_brier_scores()
-plt.show()
