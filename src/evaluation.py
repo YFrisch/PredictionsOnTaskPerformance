@@ -78,9 +78,12 @@ def plot_average_task_scores():
     for i in range(0, points_over_task.shape[1]):
         plt.bar(x=i+1, height=np.mean(points_over_task[:, i]), yerr=np.std(points_over_task[:, i]),
                 color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
+    plt.hlines(np.mean(points_over_task), 0.6, points_over_task.shape[1]+0.4, color='orange')
     plt.title("Average points per task.")
     plt.xlabel("Task ID")
     plt.ylabel("Average Points")
+    plt.savefig(BASE_DIR + f'/assets/results/average_task_scores.png')
+    plt.close('all')
     return None
 
 
@@ -106,9 +109,12 @@ def plot_average_brier_scores():
     for i in range(0, brier_over_task.shape[1]):
         plt.bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
                 color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
+    plt.hlines(np.mean(brier_over_task), 0.6, brier_over_task.shape[1]+0.4, color='orange')
     plt.title("Average brier score per task.")
     plt.xlabel("Task ID")
     plt.ylabel("Avg. Brier Score")
+    plt.savefig(BASE_DIR + f'/assets/results/average_brier_scores.png')
+    plt.close('all')
     return None
 
 
@@ -155,5 +161,5 @@ for subject in subjects:
     plt.savefig(BASE_DIR + f'/assets/results/brier_scores/{subject}_brier_scores.png')
     plt.close()
 
-#plot_average_task_scores()
-#plot_average_brier_scores()
+plot_average_task_scores()
+plot_average_brier_scores()
