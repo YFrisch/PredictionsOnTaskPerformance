@@ -3,16 +3,7 @@
 % Put everything that shall appear in the discussion
 % inside this document environment.
 \begin{document}
-	\textbf{What to do?}
-	\begin{itemize}
-		\item discuss challenges that you faced during implementation, 
-		\item reflect your solution
-		\item give an outlook
-	\end{itemize}
-
-	\noindent\rule{\textwidth}{.4pt}
-	
-	\vspace{2mm}
+	What to do: discuss challenges that you faced during implementation, reflect your solution, give an outlook.\\
 	
 	\noindent Our universal goal was to design an experiment which can understand how well people estimate their performance. Therefore is our study a preliminary study. For this we designed an experiment, where subjects had to solve several five item sorting tasks. After finishing each task, the subject had to draw a probability density function over their performance. The questionnaire had two conditions. The first condition was sorting without active recall. The five answers to the question were already given in a randomized order and had to be sorted in the write order. The second condition was sorting with active recall. The question was open and the subject had to know the items and the correct ordering. In total we had 7 questions for condition one and one question for condition two.
 	
@@ -56,13 +47,33 @@
 	\\\\
 	\noindent\textbf{Validity:}
 	
+	Flooring effects - providing the items is great. Active recall is hard.
+	
 	
 	\subsection{Finding good questions}
-	\subsection{Biases drawing the probability density functions.}
+	
+	We want to take the time to discuss what we define as good questions. We think this is a big issue when designing performance evaluation questionnaires in research and should be taken more into account. The design of questions needs to be done very carefully to draw the correct conclusions. Especially when comparing studies which came to the same or different conclusions, people need to be able to examine exactly how the tasks where structured. It is true, regarding performance self-evaluation, we are only interested in how well a person solves a task and good his performance prediction overlaps with the results. However, it might be very interesting to know why a person achieved a certain level of points, it might solve conclusion differences between researches and it might even solve biases. Our main focus lies on the capacity of the short term memory, the question areas and the level of difficulty, especially the appearance of floor and ceiling effects.
+	
+	Many studies show that humans can hold about $\pm 7$ items in their short term memory. In our case this means that we decided to provide 5 items per task to sort. This way we would only test the knowledge of the subject and not the ability to use the memory efficiently. Maybe subjects are better in evaluating their performance regarding their knowledge, but not regarding their memory capacity. Maybe not. We do not know. But only if we report how we designed the questions and what we tested, we are able to draw correct conclusions between different studies. The same issue displays regarding the knowledge we are inquiring. Maybe in some areas self-evaluation works better than in others. We decided to not test a specific area, but incorporate many different areas to get an overview on how well people do on average. Another important point is the difficulty of the questions. Maybe people are good at a certain level of difficulty. That is why we incorporated items with different levels of difficulty.
+	
+	Per se floor or ceiling effects are not as bad here as in standard questionnaires. This is because we are not interested in the tasks, but rather how the subjects rate their performance. However, this might still be a problem, because it might induce a bias. If all subjects absolutely do not know anything about a task, they will most probably get 0 points. They also know themselves that they do not know anything, so they will probably rate their performance with about 0 points. If all subjects know the answer to a task, it is probably a well know question. So the subjects will rate their performance with the maximum number of points. If we now incorporate ceiling and floor items in our evaluation, it might bias our conclusion to one extreme depending on the amount of floor and ceiling items in our questionnaire.
+	\\\\
+	Future research could target different ways to design questionnaires. Our design targets the performance in knowledge tasks across domains with different difficulties and no ceiling and flooring items, however it does not shed light into the questions, if level of difficulty, more incorporation of the memory (e.g. more items or different tasks), different domains or ceiling and flooring items change the self-evaluation of performance.
+	
 	
 	\subsection{Finding the correct metric}
 	
+	After deciding to use sorting tasks, for several beneficial reasons, we needed to find a good scoring metric. Counting only the items that were designed the correct position was (a) too simple, because we wanted a metric where it is not easy for the subject to infer the exact points they get and (b) too unforgiving, because sorting one task from the fifth to the second place, would shift all other items one down and therefore render 4 items as invalid. We wanted a metric that incorporates the distances between the answer given and the correct answer.
 	
+	We did exactly this by taking the 2-norm between the position of the answers and the correct positions of the items. As an example: The correct order of a sorting task is [A, B, C, D, E] and the subject wrote [B, D, E, A, C]. Translated into numbers the correct ordering always translates to [1, 2, 3, 4, 5] and in this case the answer of the subject would translate to [2, 4, 5, 1, 3]. Now we take the L2-norm, which is in this case $\sqrt{(1-2)^2 + (2-4)^2 + ...  + (5 - 3)^2} \approx 4.69$. The closer the correct position of the answer, the lower is the L2 norm. A result of L2-norm $= 0$ would mean a perfect fit.
+	
+	To calculate the Brier score, we could not work with norms, but instead needed discrete rating values. For this we calculated the worst L2-norm possible and split the interval of [0, L2-max-norm] into a an array of a fixed amount of equidistant numbers (in our case 10). The discrete rating for this task is the 'id' of the closest value of that array compared to the L2-norm of the answer.
+	\\\\
+	We found this metric and scoring procedure highly adaptable. It scales well with both the number of items to sort and the amounts of points we want to assign to each task. It can also be used to assign the same amount of points to the a task with different amounts of items. This would be a good starting point to administer further research on this project.
+	\\\\
+	To avoid bias, it is important that the subjects know the scoring procedure of the tasks. The exact scoring function (in our case a function including the L2-norm) is not as important as letting the subjects know all the factors that are included into the evaluation. In our case this was especially the fact that we incorporate the distance between the correct answer and the given answer. An answer that is close to it's correct field will still give some points. This drastically shifts the perception of what a good or bad answer is. It is important that subjects incorporate this knowledge when drawing the probability density functions to draw valid conclusions.
+	
+	We forgot to write this information into the instructions, which we would propose for all future research. During our first session, the subject asked for the grading procedure and from that onward we orally gave this information before the people started filling out the questionnaire.
 	
 	\subsection{Explaining probability density functions}
 	
@@ -74,7 +85,7 @@
 	
 	It is hard to understand and we have two suggestions for future administration of the questionnaire. First, we highly recommend to use an example task. We already incorporated example probability density functions, which was not enough. Many subjects gave us the feedback that they would have liked an example task, where they could have drawn a probability density function for practice. Second, we recommend to talk to the subject about the probability density functions. We actually did this with most of our subjects and think it benefited the overall understanding on how to use probability density functions in the experiment. It is very important that the subjects know what to do! Otherwise we do not measure the uncertainty about the task, but instead we measure how well people have understood the functions of probability density functions in this case. Make sure that the task is clear and that the subject has a basic understanding of probability density functions, what the x and y axis stand for and how they relate to each other.
 	
-	\subsection{Computer Vision}
+	\subsection{Analysis with Computer Vision}
 	
 	One of our main difficulties was to find a good method to gather probability density functions. It was clear that we needed a digital representation of the probability density functions that subjects would draw. This way the computer can read the probabilities from the probability density function without a human painfully measuring the distances with a ruler.
 	
