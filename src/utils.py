@@ -14,6 +14,17 @@ def set_working_directory():
         os.chdir(f'..')
 
 
+def create_folder(folder_path):
+    """
+
+    :param folder_path:
+    :return:
+    """
+    if not os.path.exists(folder_path):
+        os.mkdir(folder_path)
+    return True
+
+
 def create_analysis_directories(subjects, subjects_folder_path):
     """
     TODO
@@ -23,8 +34,7 @@ def create_analysis_directories(subjects, subjects_folder_path):
     """
     for subject in subjects:
         analysis_path = f'{subjects_folder_path}subject_{subject}/analysis/'
-        if not os.path.exists(analysis_path):
-            os.mkdir(analysis_path)
+        create_folder(analysis_path)
     return True
 
 
@@ -37,8 +47,7 @@ def create_pdf_directories(subjects, subjects_folder_path):
     """
     for subject in subjects:
         pdf_path = f'{subjects_folder_path}subject_{subject}/pdfs/'
-        if not os.path.exists(pdf_path):
-            os.mkdir(pdf_path)
+        create_folder(pdf_path)
     return True
 
 
