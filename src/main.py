@@ -62,7 +62,7 @@ print(f'Done!')
 # --------------- Simulate Distribution --------------- #
 for s in subjects:
     dr = DDR(vpn_code=s, task_scores=subject_task_scores.get(s))
-    dr.plot(task_ids=[9])
-
+    if s == f'ELTS':
+        dr.plot([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 

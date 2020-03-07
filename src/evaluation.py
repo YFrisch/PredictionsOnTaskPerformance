@@ -128,7 +128,7 @@ def plot_vpn_probabilities(vpn_code):
         task_prob = np.array(prob_dict.get(i)).reshape((1, -1))
         prob_matrix = np.concatenate((prob_matrix, task_prob), axis=0)
     prob_matrix = np.copy(prob_matrix.T[:, 1:])
-    plt.imshow(prob_matrix)
+    plt.imshow(prob_matrix, cmap='Greys')
     # TODO: Rename x-axis by range(1, 10) (r.n. it's range(0, 9)
     plt.title(f"Estimated scores of {vpn_code} per task")
     plt.xlabel("Task")
@@ -138,9 +138,10 @@ def plot_vpn_probabilities(vpn_code):
 
 
 # TODO: Get that shit in subplots of ONE figure
-#plot_vpn_probabilities(f'ATDA')
-#plot_vpn_task_scores(f'ATDA')
-#plot_vpn_brier_scores(f'ATDA')
-plot_average_task_scores()
-plot_average_brier_scores()
+subj = f'UENN'
+plot_vpn_probabilities(subj)
+plot_vpn_task_scores(subj)
+plot_vpn_brier_scores(subj)
+#plot_average_task_scores()
+#plot_average_brier_scores()
 plt.show()
