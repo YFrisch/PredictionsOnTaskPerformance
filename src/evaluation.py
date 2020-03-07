@@ -92,6 +92,7 @@ def plot_vpn_task_scores(vpn_code):
     plt.figure()
     for i in range(0, len(ts)):
         plt.bar(x=i+1, height=ts[i], color='red', align='center', alpha=0.3)
+    plt.hlines(np.mean(ts), 0.6, len(ts)+0.4, color='orange')
     plt.title(f"Points of {vpn_code} per task")
     plt.xlabel("Task ID")
     plt.yticks(np.arange(0, 6, 1))
@@ -115,6 +116,9 @@ def plot_average_brier_scores():
     plt.ylabel("Avg. Brier Score")
     plt.savefig(BASE_DIR + f'/assets/results/average_brier_scores.png')
     plt.close('all')
+
+    print(f'Mean Brier score: {np.mean(brier_over_task)}')
+
     return None
 
 
@@ -123,6 +127,7 @@ def plot_vpn_brier_scores(vpn_code):
     plt.figure()
     for i in range(0, len(bs)):
         plt.bar(x=i+1, height=bs[i], color='green', align='center', alpha=0.3)
+    plt.hlines(np.mean(bs), 0.6, len(bs)+0.4, color='orange')
     plt.title(f"Brier Scores of {vpn_code}")
     plt.xlabel("Task ID")
     plt.ylabel("Brier Score")
