@@ -101,17 +101,21 @@
 	
 	The best value of the Brier score is zero and the worst is one. Because the Brier score takes discrete values that means that zero can only be reached when the subject assign one to the number of points they actually got for the task and zero to all others. In the form of probability density functions subjects would need to draw a very steep summit and assign the rest of the points zero probability. This is theoretically possible, but in practice the subjects will draw a more smooth function. In conclusions, a brier score of 0 is rarely reached, even if the subjects gave the correct answer the most probability.
 	
+	The Brier score is more forgiving for two small mistakes than one big mistake. This is due to the fact that the Brier score calculates the squared difference between the occurance of an event and the probability ascribed to it. Equation (\ref{eq:brier}) shows this in numbers.
+	\begin{equation}
+	\label{eq:brier}
+	(0.05 - 0)^2 + (0.05 - 0)^2 = 0.005 < 0.01 = (0.1 - 0)^2
+	\end{equation}
+	
+	This feature is exactly what we were looking for. When evaluating the probability density functions, we want to credit a subject most for drawing the peak at the correct location. The bigger the peak the better the brier score. If the subject sill assigns some low percentage for all other events, this will not have a strong impact on the result.
+	
 	\subsection{Comparing our results with the literature}
 	
 	Because this is a preliminary study which focuses on finding a good way to measure predictions on task performance, we focused on discussing the way we designed the questionnaire and executed the analysis. However, we also got some interesting results on the twelve subjects we collected.
 	
-	On average, our subjects received a Brier score of $BS \approx 0.13$ for each task. This is better than we expected. A Brier score of $BS \approx 0.13$ is equal to ascribing the occuring event a probability of 70\% and two other events 15\%. If we would distribute the remaining 30\% across all remaining events, the Brier score would even fall further. From this we can see that the Brier score is more forgiving for two small mistakes than one big mistake. This is due to the fact that the Brier score calculates the squared difference between the occurance of an event and the probability ascribed to it. Equation (\ref{eq:brier}) shows this in numbers.
-	\begin{equation}
-		\label{eq:brier}
-		(0.05 - 0)^2 + (0.05 - 0)^2 = 0.005 < 0.01 = (0.1 - 0)^2
-	\end{equation}
+	On average, our subjects received a Brier score of $BS \approx 0.13$ for each task. This is better than we expected. A Brier score of $BS \approx 0.13$ is equal to ascribing the occuring event a probability of 70\% and two other events 15\%. If we would distribute the remaining 30\% across all remaining events, the Brier score would even fall further. 
 	
-	This feature is exactly what we were looking for. When evaluating the probability density functions, we want to credit a subject most for drawing the peak at the correct location. The bigger the peak the better the brier score. If the subject sill assigns some low percentage for all other events, this will not have a strong impact on the result.
+	This is in comparison to what we find in the literature. In the existing studies, researchers show that humans are quite bad when self-assessing their performance after executing task. We do not know why this discrepancy exists and would like to see some further research in this field that trail possible biases by executing controlled studies. Average, lets say 50\%, would be at least $BS = 0.25$.
 	
 	
 

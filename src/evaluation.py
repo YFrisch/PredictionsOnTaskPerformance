@@ -35,6 +35,8 @@ for subject in subjects:
                   f'analysis/{subject}_brier_scores.csv'
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
+        pandas_frame = pandas_frame.drop(7)
+        print(pandas_frame)
         bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_brier_scores[subject] = bs
 
@@ -48,6 +50,8 @@ for subject in subjects:
                   f'analysis/{subject}_probabilities.csv'
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
+        pandas_frame = pandas_frame.drop(8)
+        print(pandas_frame)
         probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_probs[subject] = probs
 
@@ -61,6 +65,7 @@ for subject in subjects:
                   f'analysis/{subject}_task_scores.csv'
     if os.path.exists(path_to_csv):
         scores = pd.read_csv(path_to_csv, sep=',')
+        scores = scores.drop(7)
         scores = scores.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_task_scores[subject] = scores
 
@@ -118,7 +123,9 @@ def plot_average_brier_scores():
     plt.close('all')
 
     print(f'Mean Brier score: {np.mean(brier_over_task)}')
-
+    print(f'Average SD Brier score per subject:\n'
+          f'{np.sort(np.std(brier_over_task, axis=1))}')
+    print(f'Average SD Brier score: {np.mean(np.std(brier_over_task, axis=1))}')
     return None
 
 
