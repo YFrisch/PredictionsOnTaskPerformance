@@ -30,9 +30,6 @@ def plot_example_probability_functions(with_points=False):
     x = np.arange(0, 1.015, 0.015)
     g_x = scipy.stats.norm.pdf(x, 0.3, math.sqrt(0.01))
     g2_x = scipy.stats.norm.pdf(x, 0.666, 0.3)
-    u = uni(x)
-    u_x = [u for xs in x]
-    w_x = weibull(x, 1, 1)
     a_x = alpha(x, 1)
 
     # For plotting points

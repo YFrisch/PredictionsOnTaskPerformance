@@ -16,16 +16,70 @@
 	
 	\noindent Our universal goal was to design an experiment which can understand how well people estimate their performance. Therefore is our study a preliminary study. For this we designed an experiment, where subjects had to solve several five item sorting tasks. After finishing each task, the subject had to draw a probability density function over their performance. The questionnaire had two conditions. The first condition was sorting without active recall. The five answers to the question were already given in a randomized order and had to be sorted in the write order. The second condition was sorting with active recall. The question was open and the subject had to know the items and the correct ordering. In total we had 7 questions for condition one and one question for condition two.
 	
-	After collecting the answers from XX subjects, our program read the probability density functions with the help of computer vision and we analyzed the the Brier score of the data.
+	After collecting the answers from 12 subjects, our program read the probability density functions with the help of computer vision and we analyzed the the Brier score of the data.
 	
-	\textbf{Objectivität Finding the correct type of questions.}
+	\subsection{Finding the correct type of task}
 	
-	\textbf{Finding the correct questions.}
+	In comparison to many other experiments, achieving a high level of objectivity, reliability and validity was quite challenging. This is mainly due to our preconditions:
 	
-	\textbf{Finding the correct metric.}
+	\begin{enumerate}
+		\item Each task must be answerable in a few minutes
+		\item The task type allows the design of easy, moderate and difficult tasks
+		\item The task type does not allow subjects to easily assess the exact number of points they achieve for a task. The idea behind this is that we want to avoid simple counting of correct answers. We are rather interested in the implicit metacognition that subjects exhibit. 
+	\end{enumerate}
+
+	\noindent Some of our top choices were math, spelling, grammar, translation, estimation, mapping and fill out tasks (see table \ref{tab:task-types}). We discarded all of these types, because none of them allowed us to define an objective, reliable and valid evaluation procedure that makes it hard for the subjects to track their exact performance.
 	
-	\textbf{Explaining the concept of probability density functions.}
+	\begin{table}[h]
+		\centering
+
+		\begin{tabular}{l|c|c|c}
+			\textbf{Task type} & \textbf{Objectivity} & \textbf{Reliability} & \textbf{Validity} \\
+			\hline
+			Math & - & & \\
+			Translation & - & - & \\
+			Spelling & & & \\
+			Grammar & & & \\
+			Estimation & & & \\
+			Mapping & & & \\
+			Fill out & & & \\
+			Sorting & + & + & + \\
+		\end{tabular}
+		 \captionsetup{justification=centering}
+		 \label{tab:task-types}
+		\caption{Task types and their criteria for test quality.}
+	\end{table}	
 	
-	\textbf{Computer Vision.}
+	\noindent\textbf{Objectivity:} Especially a high level of evaluation objectivity was hard to ensure for many tasks. For example math tasks allow for a fine grained assessment, which is what we are looking for, but lack objectivity. It is not possible to write down an evaluation scheme that considers all possibilities. In addition, even if we can write down such an evaluation scheme, it would need loads of resources and is susceptible to errors. Any possible answer that we forget has to be added to the evaluation scheme and incorporated in all previous evaluations. Another problem is the amount of expertise that the experiment administrator needs. Last, we would not be able to ask questions of different areas.
+	\\\\
+	\noindent\textbf{Reliability:} Per se reliability was given for all the task types in table \ref{tab:task-types}. In the end we only care about the performance and the respective self-assessment of the subjects. At this stage, we do not really care why people are good or bad at specific tasks, we are only interested in getting an idea how well people self-assess themselves on average. However, a task type can be problematic if it biases the subject to draw the probability density function differently. We decided to use the sorting task. 
+	\\\\
+	\noindent\textbf{Validity:}
+	
+	
+	\subsection{Finding good questions}
+	\subsection{Biases drawing the probability density functions.}
+	
+	\subsection{Finding the correct metric}
+	
+	
+	
+	\subsection{Explaining probability density functions}
+	
+	The idea of using probability density functions for gathering uncertainty was very intrieging to us.
+	
+	
+	\subsection{Computer Vision}
+	
+	One of our main difficulties was to find a good method to gather probability density functions. It was clear that we needed a digital representation of the probability density functions that subjects would draw. This way the computer can read the probabilities from the probability density function without a human painfully measuring the distances with a ruler.
+	
+	We initially had the idea that subjects draw the probability density functions on a computer inside a dedicated window. However, we decided against it, because it is rather hard to draw on the computer with a mouse. Drawing by hand is far more accurate and easier for subjects. Which is why we decided to develop the questionnaire in a way that let us use computer vision to detect and extract the probability functions as images. We can then use these probability density function images to read of the probability for certain points and calculate the metrics we are interested in.
+	
+	We recommend this or a similar approach. An automatic processing pipeline is much less error prone and ensures a high level of objectivity. If correctly implemented the evaluation is independent of the instructor. 
+	\\\\
+	In the future, we think it would be beneficial to incorporate even more computer vision. When designing the questionnaire, we added little squares on the right of the answer panels. We used these to evaluate the subject's answers by assigning numbers from one to five. This helped us to created a CSV file with the ordering the subjects chose for each task. Originally we intended to read the squares with the help of computer vision and then apply Machine Learning to recognize the hand written digits. However, due to time constraints we were not able to do so. This would be a great next step or even skipping the hand evaluation and reading and recognizing the answers instead.
+	
+	\subsection{Brier Score}
+	
 	
 \end{document}
