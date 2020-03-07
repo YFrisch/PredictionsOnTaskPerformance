@@ -165,6 +165,7 @@ class DiscreteDistributionReader:
         """ Saves the discrete probability confidence values for each task to a csv file.
         :return: None
         """
+        # TODO: Give overall estimation a different header
         path = BASE_DIR + f'/assets/subjects/subject_{self.vpn_code}/analysis/{self.vpn_code}_probabilities.csv'
         panda_df = pd.DataFrame.from_dict(self.normalized_discrete_values, orient='index')
         panda_df.to_csv(path, sep=',')
@@ -189,7 +190,8 @@ class DiscreteDistributionReader:
         """
         ppt = np.zeros(shape=(self.points_per_task+1, 1))
         ppt[vpn_points_for_task] = 1
-        bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
+        # bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
+        bs = np.mean([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
         return bs
 
     def plot(self, task_ids):
