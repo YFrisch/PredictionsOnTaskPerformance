@@ -1,12 +1,12 @@
-__author__ = 'Maximilian A. Gehrke'
-__date__ = '01-03-2020'
+"""
 
+"""
 
 import numpy as np
 import cv2
-import os
-import pathlib as pl
-import matplotlib.pyplot as plt
+
+__author__ = 'Maximilian A. Gehrke'
+__date__ = '01-03-2020'
 
 
 def sort_contours(cnts, method="left-to-right"):
