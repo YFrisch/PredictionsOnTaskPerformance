@@ -4,6 +4,9 @@ Repository for the Applied Cognitive Science Project at TU Darmstadt WS2019/2020
 
 ## TODOs
 
+- Extra file for Brier score?
+- Documentation of evaluation.py and distribution_readers
+
 4. Compare user-given distributions about the scores with actual achieved scores on tasks
 5. Normalize discrete probability distributions
 6. Framework for modular use
@@ -38,7 +41,7 @@ Repository for the Applied Cognitive Science Project at TU Darmstadt WS2019/2020
 3. Drawing pdfs on screen or on paper.
 4. We want enough uncertainty.
 5. VP should not be able to identify exactly the points for each task.
-6. Methods: sorting, etc. 
+6. Methods: sorting, etc.
 7. x-axis: percent or points
 8. How many questions, how many participants.
 9. Questions in specific areas or overall.
