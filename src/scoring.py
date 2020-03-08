@@ -1,6 +1,6 @@
 """
 Defining and applying scoring functions.
-Experiment: Predictions on Task Performance
+Project: Predictions on Task Performance
 """
 
 import numpy as np
@@ -57,7 +57,7 @@ def apply_scoring(subject_answers, task_ids, pts_per_task,
     """
     Apply scoring to the answers of the subjects.
 
-    :param subject_answers: dictionary of a dictionary; first key is the
+    :param subject_answers: dictionary of dictionaries; first key is the
         subject code, second key is the task id in form of 'task_id' and
         the value is an array of ints representing the answers of the subject
         at the specific task.
