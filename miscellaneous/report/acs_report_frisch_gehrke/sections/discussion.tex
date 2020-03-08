@@ -5,6 +5,20 @@
 \begin{document}
 	What to do: discuss challenges that you faced during implementation, reflect your solution, give an outlook.\\
 	
+	1. We decided to take only 5 items. Humans can only hold 7 ± 2 items in short term memory.
+	2. Discreate vs. continuous distribution reader.
+	3. Drawing pdfs on screen or on paper.
+	4. We want enough uncertainty.
+	5. VP should not be able to identify exactly the points for each task.
+	6. Methods: sorting, etc.
+	7. x-axis: percent or points
+	8. How many questions, how many participants.
+	9. Questions in specific areas or overall.
+	10. Do we test what we want to test?
+	11. Fragenreihenfolge randomisiert
+	12. Ein leichtes Item um zu schauen, wie die leute reagieren, wenn sie sich sicher sind.
+	\\
+	
 	\noindent Our universal goal was to design an experiment which can understand how well people estimate their performance. Therefore is our study a preliminary study. For this we designed an experiment, where subjects had to solve several five item sorting tasks. After finishing each task, the subject had to draw a probability density function over their performance. The questionnaire had two conditions. The first condition was sorting without active recall. The five answers to the question were already given in a randomized order and had to be sorted in the write order. The second condition was sorting with active recall. The question was open and the subject had to know the items and the correct ordering. In total we had 7 questions for condition one and one question for condition two.
 	
 	After collecting the answers from 12 subjects, our program read the probability density functions with the help of computer vision and we analyzed the the Brier score of the data.
@@ -116,8 +130,7 @@
 	On average, our subjects received a Brier score of $BS \approx 0.13$ for each task. This is better than we expected. A Brier score of $BS \approx 0.13$ is equal to ascribing the occuring event a probability of 70\% and two other events 15\%. If we would distribute the remaining 30\% across all remaining events, the Brier score would even fall further. 
 	
 	This is in comparison to what we find in the literature. In the existing studies, researchers show that humans are quite bad when self-assessing their performance after executing task. We do not know why this discrepancy exists and would like to see some further research in this field that trail possible biases by executing controlled studies. Average, lets say 50\%, would be at least $BS = 0.25$.
-	
-	
+
 
 	
 	
