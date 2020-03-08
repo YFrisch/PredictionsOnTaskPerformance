@@ -35,8 +35,7 @@ for subject in subjects:
                   f'analysis/{subject}_brier_scores.csv'
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        pandas_frame = pandas_frame.drop(7)
-        print(pandas_frame)
+        # pandas_frame = pandas_frame.drop(7)
         bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_brier_scores[subject] = bs
 
@@ -50,8 +49,7 @@ for subject in subjects:
                   f'analysis/{subject}_probabilities.csv'
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        pandas_frame = pandas_frame.drop(8)
-        print(pandas_frame)
+        # pandas_frame = pandas_frame.drop(8)
         probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_probs[subject] = probs
 
@@ -65,7 +63,7 @@ for subject in subjects:
                   f'analysis/{subject}_task_scores.csv'
     if os.path.exists(path_to_csv):
         scores = pd.read_csv(path_to_csv, sep=',')
-        scores = scores.drop(7)
+        # scores = scores.drop(7)
         scores = scores.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_task_scores[subject] = scores
 
@@ -74,6 +72,7 @@ print("# Read in achieved task scores.")
 
 # --------------- EVALUATE DATA --------------- #
 def plot_average_task_scores():
+    # TODO: Fix; The scores are summed up somewhere / somehow
     points_over_task = np.empty((1, len(subject_task_scores.get(subjects[0]))))
     for s in subjects:
         ts = np.array(list(subject_task_scores.get(s).values())).T
@@ -121,11 +120,6 @@ def plot_average_brier_scores():
     plt.ylabel("Avg. Brier Score")
     plt.savefig(BASE_DIR + f'/assets/results/average_brier_scores.png')
     plt.close('all')
-
-    print(f'Mean Brier score: {np.mean(brier_over_task)}')
-    print(f'Average SD Brier score per subject:\n'
-          f'{np.sort(np.std(brier_over_task, axis=1))}')
-    print(f'Average SD Brier score: {np.mean(np.std(brier_over_task, axis=1))}')
     return None
 
 
@@ -156,13 +150,42 @@ def plot_vpn_probabilities(vpn_code):
     plt.colorbar()
     return None
 
+
+def plot_vpn(vpn_code):
+    bs = np.array(list(subject_brier_scores.get(vpn_code).values())).T.squeeze()
+    ts = np.array(list(subject_task_scores.get(vpn_code).values())).T.squeeze()
+    prob_matrix = np.empty((1, 6))
+    prob_dict = subject_probs.get(vpn_code)
+    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    for i in range(0, 8):
+        axs[0].bar(x=i+1, height=ts[i], color='red', align='center', alpha=0.3)
+        axs[1].bar(x=i+1, height=bs[i], color='green', align='center', alpha=0.3)
+        task_prob = np.array(prob_dict.get(i)).reshape((1, -1))
+        prob_matrix = np.concatenate((prob_matrix, task_prob), axis=0)
+    prob_matrix = np.copy(prob_matrix.T[:, 1:])
+    # TODO: Scale imshow plot to same size as other plots and colorbar
+    ims = axs[2].imshow(prob_matrix, cmap='Greys')
+    axs[0].set_title(f"Points of {vpn_code} per task")
+    axs[0].set_xlabel("Task")
+    axs[0].set_ylabel("Achieved Points")
+    axs[1].set_title(f"Brier Scores of {vpn_code}")
+    axs[1].set_xlabel("Task")
+    axs[1].set_ylabel("Brier Score")
+    axs[2].set_title(f"Estimated scores of {vpn_code} per task")
+    axs[2].set_xlabel("Task")
+    axs[2].set_ylabel("Scores")
+    plt.colorbar(ims, ax=axs[2])
+    plt.suptitle(f"Subject {vpn_code}")
+
+
 src.utils.create_folder(BASE_DIR + f'/assets/results/')
 src.utils.create_folder(BASE_DIR + f'/assets/results/probabilites/')
 src.utils.create_folder(BASE_DIR + f'/assets/results/task_scores/')
 src.utils.create_folder(BASE_DIR + f'/assets/results/brier_scores/')
 
-# TODO: Get that shit in subplots of ONE figure
+
 for subject in subjects:
+    """
     plot_vpn_probabilities(subject)
     plt.savefig(BASE_DIR + f'/assets/results/probabilites/{subject}_probs.png')
     plt.close()
@@ -172,6 +195,12 @@ for subject in subjects:
     plot_vpn_brier_scores(subject)
     plt.savefig(BASE_DIR + f'/assets/results/brier_scores/{subject}_brier_scores.png')
     plt.close()
+    """
+    plot_vpn(subject)
+    plt.savefig(BASE_DIR + f'/assets/results/{subject}_results.png')
+    plt.close()
 
 plot_average_task_scores()
 plot_average_brier_scores()
+
+print("# Saved results.")
