@@ -1,8 +1,8 @@
-"""
-    This file contains diverse small utility functions.
-"""
+""" This file contains diverse small utility functions. """
 
 import os
+import numpy as np
+
 import pdf2image
 
 __author__ = 'Maximilian A. Gehrke'
@@ -128,3 +128,15 @@ def convert_pdf_to_jpg(subjects, subjects_folder_path, file_suffixes):
                 if not os.path.exists(img_path):
                     files = pdf2image.convert_from_path(f'{img_path[:-3]}pdf')
                     files[0].save(img_path, f'jpeg')
+
+
+def find_nearest(array, value):
+    """
+    Find the entry of the array that is closest to a given value.
+    :param array: list or array of values
+    :param value: int; a number
+    :return: int; the number in the array that is closest to the given value
+    """
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    return array[idx]
