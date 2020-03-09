@@ -196,6 +196,13 @@ def plot_subject(subject_code):
         axs[1].bar(x=i+1, height=bs[i], color='green', align='center', alpha=0.3)
         task_prob = np.array(prob_dict.get(i)).reshape((1, -1))
         prob_matrix = np.concatenate((prob_matrix, task_prob), axis=0)
+
+    # Plot horizontal lines for the mean
+    axs[0].hlines(np.mean(ts), 0.6,
+                  ts.shape[0] + 0.4, color='orange')
+    axs[1].hlines(np.mean(bs), 0.6,
+                  bs.shape[0] + 0.4, color='orange')
+
     prob_matrix = np.copy(prob_matrix.T[:, 1:])
     # TODO: Scale imshow plot to same size as other plots and colorbar
     ims = axs[2].imshow(prob_matrix, cmap='Greys')
@@ -218,10 +225,11 @@ plot_average_task_scores()
 plot_average_brier_scores()
 
 # Create plots for every subjects
+print(f'# Save Plots ... ', end='')
+sys.stdout.flush()
 for subject in subjects:
     plot_subject(subject)
     plt.savefig(f'assets/plots/{subject}_results.png')
     plt.close()
 
-
-print(f'# Save Plots ... Done!')
+print(f'Done!')

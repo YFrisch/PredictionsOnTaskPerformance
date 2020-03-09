@@ -3,69 +3,52 @@
 % Put everything that shall appear in the discussion
 % inside this document environment.
 \begin{document}
-	What to do: discuss challenges that you faced during implementation, reflect your solution, give an outlook.\\
+%	What to do: discuss challenges that you faced during implementation, reflect your solution, give an outlook.\\
+%	
+%	1. We decided to take only 5 items. Humans can only hold 7 ± 2 items in short term memory.
+%	2. Discreate vs. continuous distribution reader.
+%	3. Drawing pdfs on screen or on paper.
+%	4. We want enough uncertainty.
+%	5. VP should not be able to identify exactly the points for each task.
+%	6. Methods: sorting, etc.
+%	7. x-axis: percent or points
+%	8. How many questions, how many participants.
+%	9. Questions in specific areas or overall.
+%	10. Do we test what we want to test?
+%	11. Fragenreihenfolge randomisiert
+%	12. Ein leichtes Item um zu schauen, wie die leute reagieren, wenn sie sich sicher sind.
+%	\\
+%	1. Mehr subjects, 2. nicht so eine homogene Gruppe, 3. VP wissen nicht, wie man normalisiert
 	
-	1. We decided to take only 5 items. Humans can only hold 7 ± 2 items in short term memory.
-	2. Discreate vs. continuous distribution reader.
-	3. Drawing pdfs on screen or on paper.
-	4. We want enough uncertainty.
-	5. VP should not be able to identify exactly the points for each task.
-	6. Methods: sorting, etc.
-	7. x-axis: percent or points
-	8. How many questions, how many participants.
-	9. Questions in specific areas or overall.
-	10. Do we test what we want to test?
-	11. Fragenreihenfolge randomisiert
-	12. Ein leichtes Item um zu schauen, wie die leute reagieren, wenn sie sich sicher sind.
-	\\
-	1. Mehr subjects, 2. nicht so eine homogene Gruppe, 3. VP wissen nicht, wie man normalisiert
+	\noindent Our goal was to design and evaluate an experiment which measures how well people estimate their performance. We created a questionnaire, where subjects had to solve eight sorting tasks. The questionnaire had two conditions: sorting without and with active recall. When sorting without active recall, we provided the answers to the task in a randomized order. The subjects simply needed to bring the given items into the correct order. When sorting with active recall, we did not provide any hints to the solution. The subjects had to actively recall the items in question and bring them into the correct order. In total we collected seven tasks for condition one and one task for condition two. After finishing a task, the subjects had to estimate their performance by drawing a probability density function. 
 	
-	\noindent Our universal goal was to design an experiment which can understand how well people estimate their performance. Therefore is our study a preliminary study. For this we designed an experiment, where subjects had to solve several five item sorting tasks. After finishing each task, the subject had to draw a probability density function over their performance. The questionnaire had two conditions. The first condition was sorting without active recall. The five answers to the question were already given in a randomized order and had to be sorted in the write order. The second condition was sorting with active recall. The question was open and the subject had to know the items and the correct ordering. In total we had 7 questions for condition one and one question for condition two.
-	
-	After collecting the answers from 12 subjects, our program read the probability density functions with the help of computer vision and we analyzed the the Brier score of the data.
+	After collecting the answers from fourteen subjects, our program read the probability density functions, extracted the probabilities at discrete points and normalized these probabilities. Additionally, the program scored the answers of each subject for each task. Then we used these two quantities to calculate the Brier score, a score to measure the accuracy of probabilistic predictions, for each participant and each task.
+	\\\\
+	In sections \ref{sec:finding_task_type} to \ref{sec:explaining_pdf} we discuss the creation and design of the questionnaire. We review different task types (\ref{sec:finding_task_type}), discuss the detection of good questions (\ref{sec:finding_questions}) and emphasize the importance of explaining probability density functions (\ref{sec:explaining_pdf}). Next, we talk about finding the correct metric to score the subjects answers (\ref{sec:finding_metric}), argue why we deem the Brier score a good function to measure accuracy of probabilistic predictions (\ref{sec:brier_score}) and stress the importance of computer vision for a task like this (\ref{sec:computer_vision}). Finally, we discuss the results of the experiments and it's implication for the future in section \ref{sec:exp_results}.
 	
 	\subsection{Finding the correct type of task}
+	\label{sec:finding_task_type}
 	
-	In comparison to many other experiments, achieving a high level of objectivity, reliability and validity was quite challenging. This is mainly due to our preconditions:
+	Finding a task type that ensures a high level of objectivity was quite challenging. This is mainly due to the nature of our preconditions:
 	
 	\begin{enumerate}
-		\item Each task must be answerable in a few minutes
-		\item The task type allows the design of easy, moderate and difficult tasks
-		\item The task type does not allow subjects to easily assess the exact number of points they achieve for a task. The idea behind this is that we want to avoid simple counting of correct answers. We are rather interested in the implicit metacognition that subjects exhibit. 
+		\item[(1)] Each task must be answerable in a few minutes.
+		\item[(2)] The task type allows the design of easy, moderate and difficult tasks.
+		\item[(3)] The task type does not allow subjects to easily assess the exact number of points they achieve for a task.
 	\end{enumerate}
 
-	\noindent Some of our top choices were math, spelling, grammar, translation, estimation, mapping and fill out tasks (see table \ref{tab:task-types}). We discarded all of these types, because none of them allowed us to define an objective, reliable and valid evaluation procedure that makes it hard for the subjects to track their exact performance.
-	
-	\begin{table}[h]
-		\centering
+	\noindent We decided to add precondition (1) for practical reasons. Precondition (2) enabled us to ask questions with difficulties and thus eliminating the potential bias that the prediction of task performance is correlated with task difficulty. The idea behind precondition (3) is to avoid counting of correct answers ant rather tapping into the implicit metacognitive assessment when asking participants to draw their evaluation of the own task performance.
 
-		\begin{tabular}{l|c|c|c}
-			\textbf{Task type} & \textbf{Objectivity} & \textbf{Reliability} & \textbf{Validity} \\
-			\hline
-			Math & - & & \\
-			Translation & - & - & \\
-			Spelling & & & \\
-			Grammar & & & \\
-			Estimation & & & \\
-			Mapping & & & \\
-			Fill out & & & \\
-			Sorting & + & + & + \\
-		\end{tabular}
-		 \captionsetup{justification=centering}
-		 \label{tab:task-types}
-		\caption{Task types and their criteria for test quality.}
-	\end{table}	
+	Some of our top choices for task types were math, spelling, grammar, translation, estimation, mapping and fill out tasks. We discarded all of these types, because none of them allowed us to define an objective evaluation procedure while ensuring that subjects could not easily track their exact performance.
 	
-	\noindent\textbf{Objectivity:} Especially a high level of evaluation objectivity was hard to ensure for many tasks. For example math tasks allow for a fine grained assessment, which is what we are looking for, but lack objectivity. It is not possible to write down an evaluation scheme that considers all possibilities. In addition, even if we can write down such an evaluation scheme, it would need loads of resources and is susceptible to errors. Any possible answer that we forget has to be added to the evaluation scheme and incorporated in all previous evaluations. Another problem is the amount of expertise that the experiment administrator needs. Last, we would not be able to ask questions of different areas.
-	\\\\
-	\noindent\textbf{Reliability:} Per se reliability was given for all the task types in table \ref{tab:task-types}. In the end we only care about the performance and the respective self-assessment of the subjects. At this stage, we do not really care why people are good or bad at specific tasks, we are only interested in getting an idea how well people self-assess themselves on average. However, a task type can be problematic if it biases the subject to draw the probability density function differently. We decided to use the sorting task. 
-	\\\\
-	\noindent\textbf{Validity:}
+	Especially the evaluation objectivity is hard to guarantee for many tasks. For example math tasks allow for a fine grained assessment, which is what we are looking for, but lack objectivity. It is not possible to write down an evaluation scheme that considers all possibilities. In addition, even if we can write down such an evaluation scheme, it would need loads of resources and is susceptible to errors. Any possible answer that we forget has to be added to the evaluation scheme and incorporated in all previous evaluations. Another problem is the amount of expertise that the experiment administrator needs. Last, we would not be able to ask questions of different areas.
+	
+	Sorting tasks.
 	
 	Flooring effects - providing the items is great. Active recall is hard.
 	
-	
 	\subsection{Finding good questions}
+	\label{sec:finding_questions}
 	
 	We want to take the time to discuss what we define as good questions. We think this is a big issue when designing performance evaluation questionnaires in research and should be taken more into account. The design of questions needs to be done very carefully to draw the correct conclusions. Especially when comparing studies which came to the same or different conclusions, people need to be able to examine exactly how the tasks where structured. It is true, regarding performance self-evaluation, we are only interested in how well a person solves a task and good his performance prediction overlaps with the results. However, it might be very interesting to know why a person achieved a certain level of points, it might solve conclusion differences between researches and it might even solve biases. Our main focus lies on the capacity of the short term memory, the question areas and the level of difficulty, especially the appearance of floor and ceiling effects.
 	
@@ -76,7 +59,19 @@
 	Future research could target different ways to design questionnaires. Our design targets the performance in knowledge tasks across domains with different difficulties and no ceiling and flooring items, however it does not shed light into the questions, if level of difficulty, more incorporation of the memory (e.g. more items or different tasks), different domains or ceiling and flooring items change the self-evaluation of performance.
 	
 	
+	\subsection{Explaining probability density functions}
+	\label{sec:explaining_pdf}
+	
+	The idea of using probability density functions for gathering uncertainty was very intriguing to us. To incorporate probability density functions, we needed to make sure that the subjects understood the concept of probability density functions and additionally how we use them in our experiment. 
+	
+	We designed a one page explanation on how probability density functions work and provided examples. We let the subjects know that they they simply needed to care about where to put more probability and not about normalization. We took care of normalizing the functions afterwards so that they sum up to one. We explained how the subject is suppose to use the them in the following tasks.
+	
+	But still, subjects struggled to understand how probability density functions work. Even people who know what probability density functions are and how they work, needed quite some time to understand how they are supposed to be used in this case. The confusion stems from the similar labels of the x and y axes. On the x axis delineates the percentage of points that the subject gets for the task. It starts from 0\% of the obtainable points to 100\% of the obtainable points. The y axis shows the probability that the subject thinks it got for achieving X\% of the task (where X ranges from 0 to 100).
+	
+	It is hard to understand and we have two suggestions for future administration of the questionnaire. First, we highly recommend to use an example task. We already incorporated example probability density functions, which was not enough. Many subjects gave us the feedback that they would have liked an example task, where they could have drawn a probability density function for practice. Second, we recommend to talk to the subject about the probability density functions. We actually did this with most of our subjects and think it benefited the overall understanding on how to use probability density functions in the experiment. It is very important that the subjects know what to do! Otherwise we do not measure the uncertainty about the task, but instead we measure how well people have understood the functions of probability density functions in this case. Make sure that the task is clear and that the subject has a basic understanding of probability density functions, what the x and y axis stand for and how they relate to each other.
+	
 	\subsection{Finding the correct metric}
+	\label{sec:finding_metric}
 	
 	After deciding to use sorting tasks, for several beneficial reasons, we needed to find a good scoring metric. Counting only the items that were designed the correct position was (a) too simple, because we wanted a metric where it is not easy for the subject to infer the exact points they get and (b) too unforgiving, because sorting one task from the fifth to the second place, would shift all other items one down and therefore render 4 items as invalid. We wanted a metric that incorporates the distances between the answer given and the correct answer.
 	
@@ -90,27 +85,8 @@
 	
 	We forgot to write this information into the instructions, which we would propose for all future research. During our first session, the subject asked for the grading procedure and from that onward we orally gave this information before the people started filling out the questionnaire.
 	
-	\subsection{Explaining probability density functions}
-	
-	The idea of using probability density functions for gathering uncertainty was very intriguing to us. To incorporate probability density functions, we needed to make sure that the subjects understood the concept of probability density functions and additionally how we use them in our experiment. 
-	
-	We designed a one page explanation on how probability density functions work and provided examples. We let the subjects know that they they simply needed to care about where to put more probability and not about normalization. We took care of normalizing the functions afterwards so that they sum up to one. We explained how the subject is suppose to use the them in the following tasks.
-	
-	But still, subjects struggled to understand how probability density functions work. Even people who know what probability density functions are and how they work, needed quite some time to understand how they are supposed to be used in this case. The confusion stems from the similar labels of the x and y axes. On the x axis delineates the percentage of points that the subject gets for the task. It starts from 0\% of the obtainable points to 100\% of the obtainable points. The y axis shows the probability that the subject thinks it got for achieving X\% of the task (where X ranges from 0 to 100).
-	
-	It is hard to understand and we have two suggestions for future administration of the questionnaire. First, we highly recommend to use an example task. We already incorporated example probability density functions, which was not enough. Many subjects gave us the feedback that they would have liked an example task, where they could have drawn a probability density function for practice. Second, we recommend to talk to the subject about the probability density functions. We actually did this with most of our subjects and think it benefited the overall understanding on how to use probability density functions in the experiment. It is very important that the subjects know what to do! Otherwise we do not measure the uncertainty about the task, but instead we measure how well people have understood the functions of probability density functions in this case. Make sure that the task is clear and that the subject has a basic understanding of probability density functions, what the x and y axis stand for and how they relate to each other.
-	
-	\subsection{Analysis with Computer Vision}
-	
-	One of our main difficulties was to find a good method to gather probability density functions. It was clear that we needed a digital representation of the probability density functions that subjects would draw. This way the computer can read the probabilities from the probability density function without a human painfully measuring the distances with a ruler.
-	
-	We initially had the idea that subjects draw the probability density functions on a computer inside a dedicated window. However, we decided against it, because it is rather hard to draw on the computer with a mouse. Drawing by hand is far more accurate and easier for subjects. Which is why we decided to develop the questionnaire in a way that let us use computer vision to detect and extract the probability functions as images. We can then use these probability density function images to read of the probability for certain points and calculate the metrics we are interested in.
-	
-	We recommend this or a similar approach. An automatic processing pipeline is much less error prone and ensures a high level of objectivity. If correctly implemented the evaluation is independent of the instructor. 
-	\\\\
-	In the future, we think it would be beneficial to incorporate even more computer vision. When designing the questionnaire, we added little squares on the right of the answer panels. We used these to evaluate the subject's answers by assigning numbers from one to five. This helped us to created a CSV file with the ordering the subjects chose for each task. Originally we intended to read the squares with the help of computer vision and then apply Machine Learning to recognize the hand written digits. However, due to time constraints we were not able to do so. This would be a great next step or even skipping the hand evaluation and reading and recognizing the answers instead.
-	
 	\subsection{Brier Score}
+	\label{sec:brier_score}
 	
 	We use the Brier score to measure the self-assessment of the subjects. The Brier score is a proper score function that measures the accuracy of probabilistic predictions, which is exactly what we want to know. Because the Brier score only takes discrete values, we calculate and assign each answer a discrete point value. How exactly we do that is described above in section \ref{xx}. 
 	
@@ -124,7 +100,19 @@
 	
 	This feature is exactly what we were looking for. When evaluating the probability density functions, we want to credit a subject most for drawing the peak at the correct location. The bigger the peak the better the brier score. If the subject sill assigns some low percentage for all other events, this will not have a strong impact on the result.
 	
-	\subsection{Comparing our results with the literature}
+	\subsection{Analysis with Computer Vision}
+	\label{sec:computer_vision}
+	
+	One of our main difficulties was to find a good method to gather probability density functions. It was clear that we needed a digital representation of the probability density functions that subjects would draw. This way the computer can read the probabilities from the probability density function without a human painfully measuring the distances with a ruler.
+	
+	We initially had the idea that subjects draw the probability density functions on a computer inside a dedicated window. However, we decided against it, because it is rather hard to draw on the computer with a mouse. Drawing by hand is far more accurate and easier for subjects. Which is why we decided to develop the questionnaire in a way that let us use computer vision to detect and extract the probability functions as images. We can then use these probability density function images to read of the probability for certain points and calculate the metrics we are interested in.
+	
+	We recommend this or a similar approach. An automatic processing pipeline is much less error prone and ensures a high level of objectivity. If correctly implemented the evaluation is independent of the instructor. 
+	\\\\
+	In the future, we think it would be beneficial to incorporate even more computer vision. When designing the questionnaire, we added little squares on the right of the answer panels. We used these to evaluate the subject's answers by assigning numbers from one to five. This helped us to created a CSV file with the ordering the subjects chose for each task. Originally we intended to read the squares with the help of computer vision and then apply Machine Learning to recognize the hand written digits. However, due to time constraints we were not able to do so. This would be a great next step or even skipping the hand evaluation and reading and recognizing the answers instead.
+	
+	\subsection{Experiment results}
+	\label{sec:exp_results}
 	
 	Because this is a preliminary study which focuses on finding a good way to measure predictions on task performance, we focused on discussing the way we designed the questionnaire and executed the analysis. However, we also got some interesting results on the twelve subjects we collected.
 	
