@@ -7,7 +7,7 @@
 
     Plotting is implemented for a given task id.
 
-    Only argument is a 4-letter subject (vpn) code.
+    Only arguments are the 4-letter subject (vpn) code and an array containing the subject's task scores.
 
     https://www.statisticshowto.datasciencecentral.com/brier-score/
     The "brier score" can be calculated for a given task id and actual points of the vpn.
@@ -36,7 +36,7 @@ class DiscreteDistributionReader:
         self.overall_confidence_img, self.o_img_shape = self.read_in_overall_confidence_image()
         print("# Read in drawn confidence distributions.")
         self.points_per_task = 5
-        self.task_scores =task_scores
+        self.task_scores = task_scores
         self.indices = defaultdict(np.ndarray)
         self.ys = defaultdict(np.ndarray)
         self.xs = defaultdict(np.ndarray)
@@ -69,7 +69,7 @@ class DiscreteDistributionReader:
         return confidence_images, img_shapes
 
     def read_in_overall_confidence_image(self):
-        """ This method reads in the file named 'pdf_task_i.jpg' from the vpn subfolder
+        """ This method reads in the file named 'pdf_task_1_to7.jpg' from the vpn subfolder
             and stores it inside self.overall_confidence_image.
         :return: overall_confidence_image, o_img_shape: read-in overall confidence and shape of that image
         """
@@ -104,8 +104,6 @@ class DiscreteDistributionReader:
             if i < len(self.confidence_images) - 1:
                 threshold = np.max(img) - (np.max(img)-np.min(img)) / 3.0
             else:
-                print(np.max(img))
-                print(np.min(img))
                 threshold = 100
             x_raw = np.arange(1, self.img_shapes[i][1])
             y_raw = []
@@ -119,8 +117,15 @@ class DiscreteDistributionReader:
                 y_raw.append(value)
             y_raw = np.array(y_raw)
 
-            # Extrapolating missing data
-            # TODO: Documentation / Comments
+            """ Extrapolating missing data.
+            
+                Read-in image pixels with y[x] = -1 (see above) are used for extrapolation.
+                Starting at x, we iterate forward until we find an y[x'] != -1.  
+                If such an x' exists, we assign all values between y[x] and y[x'] the value y[x'].
+                If such an x' does not exist, we start again from x and iterate backwards.
+                If the backward iteration does not find a valid value either, we assign y[x] = 1, so we get a uniform
+                distribution after normalization.                
+            """
             for c in np.arange(0, len(y_raw)):
                 if y_raw[c] == -1:
                     c_up = c
@@ -150,6 +155,7 @@ class DiscreteDistributionReader:
                     continue
 
             # Cut data where y == -1 (no dark pixels)
+            # TODO: Should not make any difference anymore?
             indices = np.where(y_raw == -1)[0]
             self.xs[i] = np.delete(x_raw, indices)
             self.ys[i] = np.delete(y_raw, indices)

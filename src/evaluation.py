@@ -1,5 +1,16 @@
-""" This file is used for several evaluations and plots of the calculated brier scores of the subjects.
+""" This file is used for several evaluations and plots of the calculated brier scores,
+    achieved task scores and assigned probabilities of the subjects.
+
+    All available evaluation data is read-in first.
+
+    Several methods to plot the data can be used.
+
+    Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
+    and bar plots of the averages for the task and brier scores are created and saved.
 """
+
+__author__ = 'Yannik Frisch'
+__date__ = '08-03-2020'
 
 # --------------- IMPORTS ETC --------------- #
 
@@ -27,6 +38,8 @@ for subject_dir in subject_dirs_:
 
 print("# Read in subjects: ", subjects)
 
+# TODO: The 3 following for-loops are very redundant and could get combined
+
 # Dictionary of dictionaries
 subject_brier_scores = {}
 
@@ -36,8 +49,8 @@ for subject in subjects:
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
         # pandas_frame = pandas_frame.drop(7)
-        bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_brier_scores[subject] = bs
+        pandas_bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
+        subject_brier_scores[subject] = pandas_bs
 
 print("# Read in brier scores.")
 
@@ -72,6 +85,10 @@ print("# Read in achieved task scores.")
 
 # --------------- EVALUATE DATA --------------- #
 def plot_average_task_scores():
+    """ This method creates and saves a bar plot of the achieved discrete rating per task,
+        averaged over all subjects.
+    :return: None
+    """
     # TODO: Fix; The scores are summed up somewhere / somehow
     points_over_task = np.empty((1, len(subject_task_scores.get(subjects[0]))))
     for s in subjects:
@@ -91,20 +108,11 @@ def plot_average_task_scores():
     return None
 
 
-def plot_vpn_task_scores(vpn_code):
-    ts = np.array(list(subject_task_scores.get(vpn_code).values())).T.squeeze()
-    plt.figure()
-    for i in range(0, len(ts)):
-        plt.bar(x=i+1, height=ts[i], color='red', align='center', alpha=0.3)
-    plt.hlines(np.mean(ts), 0.6, len(ts)+0.4, color='orange')
-    plt.title(f"Points of {vpn_code} per task")
-    plt.xlabel("Task ID")
-    plt.yticks(np.arange(0, 6, 1))
-    plt.ylabel("Points")
-    return None
-
-
 def plot_average_brier_scores():
+    """ This method creates and saves a bar plot of the calculated brier score per task,
+        averaged over all subjects.
+    :return: None
+    """
     brier_over_task = np.empty((1, len(subject_brier_scores.get(subjects[0]))))
     for s in subjects:
         bs = np.array(list(subject_brier_scores.get(s).values())).T
@@ -123,35 +131,13 @@ def plot_average_brier_scores():
     return None
 
 
-def plot_vpn_brier_scores(vpn_code):
-    bs = np.array(list(subject_brier_scores.get(vpn_code).values())).T.squeeze()
-    plt.figure()
-    for i in range(0, len(bs)):
-        plt.bar(x=i+1, height=bs[i], color='green', align='center', alpha=0.3)
-    plt.hlines(np.mean(bs), 0.6, len(bs)+0.4, color='orange')
-    plt.title(f"Brier Scores of {vpn_code}")
-    plt.xlabel("Task ID")
-    plt.ylabel("Brier Score")
-    return None
-
-
-def plot_vpn_probabilities(vpn_code):
-    prob_matrix = np.empty((1, 6))
-    prob_dict = subject_probs.get(vpn_code)
-    for i in range(0, len(prob_dict)):
-        task_prob = np.array(prob_dict.get(i)).reshape((1, -1))
-        prob_matrix = np.concatenate((prob_matrix, task_prob), axis=0)
-    prob_matrix = np.copy(prob_matrix.T[:, 1:])
-    plt.imshow(prob_matrix, cmap='Greys')
-    # TODO: Rename x-axis by range(1, 10) (r.n. it's range(0, 9)
-    plt.title(f"Estimated scores of {vpn_code} per task")
-    plt.xlabel("Task")
-    plt.ylabel("Score")
-    plt.colorbar()
-    return None
-
-
 def plot_vpn(vpn_code):
+    """ This method creates bar-plots for the task-score and brier-score per task for a given subject and an
+        pyplot.imshow matrix plot for the assigned probabilities per normalized discrete rating per task (confidence).
+        The graphics are saved in a single figure with subplots.
+     :param: vpn_code: The 4-letter vpn-code of the subject
+     :return: None
+     """
     bs = np.array(list(subject_brier_scores.get(vpn_code).values())).T.squeeze()
     ts = np.array(list(subject_task_scores.get(vpn_code).values())).T.squeeze()
     prob_matrix = np.empty((1, 6))
@@ -176,26 +162,12 @@ def plot_vpn(vpn_code):
     axs[2].set_ylabel("Scores")
     plt.colorbar(ims, ax=axs[2])
     plt.suptitle(f"Subject {vpn_code}")
+    fig.subplots_adjust()
 
 
 src.utils.create_folder(BASE_DIR + f'/assets/results/')
-src.utils.create_folder(BASE_DIR + f'/assets/results/probabilites/')
-src.utils.create_folder(BASE_DIR + f'/assets/results/task_scores/')
-src.utils.create_folder(BASE_DIR + f'/assets/results/brier_scores/')
-
 
 for subject in subjects:
-    """
-    plot_vpn_probabilities(subject)
-    plt.savefig(BASE_DIR + f'/assets/results/probabilites/{subject}_probs.png')
-    plt.close()
-    plot_vpn_task_scores(subject)
-    plt.savefig(BASE_DIR + f'/assets/results/task_scores/{subject}_task_scores.png')
-    plt.close()
-    plot_vpn_brier_scores(subject)
-    plt.savefig(BASE_DIR + f'/assets/results/brier_scores/{subject}_brier_scores.png')
-    plt.close()
-    """
     plot_vpn(subject)
     plt.savefig(BASE_DIR + f'/assets/results/{subject}_results.png')
     plt.close()
