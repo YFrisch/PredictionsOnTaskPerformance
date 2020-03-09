@@ -15,8 +15,8 @@
 
 ---
 
-- [x] Why does 'ELTS' have task 1 to 9?
-	- Task 9 is overall confidence
 - [ ] Delete Question 8 from evaluation
-- [ ] Finish Evaluation
+- [ ] Finish Evaluation of Task 1 to 7
+- [ ] Evaluation of Task 8
+- [ ] Evaluation of Overall confidence
 - [ ] questionnaire.py
