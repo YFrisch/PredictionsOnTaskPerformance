@@ -8,13 +8,12 @@
     Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
     and bar plots of the averages for the task and brier scores are created and saved.
 """
+from collections import OrderedDict
 import os
 import sys
 import numpy as np
 import pandas as pd
-
 import matplotlib.pyplot as plt
-
 import src.utils
 
 __author__ = 'Yannik Frisch'
@@ -51,7 +50,7 @@ for subject in subjects:
     path_to_csv = f'assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_probabilities.csv'
     pandas_frame = pd.read_csv(path_to_csv, sep=',')
-    pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
+    #pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
     probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
     subject_probs[subject] = probs
 
@@ -124,7 +123,7 @@ def plot_average_task_scores():
 
 def plot_average_brier_scores():
     """
-    This method calculates and plots the brier score for our experiment.
+    This method calculates and plots the average brier score for the subjects in our experiment.
 
     This method creates and saves a bar plot of the calculated brier score per
     task, averaged over all subjects and a bar plot of the mean brier score per
@@ -180,9 +179,11 @@ def plot_average_brier_scores():
 def plot_subject(subject_code):
     """This method creates bar-plots for the task-score and brier-score per
     task for a given subject and an pyplot.imshow matrix plot for the assigned
-    probabilities per normalized discrete rating per task (confidence). The
-    plots are saved in a single figure with subplots.
-    :param: vpn_code: The 4-letter vpn-code of the subject
+    probabilities per normalized discrete rating per task (confidence).
+
+    The plots are saved in a single figure with subplots.
+
+    :param: subject_code: The 4-letter vpn-code of the subject
     :return: None
     """
     bs = np.array(list(subject_brier_scores.get(subject_code).values())).T.squeeze()
@@ -211,6 +212,7 @@ def plot_subject(subject_code):
     plt.suptitle(f"Subject {subject_code}")
     fig.subplots_adjust()
 
+
 # Create plots with all subjects
 plot_average_task_scores()
 plot_average_brier_scores()
@@ -220,5 +222,6 @@ for subject in subjects:
     plot_subject(subject)
     plt.savefig(f'assets/plots/{subject}_results.png')
     plt.close()
+
 
 print(f'# Save Plots ... Done!')
