@@ -8,87 +8,74 @@
     Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
     and bar plots of the averages for the task and brier scores are created and saved.
 """
+import os
+import sys
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+import src.utils
 
 __author__ = 'Yannik Frisch'
 __date__ = '08-03-2020'
 
-# --------------- IMPORTS ETC --------------- #
-
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import os
-import src.utils
-
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
-
-
-# --------------- READ-IN DATA --------------- #
+# Set working directory to the top level of our project
+src.utils.set_working_directory()
 
 print("\n-------------------- EVALUATION --------------------")
-# Getting all the subdirectory names in the subjects folder
-subjects_folder_path = BASE_DIR + f'/assets/subjects/'
-subject_dirs_ = os.listdir(subjects_folder_path)
 
-# Delete folders that do not start with "subject" (e.g. Apple hidden .DS_Store)
-subjects = []
-for subject_dir in subject_dirs_:
-    if subject_dir.startswith("subject_"):
-        subjects.append(subject_dir[8:])
+# --------------- READ DATA --------------- #
+print(f'# Reading data ... ', end='')
+sys.stdout.flush()
+subjects_folder_path = f'assets/subjects/'
+subjects = src.utils.extract_subject_codes_from_folders(subjects_folder_path)
 
-print("# Read in subjects: ", subjects)
+# Create plots folder if it is not there
+src.utils.create_folder(f'assets/plots/')
 
-# TODO: The 3 following for-loops are very redundant and could get combined
-
-# Dictionary of dictionaries
 subject_brier_scores = {}
-
-for subject in subjects:
-    path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
-                  f'analysis/{subject}_brier_scores.csv'
-    if os.path.exists(path_to_csv):
-        pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        pandas_frame = pandas_frame.drop([7])
-        pandas_bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_brier_scores[subject] = pandas_bs
-
-print("# Read in brier scores.")
-
-# Dictionary of probabilities of task
 subject_probs = {}
-
-for subject in subjects:
-    path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
-                  f'analysis/{subject}_probabilities.csv'
-    if os.path.exists(path_to_csv):
-        pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        pandas_frame = pandas_frame.drop([7, 8])
-        probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_probs[subject] = probs
-
-print("# Read in estimated probabilities.")
-
-# Dictionary of dictionaries
 subject_task_scores = {}
 
 for subject in subjects:
-    path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
-                  f'analysis/{subject}_task_scores.csv'
-    if os.path.exists(path_to_csv):
-        pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        pandas_frame = pandas_frame.drop([7])
-        scores = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-        subject_task_scores[subject] = scores
+    # Read brier scores
+    path_to_csv = f'assets/subjects/subject_{subject}/' \
+                  f'analysis/{subject}_brier_scores.csv'
+    pandas_frame = pd.read_csv(path_to_csv, sep=',')
+    pandas_frame = pandas_frame.drop([7])  # Drop task 8
+    pandas_bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
+    subject_brier_scores[subject] = pandas_bs
 
-print("# Read in achieved task scores.")
+    # Read probabilites
+    path_to_csv = f'assets/subjects/subject_{subject}/' \
+                  f'analysis/{subject}_probabilities.csv'
+    pandas_frame = pd.read_csv(path_to_csv, sep=',')
+    pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
+    probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
+    subject_probs[subject] = probs
+
+    # Read task scores
+    path_to_csv = f'assets/subjects/subject_{subject}/' \
+                  f'analysis/{subject}_task_scores.csv'
+    pandas_frame = pd.read_csv(path_to_csv, sep=',')
+    pandas_frame = pandas_frame.drop([7])  # Drop task 8
+    scores = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
+    subject_task_scores[subject] = scores
+
+print(f'Done!')
 
 
 # --------------- EVALUATE DATA --------------- #
 def plot_average_task_scores():
-    """ This method creates and saves a figure with a bar plot of the achieved discrete rating per task,
-        averaged over all subjects and a bar plot of the achieved discrete rating per subject,
-        averaged over all tasks.
-        The mean and standard deviation over the subject AND task axes is printed out.
+    """
+    This function calculates and plots average task scores for our experiment.
+
+    This method creates and saves a figure with a bar plot of the achieved
+    discrete rating per task, averaged over all subjects and a bar plot of the
+    achieved discrete rating per subject, averaged over all tasks.
+    The mean and standard deviation over the subject AND task axes is printed.
+
     :return: None
     """
     points_over_task = np.empty((1, len(subject_task_scores.get(subjects[0]))))
@@ -97,19 +84,32 @@ def plot_average_task_scores():
         points_over_task = np.concatenate((points_over_task, ts), axis=0)
     points_over_task = np.copy(points_over_task[1:, :])
 
+    # Create a figure with two plots
     fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Plot the mean of task scores grouped by tasks
     for i in range(0, points_over_task.shape[1]):
-        axs[0].bar(x=i+1, height=np.mean(points_over_task[:, i]), yerr=np.std(points_over_task[:, i]),
-                   color='blue', ecolor='black', align='center', alpha=0.3, capsize=5)
+        axs[0].bar(x=i+1, height=np.mean(points_over_task[:, i]),
+                   yerr=np.std(points_over_task[:, i]), color='red',
+                   ecolor='black', align='center', alpha=0.3, capsize=5)
 
+    # Plot the mean of task scores grouped by subjects
     for i in range(0, points_over_task.shape[0]):
-        axs[1].bar(x=i+1, height=np.mean(points_over_task[i, :]), yerr=np.std(points_over_task[i, :]),
-                   color='yellow', ecolor='black', align='center', alpha=0.7, capsize=5)
+        axs[1].bar(x=i+1, height=np.mean(points_over_task[i, :]),
+                   yerr=np.std(points_over_task[i, :]), color='red',
+                   ecolor='black', align='center', alpha=0.3, capsize=5)
 
-    axs[0].hlines(np.mean(points_over_task), 0.6, points_over_task.shape[1] + 0.4, color='red')
-    axs[1].hlines(np.mean(points_over_task), 0.6, points_over_task.shape[0] + 0.4, color='red')
-    print(f"The mean achieved task score over all tasks and subjects is {np.round(np.mean(points_over_task), 4)} with a "
+    # Plot horizontal lines for the mean
+    axs[0].hlines(np.mean(points_over_task), 0.6,
+                  points_over_task.shape[1] + 0.4, color='orange')
+    axs[1].hlines(np.mean(points_over_task), 0.6,
+                  points_over_task.shape[0] + 0.4, color='orange')
+
+    # Print average and standard deviation to the console
+    print(f"The mean achieved task score over all tasks and subjects is "
+          f"{np.round(np.mean(points_over_task), 4)} with a "
           f"standard deviation of {np.round(np.std(points_over_task), 4)}.")
+
     plt.suptitle("Average task scores")
     axs[0].set_title("Average points per task")
     axs[1].set_title("Average points per subject")
@@ -117,16 +117,20 @@ def plot_average_task_scores():
     axs[1].set_xlabel("Subject ID")
     axs[0].set_ylabel("Average Points")
     axs[1].set_ylabel("Average Points")
-    plt.savefig(BASE_DIR + f'/assets/plots/average_task_scores.png')
+    plt.savefig(f'assets/plots/average_task_scores.png')
     plt.close('all')
     return None
 
 
 def plot_average_brier_scores():
-    """ This method creates and saves a bar plot of the calculated brier score per task,
-        averaged over all subjects and a bar plot of the mean brier score per subject,
-        averaged over all tasks.
-        The mean and standard deviation over the subject AND task axes is printed out.
+    """
+    This method calculates and plots the brier score for our experiment.
+
+    This method creates and saves a bar plot of the calculated brier score per
+    task, averaged over all subjects and a bar plot of the mean brier score per
+    subject, averaged over all tasks. The mean and standard deviation over the
+    subject AND task axes is printed out.
+
     :return: None
     """
     brier_over_task = np.empty((1, len(subject_brier_scores.get(subjects[0]))))
@@ -134,19 +138,33 @@ def plot_average_brier_scores():
         bs = np.array(list(subject_brier_scores.get(s).values())).T
         brier_over_task = np.concatenate((brier_over_task, bs), axis=0)
     brier_over_task = np.copy(brier_over_task[1:, :])
+
+    # Create a figure with two plots
     fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Plot the mean of task scores grouped by tasks
     for i in range(0, brier_over_task.shape[1]):
-        axs[0].bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
-                   color='blue', ecolor='black', align='center', alpha=0.3, capsize=5)
+        axs[0].bar(x=i+1, height=np.mean(brier_over_task[:, i]),
+                   yerr=np.std(brier_over_task[:, i]), color='green',
+                   ecolor='black', align='center', alpha=0.3, capsize=5)
 
+    # Plot the mean of task scores grouped by subjects
     for i in range(0, brier_over_task.shape[0]):
-        axs[1].bar(x=i+1, height=np.mean(brier_over_task[i, :]), yerr=np.std(brier_over_task[i, :]),
-                   color='yellow', ecolor='black', align='center', alpha=0.7, capsize=5)
+        axs[1].bar(x=i+1, height=np.mean(brier_over_task[i, :]),
+                   yerr=np.std(brier_over_task[i, :]), color='green',
+                   ecolor='black', align='center', alpha=0.3, capsize=5)
 
-    axs[0].hlines(np.mean(brier_over_task), 0.6, brier_over_task.shape[1] + 0.4, color='red')
-    axs[1].hlines(np.mean(brier_over_task), 0.6, brier_over_task.shape[0] + 0.4, color='red')
-    print(f"The mean brier score over all tasks and subjects is {np.round(np.mean(brier_over_task), 4)} with "
+    # Plot horizontal lines for the mean
+    axs[0].hlines(np.mean(brier_over_task), 0.6,
+                  brier_over_task.shape[1] + 0.4, color='orange')
+    axs[1].hlines(np.mean(brier_over_task), 0.6,
+                  brier_over_task.shape[0] + 0.4, color='orange')
+
+    # Print average and standard deviation to the console
+    print(f"The mean brier score over all tasks and subjects is "
+          f"{np.round(np.mean(brier_over_task), 4)} with "
           f"a standard deviation of {np.round(np.std(brier_over_task), 4)}.")
+
     plt.suptitle("Average brier scores")
     axs[0].set_title("Average brier score per task")
     axs[1].set_title("Average brier score per subject")
@@ -154,22 +172,23 @@ def plot_average_brier_scores():
     axs[1].set_xlabel("Subject ID")
     axs[0].set_ylabel("Avg. brier score")
     axs[1].set_ylabel("Avg. brier score")
-    plt.savefig(BASE_DIR + f'/assets/plots/average_brier_scores.png')
+    plt.savefig(f'assets/plots/average_brier_scores.png')
     plt.close('all')
     return None
 
 
-def plot_vpn(vpn_code):
-    """ This method creates bar-plots for the task-score and brier-score per task for a given subject and an
-        pyplot.imshow matrix plot for the assigned probabilities per normalized discrete rating per task (confidence).
-        The graphics are saved in a single figure with subplots.
-     :param: vpn_code: The 4-letter vpn-code of the subject
-     :return: None
-     """
-    bs = np.array(list(subject_brier_scores.get(vpn_code).values())).T.squeeze()
-    ts = np.array(list(subject_task_scores.get(vpn_code).values())).T.squeeze()
+def plot_subject(subject_code):
+    """This method creates bar-plots for the task-score and brier-score per
+    task for a given subject and an pyplot.imshow matrix plot for the assigned
+    probabilities per normalized discrete rating per task (confidence). The
+    plots are saved in a single figure with subplots.
+    :param: vpn_code: The 4-letter vpn-code of the subject
+    :return: None
+    """
+    bs = np.array(list(subject_brier_scores.get(subject_code).values())).T.squeeze()
+    ts = np.array(list(subject_task_scores.get(subject_code).values())).T.squeeze()
     prob_matrix = np.empty((1, 6))
-    prob_dict = subject_probs.get(vpn_code)
+    prob_dict = subject_probs.get(subject_code)
     fig, axs = plt.subplots(1, 3, figsize=(15, 5))
     for i in range(0, 7):
         axs[0].bar(x=i+1, height=ts[i], color='red', align='center', alpha=0.3)
@@ -179,28 +198,27 @@ def plot_vpn(vpn_code):
     prob_matrix = np.copy(prob_matrix.T[:, 1:])
     # TODO: Scale imshow plot to same size as other plots and colorbar
     ims = axs[2].imshow(prob_matrix, cmap='Greys')
-    axs[0].set_title(f"Points of {vpn_code} per task")
+    axs[0].set_title(f"Points of {subject_code} per task")
     axs[0].set_xlabel("Task")
     axs[0].set_ylabel("Achieved Points")
-    axs[1].set_title(f"Brier Scores of {vpn_code}")
+    axs[1].set_title(f"Brier Scores of {subject_code}")
     axs[1].set_xlabel("Task")
     axs[1].set_ylabel("Brier Score")
-    axs[2].set_title(f"Estimated scores of {vpn_code} per task")
+    axs[2].set_title(f"Estimated scores of {subject_code} per task")
     axs[2].set_xlabel("Task")
     axs[2].set_ylabel("Scores")
     plt.colorbar(ims, ax=axs[2])
-    plt.suptitle(f"Subject {vpn_code}")
+    plt.suptitle(f"Subject {subject_code}")
     fig.subplots_adjust()
 
-
-src.utils.create_folder(BASE_DIR + f'/assets/plots/')
-
-for subject in subjects:
-    plot_vpn(subject)
-    plt.savefig(BASE_DIR + f'/assets/plots/{subject}_results.png')
-    plt.close()
-
+# Create plots with all subjects
 plot_average_task_scores()
 plot_average_brier_scores()
 
-print("# Saved results.")
+# Create plots for every subjects
+for subject in subjects:
+    plot_subject(subject)
+    plt.savefig(f'assets/plots/{subject}_results.png')
+    plt.close()
+
+print(f'# Save Plots ... Done!')
