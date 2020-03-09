@@ -40,83 +40,96 @@
 		\label{fig:processing}
 		% PDF box
 		\node[rectangle, draw=black, rounded corners=2mm, minimum width=3cm, minimum height=1cm, line width=1pt] 
-		at (-0.6, 10) {\Large PDF file};
+		at (-0.6, 10.4) {\Large PDF file};
 		
 		% PDF arrow
-		\draw[thick,arrows={-open triangle 45}]  (-7, 10) -- node [pos=.5, above] {scan questionnaire} (-2.4, 10);
+		\draw[thick,arrows={-open triangle 45}]  (-7, 10.4) -- node [pos=.5, above] {scan questionnaire} (-2.4, 10.4);
 		
-		\draw[thick,arrows={-triangle 45}]  (-0.6, 9.4) -- (-0.6, 8.6);
+		% Arrow PDF -> extract pdfs
+		\draw[thick,arrows={-triangle 45}]  (-0.6, 9.8) -- (-0.6, 8.9) node[pos=.4, right] {\Large Extract pdfs};
 		
-		% JPG box
-		\node[rectangle, draw=black, rounded corners=2mm, minimum width=3cm, minimum height=1cm, line width=1pt]  (jpgbox)
-		at (-0.6,8) {\Large JPG};
+		% --------------- Extract pdfs --------------- %
+		\def\extractY{6.5}
 		
-		% JPG arrow
-		\draw[thick,arrows={-open triangle 45}]  (-7, 8) -- node [pos=.5, above] {photograph questionnaire} (-2.4, 8);
+		% Box
+		\node[rectangle, draw=black, rounded corners=2mm, minimum width=18cm, minimum height=4.5cm, line width=1pt] 
+		at (-0.8, \extractY) {};
 		
-		\node[inner sep=0pt] (dist1) at (-5.5,4.8)
-		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_1.png}};
+		% Images
+		\node[inner sep=0pt] (dist1) at (-7,\extractY)
+		{\includegraphics[width=.3\textwidth]{../assets/example_distribution_1.png}};
+		\node[inner sep=0pt] (dist2) at (-1.3, \extractY)
+		{\includegraphics[width=.3\textwidth]{../assets/example_distribution_2.png}};
+		\node[inner sep=0pt] (dist3) at (5,\extractY)
+		{\includegraphics[width=.3\textwidth]{../assets/example_distribution_3.png}};
 		
-		\node[inner sep=0pt] (dist2) at (-0.6,4.8)
-		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_2.png}};
+		% Points
+		\node at (1.9, \extractY) {\Huge ...};
 		
-		\node[inner sep=0pt] (dist3) at (5,4.8)
-		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_3.png}};
+		% Arrow Extract -> read pdfs
+		\draw[thick,arrows={-triangle 45}]  (-0.6, 4.1) -- (-0.6, 3.1) node[pos=.4, right] {\Large Read Probabilites};	
+
+		% --------------- Read probabilities --------------- %
 		
-		\node at (2.2, 4.8) {\Huge ...};
+		% Box
+		\node[rectangle, draw=black, rounded corners=2mm, minimum width=18cm, minimum height=4.5cm, line width=1pt] 
+		at (-0.8, 0.7) {};
 		
-		\draw[thick,arrows={-triangle 45}]  (-0.6, 7.4) -- (-0.6, 7) -- (-5.5, 7) -- (-5.5, 6.5);
-		\draw[thick,arrows={-triangle 45}]  (-0.6, 7.4) -- (-0.6, 7) -- (-0.6, 7) -- (-0.6, 6.5);	
-		\draw[thick,arrows={-triangle 45}]  (-0.6, 7.4) -- (-0.6, 7) -- (5, 7) -- (5, 6.5);
+		% Images
+		\node[inner sep=0pt] (dist1) at (-7,0.7)
+		{\includegraphics[width=.3\textwidth]{../assets/example_distribution_1_points.png}};
+		\node[inner sep=0pt] (dist2) at (-1.3,0.7)
+		{\includegraphics[width=.3\textwidth]{../assets/example_distribution_2_points.png}};
+		\node[inner sep=0pt] (dist3) at (5,0.7)
+		{\includegraphics[width=.3\textwidth]{../assets/example_distribution_3_points.png}};
 		
-		\node[inner sep=0pt] (dist1) at (-5.5,0.5)
-		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_1_points.png}};
+		% Points
+		\node at (1.9, 0.7) {\Huge ...};
+
+		% --------------- Discrete Box --------------- %
 		
-		\node[inner sep=0pt] (dist2) at (-0.6,0.5)
-		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_2_points.png}};
-		
-		\node[inner sep=0pt] (dist3) at (5,0.5)
-		{\includegraphics[width=.33\textwidth]{../assets/example_distribution_3_points.png}};
-		
-		\node at (2.2, 0.5) {\Huge ...};
-		
-		\draw[thick,arrows={-triangle 45}]  (-5.5, 3) -- (-5.5, 2.2);
-		\draw[thick,arrows={-triangle 45}]  (-0.6, 3) -- (-0.6, 2.2);	
-		\draw[thick,arrows={-triangle 45}]  (5, 3) -- (5, 2.2);
-		
-		\draw[thick,arrows={-triangle 45}]  (-5.5, -1.4) -- (-5.5, -1.8) -- (-0.9, -1.8) -- (-0.9, -2.4);
-		\draw[thick,arrows={-triangle 45}]  (-0.6, -1.4) -- (-0.6, -1.8) -- (-0.6, -1.8) -- (-0.6, -2.4);
-		\draw[thick,arrows={-triangle 45}]  (5, -1.4) -- (5, -1.8) -- (-0.3, -1.8) -- (-0.3, -2.4);
+		% Arrow read probs -> discrete points
+		\draw[thick,arrows={-triangle 45}]  (-0.6, -1.7) -- (-0.6, -2.3);
 		
 		% Discrete box
 		\node[rectangle, draw=black, rounded corners=2mm, minimum width=5cm, minimum height=1cm, line width=1pt]  (discretebox)
-		at (-0.6,-3) {\Large Discrete Probability Points};
+		at (-0.6,-2.9) {\Large Discrete Probability Points};
 		
-		\draw[thick,arrows={-triangle 45}]  (-0.6, -3.6) -- (-0.6, -4.4);
+		\draw[thick,arrows={-triangle 45}]  (-0.6, -3.5) -- (-0.6, -4.1);
+		
+		% --------------- Normalize --------------- %
 		
 		% Normalize box
 		\node[rectangle, draw=black, rounded corners=2mm, minimum width=5cm, minimum height=1cm, line width=1pt]  (normalize)
-		at (-0.6,-5) {\Large Normalize};
+		at (-0.6,-4.7) {\Large Normalization};
 		
-				\draw[thick,arrows={-triangle 45}]  (-0.6, -5.6) -- (-0.6, -6.4);
-		
+		\draw[thick,arrows={-triangle 45}]  (-0.6, -5.3) -- (-0.6, -5.9);
+
+		% --------------- Brier score --------------- %
 		% Brier score box
 		\node[rectangle, double, draw=black, rounded corners=2mm, minimum width=5cm, minimum height=1cm, line width=1pt]  (brier)
-		at (-0.6,-7) {\Large Brier Score};
+		at (-0.6,-6.5) {\Large Brier Score};
 		
-				\draw[thick,arrows={-triangle 45}] (-0.6, -8.4) -- (-0.6, -7.6) ;
+		\draw[thick,arrows={-triangle 45}] (-0.6, -7.1) -- (-0.6, -7.7) ;
+		
+		% --------------- Scoring --------------- %
 		
 		\node[rectangle, draw=black, rounded corners=2mm, minimum width=5cm, minimum height=1cm, line width=1pt]  (score)
-		at (-0.6,-9) {\Large Score Answers};
+		at (-0.6,-8.3) {\Large Score Answers};
 		
-		\draw[thick,arrows={-triangle 45}]  (-0.6, -10.4) -- (-0.6, -9.6) ;
+		\draw[thick,arrows={-triangle 45}]  (-0.6, -9.5) -- (-0.6, -8.9) ;
 		
+		% --------------- CSV --------------- %
+		
+		% CSV
 		\node[rectangle, draw=black, rounded corners=2mm, minimum width=3cm, minimum height=1cm, line width=1pt]  (score)
-		at (-0.6,-11) {\Large CSV};
+		at (-0.6,-10.1) {\Large CSV};
 		
-		\draw[thick,arrows={-open triangle 45}]  (-7, -11) -- node[pos=.5, above] {enter answers} (-2.4, -11);
+		\draw[thick,arrows={-open triangle 45}]  (-7, -10.1) -- node[pos=.5, above] {enter answers} (-2.4, -10.1);
 	\end{tikzpicture}
 	\end{center}
+
+	\newpage
 
 	The pipeline that we used to process the questionnaire can be seen in the figure above. We start out by digitizing the image. This is important so that we are able to apply computer vision to extract the probability density functions. For convenience we provided two ways: either scan the questionnaire as a PDF file or photograph each page of the questionnaire and upload the pages as JPEG's. In the first case, we use the python package ``pdf2image'' to convert each PDF page into a single JPEG page, which is not necessary in the second case, cause the JPEG's are already available.  
 
