@@ -48,7 +48,7 @@ for subject in subjects:
                   f'analysis/{subject}_brier_scores.csv'
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        # pandas_frame = pandas_frame.drop(7)
+        pandas_frame = pandas_frame.drop([7])
         pandas_bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_brier_scores[subject] = pandas_bs
 
@@ -62,7 +62,7 @@ for subject in subjects:
                   f'analysis/{subject}_probabilities.csv'
     if os.path.exists(path_to_csv):
         pandas_frame = pd.read_csv(path_to_csv, sep=',')
-        # pandas_frame = pandas_frame.drop(8)
+        pandas_frame = pandas_frame.drop([7, 8])
         probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_probs[subject] = probs
 
@@ -75,9 +75,9 @@ for subject in subjects:
     path_to_csv = BASE_DIR + f'/assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_task_scores.csv'
     if os.path.exists(path_to_csv):
-        scores = pd.read_csv(path_to_csv, sep=',')
-        # scores = scores.drop(7)
-        scores = scores.set_index('Unnamed: 0').T.to_dict(f'list')
+        pandas_frame = pd.read_csv(path_to_csv, sep=',')
+        pandas_frame = pandas_frame.drop([7])
+        scores = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
         subject_task_scores[subject] = scores
 
 print("# Read in achieved task scores.")
@@ -85,48 +85,76 @@ print("# Read in achieved task scores.")
 
 # --------------- EVALUATE DATA --------------- #
 def plot_average_task_scores():
-    """ This method creates and saves a bar plot of the achieved discrete rating per task,
-        averaged over all subjects.
+    """ This method creates and saves a figure with a bar plot of the achieved discrete rating per task,
+        averaged over all subjects and a bar plot of the achieved discrete rating per subject,
+        averaged over all tasks.
+        The mean and standard deviation over the subject AND task axes is printed out.
     :return: None
     """
-    # TODO: Fix; The scores are summed up somewhere / somehow
     points_over_task = np.empty((1, len(subject_task_scores.get(subjects[0]))))
     for s in subjects:
         ts = np.array(list(subject_task_scores.get(s).values())).T
         points_over_task = np.concatenate((points_over_task, ts), axis=0)
+    points_over_task = np.copy(points_over_task[1:, :])
 
-    plt.figure()
+    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
     for i in range(0, points_over_task.shape[1]):
-        plt.bar(x=i+1, height=np.mean(points_over_task[:, i]), yerr=np.std(points_over_task[:, i]),
-                color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
-    plt.hlines(np.mean(points_over_task), 0.6, points_over_task.shape[1]+0.4, color='orange')
-    plt.title("Average points per task.")
-    plt.xlabel("Task ID")
-    plt.ylabel("Average Points")
-    plt.savefig(BASE_DIR + f'/assets/results/average_task_scores.png')
+        axs[0].bar(x=i+1, height=np.mean(points_over_task[:, i]), yerr=np.std(points_over_task[:, i]),
+                   color='blue', ecolor='black', align='center', alpha=0.3, capsize=5)
+
+    for i in range(0, points_over_task.shape[0]):
+        axs[1].bar(x=i+1, height=np.mean(points_over_task[i, :]), yerr=np.std(points_over_task[i, :]),
+                   color='yellow', ecolor='black', align='center', alpha=0.7, capsize=5)
+
+    axs[0].hlines(np.mean(points_over_task), 0.6, points_over_task.shape[1] + 0.4, color='red')
+    axs[1].hlines(np.mean(points_over_task), 0.6, points_over_task.shape[0] + 0.4, color='red')
+    print(f"The mean achieved task score over all tasks and subjects is {np.round(np.mean(points_over_task), 4)} with a "
+          f"standard deviation of {np.round(np.std(points_over_task), 4)}.")
+    plt.suptitle("Average task scores")
+    axs[0].set_title("Average points per task")
+    axs[1].set_title("Average points per subject")
+    axs[0].set_xlabel("Task ID")
+    axs[1].set_xlabel("Subject ID")
+    axs[0].set_ylabel("Average Points")
+    axs[1].set_ylabel("Average Points")
+    plt.savefig(BASE_DIR + f'/assets/plots/average_task_scores.png')
     plt.close('all')
     return None
 
 
 def plot_average_brier_scores():
     """ This method creates and saves a bar plot of the calculated brier score per task,
-        averaged over all subjects.
+        averaged over all subjects and a bar plot of the mean brier score per subject,
+        averaged over all tasks.
+        The mean and standard deviation over the subject AND task axes is printed out.
     :return: None
     """
     brier_over_task = np.empty((1, len(subject_brier_scores.get(subjects[0]))))
     for s in subjects:
         bs = np.array(list(subject_brier_scores.get(s).values())).T
         brier_over_task = np.concatenate((brier_over_task, bs), axis=0)
-
-    plt.figure()
+    brier_over_task = np.copy(brier_over_task[1:, :])
+    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
     for i in range(0, brier_over_task.shape[1]):
-        plt.bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
-                color='blue', ecolor='black', align='center', alpha=0.3, capsize=10)
-    plt.hlines(np.mean(brier_over_task), 0.6, brier_over_task.shape[1]+0.4, color='orange')
-    plt.title("Average brier score per task.")
-    plt.xlabel("Task ID")
-    plt.ylabel("Avg. Brier Score")
-    plt.savefig(BASE_DIR + f'/assets/results/average_brier_scores.png')
+        axs[0].bar(x=i+1, height=np.mean(brier_over_task[:, i]), yerr=np.std(brier_over_task[:, i]),
+                   color='blue', ecolor='black', align='center', alpha=0.3, capsize=5)
+
+    for i in range(0, brier_over_task.shape[0]):
+        axs[1].bar(x=i+1, height=np.mean(brier_over_task[i, :]), yerr=np.std(brier_over_task[i, :]),
+                   color='yellow', ecolor='black', align='center', alpha=0.7, capsize=5)
+
+    axs[0].hlines(np.mean(brier_over_task), 0.6, brier_over_task.shape[1] + 0.4, color='red')
+    axs[1].hlines(np.mean(brier_over_task), 0.6, brier_over_task.shape[0] + 0.4, color='red')
+    print(f"The mean brier score over all tasks and subjects is {np.round(np.mean(brier_over_task), 4)} with "
+          f"a standard deviation of {np.round(np.std(brier_over_task), 4)}.")
+    plt.suptitle("Average brier scores")
+    axs[0].set_title("Average brier score per task")
+    axs[1].set_title("Average brier score per subject")
+    axs[0].set_xlabel("Task ID")
+    axs[1].set_xlabel("Subject ID")
+    axs[0].set_ylabel("Avg. brier score")
+    axs[1].set_ylabel("Avg. brier score")
+    plt.savefig(BASE_DIR + f'/assets/plots/average_brier_scores.png')
     plt.close('all')
     return None
 
@@ -143,7 +171,7 @@ def plot_vpn(vpn_code):
     prob_matrix = np.empty((1, 6))
     prob_dict = subject_probs.get(vpn_code)
     fig, axs = plt.subplots(1, 3, figsize=(15, 5))
-    for i in range(0, 8):
+    for i in range(0, 7):
         axs[0].bar(x=i+1, height=ts[i], color='red', align='center', alpha=0.3)
         axs[1].bar(x=i+1, height=bs[i], color='green', align='center', alpha=0.3)
         task_prob = np.array(prob_dict.get(i)).reshape((1, -1))
@@ -165,11 +193,11 @@ def plot_vpn(vpn_code):
     fig.subplots_adjust()
 
 
-src.utils.create_folder(BASE_DIR + f'/assets/results/')
+src.utils.create_folder(BASE_DIR + f'/assets/plots/')
 
 for subject in subjects:
     plot_vpn(subject)
-    plt.savefig(BASE_DIR + f'/assets/results/{subject}_results.png')
+    plt.savefig(BASE_DIR + f'/assets/plots/{subject}_results.png')
     plt.close()
 
 plot_average_task_scores()
