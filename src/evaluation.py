@@ -50,7 +50,7 @@ for subject in subjects:
     path_to_csv = f'assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_probabilities.csv'
     pandas_frame = pd.read_csv(path_to_csv, sep=',')
-    #pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
+    pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
     probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
     subject_probs[subject] = probs
 
@@ -206,6 +206,7 @@ def plot_subject(subject_code):
     prob_matrix = np.copy(prob_matrix.T[:, 1:])
     # TODO: Scale imshow plot to same size as other plots and colorbar
     ims = axs[2].imshow(prob_matrix, cmap='Greys')
+    axs[2].scatter(np.arange(0, 7), ts, marker='x', c='orange', alpha=1)
     axs[0].set_title(f"Points of {subject_code} per task")
     axs[0].set_xlabel("Task")
     axs[0].set_ylabel("Achieved Points")
