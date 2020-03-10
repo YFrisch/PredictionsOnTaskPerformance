@@ -111,7 +111,6 @@ def plot_example_probability_functions_2():
 # plot_example_probability_functions(True)
 
 
-
 def plot_brier_graph():
     """
     This function draws a probability density function.

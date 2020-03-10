@@ -6,14 +6,13 @@
 	
 %	\textbf{Task: describe your ideas and your realization of the task}
 	
-	\subsection{Designing the Questionnaire (MAG)}
+	\subsection{Designing the Questionnaire}
 	
 	We started out by designing a questionnaire in \LaTeX and using the corporate design of our university. We separated each task clearly from the one another and wrote the instructions in the headline. The body of each tasks consists of task related information on the left, space for the answer in the middle and an empty coordinate system on the right. It was important to us to keep this structure to increase reliability across the tasks.
 	
 	We decided to use sorting tasks, because of their high objectivity (see section \ref{sec:discussion} for a discussion on task types). The first seven tasks were closed-form sorting tasks. Directly after executing each task, the subjects were asked to fill out the coordinate system with a probability density function over their performance. We decided to ask the subjects to sort five terms in a predefined order. We decided to use two easy items, three medium and two hard items. We randomized the location of the items as well as the order of the answer possibilities. An example can be seen in figure \ref{fig:example-task}.
 	
 	\begin{figure}[h]
-
 		\centering
 		\captionsetup{justification=centering}
 		\fbox{\includegraphics[width=.8\textwidth]{../assets/example-task-1.png}}
@@ -34,7 +33,7 @@
  	\end{figure} 
 	 
 	\newpage
-	\subsection{Processing Pipeline (MAG)}
+	\subsection{Processing Pipeline}
 	
 	\begin{center}
 	\begin{tikzpicture}
@@ -141,7 +140,7 @@
 	The remaining segments of this sections examine the processing pipeline in more detail.
 	
 	
-	\subsection{Extracting Probability Density Functions (MAG)}
+	\subsection{Extracting Probability Density Functions}
 	
 	To extract the probability density functions from a scanned PDF into an image, we used computer vision to detect the probability density functions on the JPEG and simply cut out the detected regions from the JPEG. The cutout process is fairly easy. In python, images are stored as an array of numbers. As soon as we get the area of the pdf as pixels, we can simply enter these pixel indices in the array and extract that part of the image. Then we save it using OpenCV a free computer vision library in python.
 	
@@ -162,10 +161,50 @@
 	
 	Because we calculate the extraction of the pdfs with percentages relative to the size of a Din A4 paper, it is independent of the DPI and resolution of the scanner or photo camera with which the questionnaire is copied.
 	
-	\subsection{Extracting Probabilites from probability density functions (YF)}
+	\subsection{Extracting Probabilites from probability density functions}
 	
-	\subsection{Scoring the answers (YF)}
+	\subsection{Scoring the answers}
 	
-	\subsection{Calculating the Brier Score (YF)}
+	To score the answers, we applied the Euclidean norm (L2-norm) to the distance between the actual position of the items and the chosen position of the items. The correct order of a sorting task is $[A, B, C, D, E]$, but the subject wrote $[B, D, E, A, C]$. Translated into numbers the correct ordering always translates to $[1, 2, 3, 4, 5]$ and in this case the answer of the subject translates to $[2, 4, 5, 1, 3]$. Now we take the L2-norm, which is displayed for our toy example in equation (\ref{eq:l2}). The better the placement of the answers, the lower is the L2-norm. A result of $L2 = 0$ represents a perfect fit.
+	
+	\begin{equation}
+		\label{eq:l2}
+		L2 = \sqrt{(1-2)^2 + (2-4)^2 + (3-5)^2 + (4-1)^2  + (5 - 3)^2} \approx 4.69
+	\end{equation}
+	
+	We then calculated the worst L2-norm possible. That is the L2 norm of the difference between the actual ordering $[1, 2, 3, 4, 5]$ an the worst ordering possible $[5, 4, 3, 2, 1]$. This resulted in the worst possible L2-norm of $\text{L2-max-norm} \approx 6.32$. We then split the interval of $[0, \text{L2-max-norm}]$ into an array of a fixed amount of equidistant numbers (in our case 6). We chose six, because we assigned a score of 0 to 5 points for each task. This led to the array of $[0, 1.27, 2.53, 3.79, 5.06, 6.32]$. The discrete rating for a task was then the 'id' of the closest value of that array compared to the L2-norm of the answer. Therefore, if a subject would get a L2-norm of $L2 = 4.69$ (equation \ref{eq:l2}), the discrete score for the task would be 4 points.
+	
+	\subsection{Calculating the Brier Score}
+	
+	To calculate the accuracy of the subjects predictions, we used the Brier score. The Brier score is a function that has been designed to do exactly that. It takes the mean squared differences between the actual outcome $o_i \in {0, 1}$ and the probability $p_i \in [0, 1]$ assigned to each outcome:
+	
+	\begin{equation}
+		BS = \frac{1}{N}\sum_{i=1}^{N} (p_i - o_t)^2
+	\end{equation}
+	
+	\noindent An outcome of $o_i = 1$ represents the occurrence of an outcome and analogous constitutes an outcome of $o_i = 0$ that an outcome did not occur. A probability of $p_i = 1$ describes a 100\% certainty that a specific outcome will occur and a probability of $p_i = 0$ describes the certainty that an outcome will not occur. A Brier score of $BS = 0$ specifies a perfect correlation between actual outcomes and predictions. A Brier score of $BS = 1$ characterizes the worst possible accuracy of predictions, that is depicting a probability of $p_i = 1$ for an outcome that did not occur and assigning all other outcomes a probability of $p_i = 0$, including the outcome that actually occurred.
+	
+	We now show how we applied the Brier score to our experiment. The participant could get 0 to 5 points for each task. Figure \ref{fig:example} shows an example task result.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{c|c|c|c|c|c|c|}
+			& \multicolumn{6}{c|}{Possible task points} \\
+			\hline
+			& 0 & 1 & 2 & 3 & 4 & 5 \\
+			\hline
+			$o_i$ & 0 & 0 & 1 & 0 & 0 & 0 \\
+			$p_i$ & 0.2 & 0.6 & 0.2 & 0 & 0 & 0\\
+		\end{tabular}
+		\caption{Example task result. The subjects certainty is encoded in the probabilities $p_i$ for each possible task score. The actual outcome is encoded with $o_i \in {0, 1}$, where 1 displays an occurring event and 0 a non-occurring event.}
+		\label{fig:example}
+	\end{figure}
+
+	The actual score that the participant got for the task is encoded with $o_i = 1$ and the other possible scores that did not occur are represented by $o_i = 0$. The participant however was underconfident and gave a possible task score of 0 points a probability of 0.2, a possible task score of 1 point a probability of 0.6 and the possible task score of 2 points (which actually occurred) a probability of 0.2. If we now apply the Brier score to our data, we get a Brier score of $BS \approx 0.17$ which can be seen in equation \ref{eq:example-brier-score}.
+	
+	\begin{equation}
+		\label{eq:example-brier-score}
+		BS = \frac{(0.2 - 0)^2 + (0.6 - 0)^2 + (0.2 - 1)^2 + (0 - 0)^2 + (0 - 0)^2}{6} \approx 0.17
+	\end{equation}
 
 \end{document}

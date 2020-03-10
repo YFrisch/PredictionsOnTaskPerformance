@@ -45,8 +45,11 @@ def score_sorting_task(answers, points_per_task):
     task_norm = np.linalg.norm(x=(correct_order - answers), ord=2)
     max_norm = np.linalg.norm(x=(correct_order - worst_order), ord=2)
 
+    print(max_norm)
+
     # Points can lie in the range of [0, points_per_task]
     intervals = np.linspace(0, max_norm, points_per_task+1)
+    print(intervals)
     nearest_value = find_nearest(intervals, task_norm)
     rating = points_per_task - np.where(intervals == nearest_value)[0][0]
     return rating

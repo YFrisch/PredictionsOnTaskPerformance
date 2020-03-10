@@ -78,14 +78,7 @@
 	
 	After deciding to use sorting tasks, we needed to find a scoring metric that induces enough uncertainty and does not simply count the number of items that were assigned to the correct positions. We need enough uncertainty to draw meaningful conclusions about metacognitive processes when self-assessing task performance (see first paragraphs of section \ref{sec:finding_task_type} for more information). Our idea was to find a metric that incorporates the distances between the answer given and the correct answer.
 	
-	We accomplished this by taking the L2-norm between the positions of the given answers and the positions of the correct items. As an example: The correct order of a sorting task is [A, B, C, D, E], but the subject wrote [B, D, E, A, C]. Translated into numbers the correct ordering always translates to [1, 2, 3, 4, 5] and in this case the answer of the subject translates to [2, 4, 5, 1, 3]. Now we take the L2-norm, which is displayed for our toy example in equation (\ref{eq:l2}). The better the placement of the answers, the lower is the L2-norm. A result of $L2 = 0$ represents a perfect fit.
-	
-	\begin{equation}
-		\label{eq:l2}
-		L2 = \sqrt{(1-2)^2 + (2-4)^2 + (3-5)^2 + (4-1)^2  + (5 - 3)^2} \approx 4.69
-	\end{equation}
-	
-	One caveat however is the continuous scale of the L2-norm. To calculate the Brier score (our scoring function to measure accuracy of probabilistic predictions, see next section), we need discrete values. That is why we calculated the worst L2-norm possible and split the interval of [0, L2-max-norm] into an array of a fixed amount of equidistant numbers (in our case 5). The discrete rating for a task is then the 'id' of the closest value of that array compared to the L2-norm of the answer.
+	We accomplished this by taking the L2-norm between the positions of the given answers and the positions of the correct items (an example can be seen in section \ref{sec:method}).	One caveat however is the continuous scale of the L2-norm. To calculate the Brier score (our scoring function to measure accuracy of probabilistic predictions, see next section), we need discrete values. That is why we calculated the worst L2-norm possible and split the interval of [0, L2-max-norm] into an array of a fixed amount of equidistant numbers (in our case 6). The discrete rating for a task is then the 'id' of the closest value of that array compared to the L2-norm of the answer.
 	\\\\
 	We found this metric and scoring procedure highly adaptable. It scales well with both the number of items to sort and the amount of points we want to assign to each task. It can also be used to assign the same amount of points to tasks with different amount of items. Embedding this would be a good starting point to administer further research on this project.
 	\\\\
