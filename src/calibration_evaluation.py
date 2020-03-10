@@ -1,12 +1,8 @@
-""" This file is used for several evaluations and plots of the calculated brier scores,
-    achieved task scores and assigned probabilities of the subjects.
+""" This file is used for several evaluations and plots of the overall assigned probabilities of the subjects.
 
     All available evaluation data is read-in first.
 
-    Several methods to plot the data can be used.
-
-    Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
-    and bar plots of the averages for the task and brier scores are created and saved.
+    Per default by calling this script, calibrate() is evaluated on all available subjects in the subject folder.
 """
 from collections import OrderedDict, defaultdict
 import os
@@ -50,7 +46,6 @@ for subject in subjects:
     path_to_csv = f'assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_probabilities.csv'
     pandas_frame = pd.read_csv(path_to_csv, sep=',')
-    #pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
     probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
     subject_probs[subject] = probs
 
