@@ -91,10 +91,12 @@ subject_task_scores = apply_scoring(subject_answers, task_ids,
 print(f'Done!')
 
 # --------------- Getting probabilites & Calc Brier score --------------- #
+print(f'Reading distributions and calculating brier scores ... ', end=f'')
+sys.stdout.flush()
 
 for s in subjects:
     dr = DDR(vpn_code=s, task_scores=subject_task_scores.get(s))
-    if s == f'ELTS': # TODO: Resolve this
-        dr.plot([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+print(f'Done!')
 
 
