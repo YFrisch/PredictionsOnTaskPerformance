@@ -46,6 +46,7 @@ for subject in subjects:
     path_to_csv = f'assets/subjects/subject_{subject}/' \
                   f'analysis/{subject}_probabilities.csv'
     pandas_frame = pd.read_csv(path_to_csv, sep=',')
+    pandas_frame = pandas_frame.drop([7, 8])
     probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
     subject_probs[subject] = probs
 
@@ -165,11 +166,49 @@ def mod_calibration(subject_codes):
     plt.ylabel('Probability')
 
 
-# Create plots for every subjects
-for subject in subjects:
-    calibration(subject)
-    plt.savefig(f'assets/plots/{subject}_calibration.png')
-    plt.close()
+def calibration2(subject_code):
+    # Gather data
+    ts = np.array(list(subject_task_scores.get(subject_code).values())).T.squeeze().reshape(-1, 1)
+    prob_matrix = np.empty((1, 6))
+    prob_dict = subject_probs.get(subject_code)
+    for i in range(0, 7):
+        task_prob = np.array(prob_dict.get(i)).squeeze().reshape((1, -1))
+        prob_matrix = np.concatenate((prob_matrix, task_prob), axis=0)
+    prob_matrix = np.copy(prob_matrix[1:, :])
 
+    # Get the peak of every discrete confidence distribution per task
+    subject_predictions = np.max(prob_matrix, axis=1).reshape(-1, 1)
+
+    # Plot achieved percentag of points vs predictions
+    plt.figure(figsize=(10, 4))
+    plt.title(f"Calibration of {subject_code}")
+    for i in range(0, len(ts)):
+        # Todo: Make max task score modular
+        max_score = 5
+        plt.scatter(subject_predictions[i], ts[i]/max_score, s=50, label=f'Task {i+1}')
+        P = np.array([subject_predictions[i], ts[i]/max_score]).reshape(2,)
+        L = np.array([1, 1]).reshape(2,)
+        X = L/np.linalg.norm(L)
+        correction = 0.5 * np.array([1, 1]) * np.dot(P, X)
+
+        if subject_predictions[i] > ts[i]/max_score:
+            plt.plot([P[0], correction[0]], [P[1], correction[1]],
+                     color='red', label='Overconfidence')
+        else:
+            plt.plot([P[0], correction[0]], [P[1], correction[1]],
+                     color='blue', label='Underconfidence')
+
+    plt.plot([0, 1], [0, 1], color='black', label='Optimal accuracy', ls='-')
+    plt.xlim(left=0, right=1)
+    plt.xlabel("Subjects predicted accuracy")
+    plt.ylim(bottom=0, top=1)
+    plt.ylabel("Subjects actual accuracy")
+    plt.legend()
+    plt.show()
+    return None
+
+
+# Create plots for every subjects
+calibration2(f'ATDA')
 
 print(f'# Save Plots ... Done!')
