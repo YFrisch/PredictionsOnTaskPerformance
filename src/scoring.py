@@ -1,20 +1,22 @@
-"""
-Defining and applying scoring functions.
+"""Defining and applying scoring functions.
+
 Project: Predictions on Task Performance
 """
+
 
 import numpy as np
 import pandas as pd
 
+
 from src.utils import find_nearest
+
 
 __author__ = 'Yannik Frisch, Maximilian A. Gehrke'
 __date__ = '08-03-2020'
 
 
 def score_sorting_task(answers, points_per_task):
-    """
-    Scoring the subject answers of a sorting task.
+    """Scoring the subject answers of a sorting task.
 
     This function returns a discrete score for an input numpy array of actual
     answer positions for a sorting task. E.g. if a subjects answer for a task
@@ -57,8 +59,7 @@ def score_sorting_task(answers, points_per_task):
 
 def apply_scoring(subject_answers, task_ids, pts_per_task,
                   subjects_folder_path):
-    """
-    Apply scoring to the answers of the subjects.
+    """Apply scoring to the answers of the subjects.
 
     :param subject_answers: dictionary of dictionaries; first key is the
         subject code, second key is the task id in form of 'task_id' and

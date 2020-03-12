@@ -1,12 +1,12 @@
 """ This file is used for several evaluations and plots of the calculated brier scores,
-    achieved task scores and assigned probabilities of the subjects.
+achieved task scores and assigned probabilities of the subjects.
 
-    All available evaluation data is read-in first.
+All available evaluation data is read-in first.
 
-    Several methods to plot the data can be used.
+Several methods to plot the data can be used.
 
-    Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
-    and bar plots of the averages for the task and brier scores are created and saved.
+Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
+and bar plots of the averages for the task and brier scores are created and saved.
 """
 import sys
 import numpy as np
@@ -15,8 +15,8 @@ import src.utils
 from src.data_reader import read_csv_files
 
 
-__author__ = 'Yannik Frisch'
-__date__ = '08-03-2020'
+__author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
+__date__ = '12-03-2020'
 
 
 # Set working directory to the top level of our project
@@ -32,8 +32,7 @@ subjects, subject_task_scores, subject_brier_scores, subject_probs, max_score = 
 
 # --------------- EVALUATE DATA --------------- #
 def plot_average_task_scores():
-    """
-    This function calculates and plots average task scores for our experiment.
+    """This function calculates and plots average task scores for our experiment.
 
     This method creates and saves a figure with a bar plot of the achieved
     discrete rating per task, averaged over all subjects and a bar plot of the
@@ -88,8 +87,7 @@ def plot_average_task_scores():
 
 
 def plot_average_brier_scores():
-    """
-    This method calculates and plots the average brier score for the subjects in our experiment.
+    """This method calculates and plots the average brier score for the subjects in our experiment.
 
     This method creates and saves a bar plot of the calculated brier score per
     task, averaged over all subjects and a bar plot of the mean brier score per

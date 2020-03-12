@@ -1,5 +1,4 @@
-"""
-Executing this file processes the data gathered by our questionnaire.
+"""Executing this file processes the data gathered by our questionnaire.
 
 For our project 'Predicitons on Task Performance', we designed a
 questionnaire where subjects execute little tasks and draw probability
@@ -24,7 +23,7 @@ import sys
 import src.utils
 from src.scoring import apply_scoring
 from src.pdf_reader import extract_pdfs
-from src.read_answers import read_answers_from_csv
+from src.data_reader import read_answers_from_csv
 from src.discrete_distribution_reader import DiscreteDistributionReader as DDR
 
 __author__ = 'Yannik Frisch, Maximilian A. Gehrke'

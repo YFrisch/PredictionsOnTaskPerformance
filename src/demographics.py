@@ -1,8 +1,10 @@
-"""
-Execute this file to read and evaluate the demographic data of the subjects.
+""" Execute this file to read and evaluate the demographic data of the subjects.
 
 Project: Predictions on Task Performance
 """
+
+__author__ = 'Maximilian A. Gehrke, Yannik P. Frisch'
+__date__ = '10-03-2020'
 
 import pandas as pd
 import numpy as np

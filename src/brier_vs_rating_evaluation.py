@@ -1,8 +1,8 @@
 import src.utils
 from src.data_reader import read_csv_files
 
-__author__ = 'Yannik Frisch'
-__date__ = '08-03-2020'
+__author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
+__date__ = '12-03-2020'
 
 # Set working directory to the top level of our project
 src.utils.set_working_directory()

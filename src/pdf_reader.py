@@ -1,5 +1,4 @@
-"""
-Extracting probability density functions and saving them to disk.
+"""Extracting probability density functions and saving them to disk.
 
 This file extracts the probability density functions of our questionnaire
 and saves them as images to the disk. We use computer vision to detect the
@@ -12,13 +11,12 @@ The function is tailored to the design of our questionnaire.
 import numpy as np
 import cv2
 
-__author__ = 'Maximilian A. Gehrke'
+__author__ = 'Maximilian A. Gehrke, Yannik P. Frisch'
 __date__ = '01-03-2020'
 
 
 def sort_contours(contours, method=f'left-to-right'):
-    """
-    Sorting contours extracted with OpenCV.
+    """Sorting contours extracted with OpenCV.
 
     Partly from: https://www.pyimagesearch.com/2015/04/20/
     sorting-contours-using-python-and-opencv/
@@ -51,8 +49,7 @@ def sort_contours(contours, method=f'left-to-right'):
 
 
 def extract_pdfs_(image_path_array, dst_folder, debugging=False):
-    """
-    Extract probability density functions for given files.
+    """Extract probability density functions for given files.
 
     This function extracts all probability density functions that can be
     found in the given files and saves them in the 'dst_folder'. The pdf's
@@ -248,8 +245,7 @@ def extract_pdfs_(image_path_array, dst_folder, debugging=False):
 
 
 def extract_pdfs(subjects, subjects_folder_path, file_suffixes):
-    """
-    Extract probability density functions for all subjects.
+    """Extract probability density functions for all subjects.
 
     We iterate over all subjects, building an array containing all the paths
     to the files we want to be extracted and pass this array with a path to

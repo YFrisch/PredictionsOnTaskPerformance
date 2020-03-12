@@ -1,24 +1,21 @@
 """ This file is used for several evaluations and plots of the overall assigned probabilities of the subjects.
 
-    All available evaluation data is read-in first.
+All available evaluation data is read-in first.
 
-    Per default by calling this script, calibrate() is evaluated on all available subjects in the subject folder.
+Per default by calling this script, calibrate() is evaluated on all available subjects in the subject folder.
 """
-from collections import OrderedDict, defaultdict
-import os
+from collections import OrderedDict
 import sys
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 # TODO: Get rid of the RGBA warning...
-from matplotlib.pyplot import cm
 import src.utils
 from src.utils import task_expectation
 from src.data_reader import read_csv_files
 
 
-__author__ = 'Yannik Frisch'
-__date__ = '08-03-2020'
+__author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
+__date__ = '12-03-2020'
 
 
 # Set working directory to the top level of our project
@@ -29,11 +26,16 @@ print("\n-------------------- CALIBRATION EVALUATION --------------------")
 
 
 # --------------- READ DATA --------------- #
-subjects, subject_task_scores, subject_brier_scores, subject_probs, max_score  = read_csv_files()
+subjects, subject_task_scores, subject_brier_scores, subject_probs, max_score = read_csv_files()
 
 
 # --------------- EVALUATE DATA --------------- #
-def calibration(subject_code):
+def confidence_eval(subject_code):
+    """ Plots a scatter plot of expected rating vs actual rating per task for the given subject.
+
+    :param subject_code: The subject code string
+    :return: None
+    """
     # Gather data
     ts = np.array(list(subject_task_scores.get(subject_code).values())).T.squeeze().reshape(-1, 1)
     prob_matrix = np.empty((1, 6))
@@ -49,7 +51,7 @@ def calibration(subject_code):
 
     # Plot achieved percentage of points vs predictions
     plt.figure(figsize=(10, 4))
-    plt.title(f"Calibration of {subject_code}")
+    plt.title(f"Confidence of {subject_code}")
     color = plt.get_cmap('rainbow', len(ts))
     colors = color(np.linspace(0, 1, len(ts)))
     for i in range(0, len(ts)):
@@ -69,10 +71,17 @@ def calibration(subject_code):
     plt.legend(by_label.values(), by_label.keys())
 
 
-def average_calibration():
+def average_confidence():
+    """ Plots a scatter plot of mean expected rating vs mean actual rating per task, averaged over all subjects.
+
+    :return: None
+    """
     task_score_matrix = np.zeros(shape=(1, 7))
     subjective_expectation_matrix = np.zeros(shape=(1, 7))
+
+    # Iterate over all subjects
     for s in subjects:
+
         # Gather data
         new_score = np.array(list(subject_task_scores.get(s).values())).reshape(1, -1)
         task_score_matrix = np.concatenate((task_score_matrix, new_score), axis=0)
@@ -114,7 +123,7 @@ def average_calibration():
     by_label = OrderedDict(zip(labels, handles))
     plt.plot([0, 1], [0, 1], color='black', label='Optimal accuracy', ls='-', zorder=2)
     plt.legend(by_label.values(), by_label.keys())
-    plt.title('Average calibration')
+    plt.title('Average confidence')
     plt.xlim(left=0, right=1)
     plt.xlabel("Average expected accuracy")
     plt.ylim(bottom=0, top=1)
@@ -126,14 +135,14 @@ sys.stdout.flush()
 
 
 # Create plots for every subjects
-for s in subjects:
-    calibration(s)
-    plt.savefig(f'assets/plots/{s}_calibration.png')
+for si in subjects:
+    confidence_eval(si)
+    plt.savefig(f'assets/plots/{si}_confidence.png')
     plt.close('all')
 
 
-average_calibration()
-plt.savefig(f'assets/plots/average_calibration.png')
+average_confidence()
+plt.savefig(f'assets/plots/average_confidence.png')
 
 
 print(f'Done!')

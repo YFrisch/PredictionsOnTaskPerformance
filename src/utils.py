@@ -2,19 +2,20 @@
 
 import os
 import numpy as np
-
 import pdf2image
 
-__author__ = 'Maximilian A. Gehrke'
-__date__ = '08-03-2020'
+
+__author__ = 'Maximilian A. Gehrke, Yannik P. Frisch'
+__date__ = '10-03-2020'
 
 
 def set_working_directory():
-    """
-    Setting the working directory to the 'PredictionsOnTaskPerformance'
+    """Setting the working directory to the 'PredictionsOnTaskPerformance'
     folder, if it is currently in the 'src' folder. This step is
     necessary as the working directory is dependent on the configuration
     of the Python IDE.
+
+    :return: None
     """
     current_folder = os.path.basename(os.getcwd())
     if current_folder == f'src':
@@ -22,8 +23,7 @@ def set_working_directory():
 
 
 def extract_subject_codes_from_folders(subjects_folder_path):
-    """
-    Extract the subject codes by taking all the folder names which start with
+    """Extract the subject codes by taking all the folder names which start with
     'subject_' at the given location and extracting the subject codes from
     them. Our naming convention for subjects is 'subject_' + 'SUBJECTCODE'.
 
@@ -45,20 +45,21 @@ def extract_subject_codes_from_folders(subjects_folder_path):
 
 
 def create_folder(folder_path):
-    """
-    Create a folder at the given path if it does not already exist.
+    """Create a folder at the given path if it does not already exist.
+
     :param folder_path: The path of the desired folder
+    :return: None
     """
     if not os.path.exists(folder_path):
         os.mkdir(folder_path)
 
 
 def create_analysis_directories(subjects, subjects_folder_path):
-    """
-    Create a folder named analysis for each subject.
-        (This function is hard coded).
+    """Create a folder named analysis for each subject (This function is hard coded).
+
     :param subjects: String array; all subject codes
     :param subjects_folder_path: String; the path to the subject's folders.
+    :return: None
     """
     for subject in subjects:
         analysis_path = f'{subjects_folder_path}subject_{subject}/analysis/'
@@ -66,11 +67,12 @@ def create_analysis_directories(subjects, subjects_folder_path):
 
 
 def create_pdf_directories(subjects, subjects_folder_path):
-    """
-    Create a folder named pdf for each subject (hard coded), where we will
+    """Create a folder named pdf for each subject (hard coded), where we will
     save all the extracted probability density functions.
+
     :param subjects: String array; all subject codes
     :param subjects_folder_path: String; the path to the subject's folders.
+    :return: None
     """
     for subject in subjects:
         pdf_path = f'{subjects_folder_path}subject_{subject}/pdfs/'
@@ -78,8 +80,7 @@ def create_pdf_directories(subjects, subjects_folder_path):
 
 
 def convert_pdf_to_jpg(subjects, subjects_folder_path, file_suffixes):
-    """
-    Convert PDF pages to JPEG images. The paths are hard coded for this
+    """Convert PDF pages to JPEG images. The paths are hard coded for this
     experiment. This function iterates over all subject folders and checks
     whether JPEG's of the questionnaire already exist in the 'raw' folder.
     If so, the function does nothing.
@@ -100,6 +101,7 @@ def convert_pdf_to_jpg(subjects, subjects_folder_path, file_suffixes):
     :param subjects_folder_path: String; path to the subjects folder
     :param file_suffixes: String array with the file endings of the
         PDF / JPEG's we want to analyse.
+    :return: None
     """
     for subject in subjects:
         # Create an array with a separate string for each
@@ -131,8 +133,8 @@ def convert_pdf_to_jpg(subjects, subjects_folder_path, file_suffixes):
 
 
 def find_nearest(array, value):
-    """
-    Find the entry of the array that is closest to a given value.
+    """Find the entry of the array that is closest to a given value.
+
     :param array: list or array of values
     :param value: int; a number
     :return: int; the number in the array that is closest to the given value
@@ -143,8 +145,7 @@ def find_nearest(array, value):
 
 
 def task_expectation(matrix_of_probabilities, max_score):
-    """
-    Returns the expectation of a scoring for a given matrix of discrete probabilities.
+    """Returns the expectation of a scoring for a given matrix of discrete probabilities.
 
     E.g. Matrix : (6, 7): 7 tasks, 0-5 points
     Returns the (1, 7) expected scores for each task.

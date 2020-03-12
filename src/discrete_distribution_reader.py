@@ -1,20 +1,21 @@
+"""This module is implementing a "discrete distribution reader" capable of reading drawn
+probability density functions (pdfs) and storing their values.
+
+The values are discretized for a fixed amount of points, and normalized afterwards to
+fit to a discrete probability density function.
+
+Plotting is implemented for a given task id.
+
+Only arguments are the 4-letter subject (vpn) code and an array containing the subject's task scores.
+
+https://www.statisticshowto.datasciencecentral.com/brier-score/
+The "brier score" can be calculated for a given task id and actual points of the vpn.
 """
-    This module is implementing a "discrete distribution reader" capable of reading drawn
-    probability density functions (pdfs) and storing their values.
 
-    The values are discretized for a fixed amount of points, and normalized afterwards to
-    fit to a discrete probability density function.
 
-    Plotting is implemented for a given task id.
-
-    Only arguments are the 4-letter subject (vpn) code and an array containing the subject's task scores.
-
-    https://www.statisticshowto.datasciencecentral.com/brier-score/
-    The "brier score" can be calculated for a given task id and actual points of the vpn.
-"""
-
-__author__ = 'Yannik Frisch'
+__author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
 __date__ = '27-02-2020'
+
 
 import numpy as np
 import os
@@ -22,6 +23,7 @@ import cv2
 import pandas as pd
 import matplotlib.pyplot as plt
 from collections import defaultdict
+
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 
@@ -51,8 +53,9 @@ class DiscreteDistributionReader:
         print("------------------------------")
 
     def read_in_confidence_images(self):
-        """ This method reads in 8 files named 'pdf_task_i.jpg' from the vpn subfolder
-            and stores them inside self.confidence_images.
+        """ This method reads in 8 files named 'pdf_task_i.jpg' from the vpn sub-folder
+        and stores them inside self.confidence_images.
+
         :return: confidence_images, img_shapes: list of read-in image per task and shape per image
         """
         confidence_images = []
@@ -69,8 +72,9 @@ class DiscreteDistributionReader:
         return confidence_images, img_shapes
 
     def read_in_overall_confidence_image(self):
-        """ This method reads in the file named 'pdf_task_1_to7.jpg' from the vpn subfolder
-            and stores it inside self.overall_confidence_image.
+        """ This method reads in the file named 'pdf_task_1_to7.jpg' from the vpn sub-folder
+        and stores it inside self.overall_confidence_image.
+
         :return: overall_confidence_image, o_img_shape: read-in overall confidence and shape of that image
         """
         img = plt.imread(BASE_DIR + "/assets/subjects/subject_" + self.vpn_code
@@ -88,14 +92,14 @@ class DiscreteDistributionReader:
         return img, img.shape
 
     def discretize(self):
-        """ This function stores the pixel values ('continous' pdf) from the images
-            in self.confidence_images in self.xs and self.ys.
+        """ This function stores the pixel values ('continuous' pdf) from the images
+        in self.confidence_images in self.xs and self.ys.
 
-            Discrete values for every possible point of a task are stored in self.discrete_values
-            respectively self.normalized_discrete_values.
+        Discrete values for every possible point of a task are stored in self.discrete_values
+        respectively self.normalized_discrete_values.
 
-            The indices from which the discrete pdf values are taken are also stored for every task
-            in self.indices.
+        The indices from which the discrete pdf values are taken are also stored for every task
+        in self.indices.
         :return: None
         """
         for i in range(0, len(self.confidence_images)):
@@ -117,14 +121,14 @@ class DiscreteDistributionReader:
                 y_raw.append(value)
             y_raw = np.array(y_raw)
 
-            """ Extrapolating missing data.
+            """Extrapolating missing data.
             
-                Read-in image pixels with y[x] = -1 (see above) are used for extrapolation.
-                Starting at x, we iterate forward until we find an y[x'] != -1.  
-                If such an x' exists, we assign all values between y[x] and y[x'] the value y[x'].
-                If such an x' does not exist, we start again from x and iterate backwards.
-                If the backward iteration does not find a valid value either, we assign y[x] = 1, so we get a uniform
-                distribution after normalization.                
+            Read-in image pixels with y[x] = -1 (see above) are used for extrapolation.
+            Starting at x, we iterate forward until we find an y[x'] != -1.  
+            If such an x' exists, we assign all values between y[x] and y[x'] the value y[x'].
+            If such an x' does not exist, we start again from x and iterate backwards.
+            If the backward iteration does not find a valid value either, we assign y[x] = 1, so we get a uniform
+            distribution after normalization.                
             """
             for c in np.arange(0, len(y_raw)):
                 if y_raw[c] == -1:
@@ -168,7 +172,8 @@ class DiscreteDistributionReader:
         return None
 
     def save_prob_to_csv(self):
-        """ Saves the discrete probability confidence values for each task to a csv file.
+        """Saves the discrete probability confidence values for each task to a csv file.
+
         :return: None
         """
         # TODO: Give overall estimation a different header
@@ -177,7 +182,8 @@ class DiscreteDistributionReader:
         panda_df.to_csv(path, sep=',')
 
     def save_brier_to_csv(self):
-        """ Saves the brier score of a subject for each task to a csv file.
+        """Saves the brier score of a subject for each task to a csv file.
+
         :return: None
         """
         # Read-in points per task
@@ -191,21 +197,21 @@ class DiscreteDistributionReader:
         panda_df.to_csv(path, sep=',')
 
     def brier_score_for_task(self, task_id, vpn_points_for_task):
-        """ Returns the brier score for this vpn for the given task id and the given amount of actual reached points.
+        """Returns the brier score for this vpn for the given task id and the given amount of actual reached points.
+
         :return: bs, the Brier Score
         """
         ppt = np.zeros(shape=(self.points_per_task+1, 1))
         ppt[vpn_points_for_task] = 1
-        # bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
-        #bs = np.mean([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
         print(self.normalized_discrete_values)
         print(ppt)
         bs = np.sum([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
         return bs
 
     def plot(self, task_ids):
-        """ Plots the original image, discrete data and normalized pdf values for a given task id.
-            The overall confidence can be plotted by maximum task id + 1
+        """Plots the original image, discrete data and normalized pdf values for a given task id.
+        The overall confidence can be plotted by maximum task id + 1
+
         :return: None
         """
         for id in task_ids:
