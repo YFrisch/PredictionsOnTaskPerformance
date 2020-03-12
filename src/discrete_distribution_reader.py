@@ -187,7 +187,7 @@ class DiscreteDistributionReader:
         panda_df = pd.DataFrame(brier_scores,
                                 columns=[f'Brier Score'],
                                 index=[f'task_1', f'task_2', f'task_3', f'task_4',
-                                        f'task_5', f'task_6', f'task_7', f'task_8'])
+                                       f'task_5', f'task_6', f'task_7', f'task_8'])
         panda_df.to_csv(path, sep=',')
 
     def brier_score_for_task(self, task_id, vpn_points_for_task):
@@ -197,7 +197,10 @@ class DiscreteDistributionReader:
         ppt = np.zeros(shape=(self.points_per_task+1, 1))
         ppt[vpn_points_for_task] = 1
         # bs = np.mean([((1-self.discrete_values[task_id][i]) - ppt[i])**2 for i in np.arange(0, len(ppt))])
-        bs = np.mean([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
+        #bs = np.mean([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
+        print(self.normalized_discrete_values)
+        print(ppt)
+        bs = np.sum([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
         return bs
 
     def plot(self, task_ids):

@@ -226,7 +226,7 @@ plot_average_task_scores()
 plot_average_brier_scores()
 
 # Create plots for every subjects
-print(f'# Save Plots ... ', end='')
+print(f'# Creating and saving plots ... ', end='')
 sys.stdout.flush()
 for subject in subjects:
     plot_subject(subject)

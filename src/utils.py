@@ -140,3 +140,20 @@ def find_nearest(array, value):
     array = np.asarray(array)
     idx = (np.abs(array - value)).argmin()
     return array[idx]
+
+
+def task_expectation(matrix_of_probabilities, max_score):
+    """
+    Returns the expectation of a scoring for a given matrix of discrete probabilities.
+
+    E.g. Matrix : (6, 7): 7 tasks, 0-5 points
+    Returns the (1, 7) expected scores for each task.
+
+    :param matrix_of_probabilities: Should contain the discrete normalized probabilities for every possible scoring
+            across the y axis; For every task across the x axis
+    :param max_score: Maximum achievable score of the tasks; Defines y axis size of probability matrix
+    :return: expectations: See above
+    """
+    t = np.arange(0, max_score+1, 1)
+    expectations = np.array([t.T@task_probs for task_probs in matrix_of_probabilities[:]])
+    return expectations
