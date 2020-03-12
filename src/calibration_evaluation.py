@@ -75,7 +75,8 @@ def calibration(subject_code):
     prob_matrix = np.copy(prob_matrix[1:, :])
 
     # Get the peak of every discrete confidence distribution per task
-    subject_predictions = np.max(prob_matrix, axis=1).reshape(-1, 1)
+    # TODO: Use expectation instead of max/argmax
+    subject_predictions = np.argmax(prob_matrix, axis=1).reshape(-1, 1)/6
 
     # Plot achieved percentage of points vs predictions
     plt.figure(figsize=(10, 4))
