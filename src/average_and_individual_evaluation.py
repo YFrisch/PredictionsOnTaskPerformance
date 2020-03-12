@@ -8,61 +8,26 @@
     Per default by calling this script, plot_vpn() is evaluated on all available subjects in the subject folder,
     and bar plots of the averages for the task and brier scores are created and saved.
 """
-from collections import OrderedDict
-import os
 import sys
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import src.utils
+from src.data_reader import read_csv_files
+
 
 __author__ = 'Yannik Frisch'
 __date__ = '08-03-2020'
 
+
 # Set working directory to the top level of our project
 src.utils.set_working_directory()
 
+
 print("\n-------------------- EVALUATION --------------------")
 
+
 # --------------- READ DATA --------------- #
-print(f'# Reading data ... ', end='')
-sys.stdout.flush()
-subjects_folder_path = f'assets/subjects/'
-subjects = src.utils.extract_subject_codes_from_folders(subjects_folder_path)
-
-# Create plots folder if it is not there
-src.utils.create_folder(f'assets/plots/')
-
-subject_brier_scores = {}
-subject_probs = {}
-subject_task_scores = {}
-
-for subject in subjects:
-    # Read brier scores
-    path_to_csv = f'assets/subjects/subject_{subject}/' \
-                  f'analysis/{subject}_brier_scores.csv'
-    pandas_frame = pd.read_csv(path_to_csv, sep=',')
-    pandas_frame = pandas_frame.drop([7])  # Drop task 8
-    pandas_bs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-    subject_brier_scores[subject] = pandas_bs
-
-    # Read probabilites
-    path_to_csv = f'assets/subjects/subject_{subject}/' \
-                  f'analysis/{subject}_probabilities.csv'
-    pandas_frame = pd.read_csv(path_to_csv, sep=',')
-    pandas_frame = pandas_frame.drop([7, 8])  # Drop task 8 and overall pdf
-    probs = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-    subject_probs[subject] = probs
-
-    # Read task scores
-    path_to_csv = f'assets/subjects/subject_{subject}/' \
-                  f'analysis/{subject}_task_scores.csv'
-    pandas_frame = pd.read_csv(path_to_csv, sep=',')
-    pandas_frame = pandas_frame.drop([7])  # Drop task 8
-    scores = pandas_frame.set_index('Unnamed: 0').T.to_dict(f'list')
-    subject_task_scores[subject] = scores
-
-print(f'Done!')
+subjects, subject_task_scores, subject_brier_scores, subject_probs, max_score = read_csv_files()
 
 
 # --------------- EVALUATE DATA --------------- #
@@ -116,6 +81,7 @@ def plot_average_task_scores():
     axs[1].set_xlabel("Subject ID")
     axs[0].set_ylabel("Average Points")
     axs[1].set_ylabel("Average Points")
+    axs[1].set_xticks(np.arange(1, len(subjects)+1))
     plt.savefig(f'assets/plots/average_task_scores.png')
     plt.close('all')
     return None
@@ -171,6 +137,7 @@ def plot_average_brier_scores():
     axs[1].set_xlabel("Subject ID")
     axs[0].set_ylabel("Avg. brier score")
     axs[1].set_ylabel("Avg. brier score")
+    axs[1].set_xticks(np.arange(1, len(subjects) + 1))
     plt.savefig(f'assets/plots/average_brier_scores.png')
     plt.close('all')
     return None
@@ -210,9 +177,12 @@ def plot_subject(subject_code):
     axs[0].set_title(f"Points of {subject_code} per task")
     axs[0].set_xlabel("Task")
     axs[0].set_ylabel("Achieved Points")
+    axs[0].set_ylim(top=5.0)
+    axs[0].set_yticks(np.arange(0, 6))
     axs[1].set_title(f"Brier Scores of {subject_code}")
     axs[1].set_xlabel("Task")
     axs[1].set_ylabel("Brier Score")
+    axs[1].set_ylim(top=2.0)
     axs[2].set_title(f"Estimated scores of {subject_code} per task")
     axs[2].set_xlabel("Task")
     axs[2].set_ylabel("Scores")
@@ -225,8 +195,9 @@ def plot_subject(subject_code):
 plot_average_task_scores()
 plot_average_brier_scores()
 
-# Create plots for every subjects
 print(f'# Creating and saving plots ... ', end='')
+
+# Create plots for every subjects
 sys.stdout.flush()
 for subject in subjects:
     plot_subject(subject)
