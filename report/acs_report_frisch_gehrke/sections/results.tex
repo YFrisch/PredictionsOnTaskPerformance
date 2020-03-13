@@ -33,7 +33,34 @@ We did individual evaluations of our subjects' task performance, brier scores an
 	\caption{Example graphic of our individual evaluations for subject \textit{ERHN}. We again plotted the achieved discrete scores per task on the left and the calculated brier-scores per task in the middle. The orange line displays the mean values for both bar plots, averaged over all tasks. The subject's estimated discrete probabilities of achieving a score are shown in the right graphic, where the orange x marks the actual achieved score in the task. [TODO: FIX X-RANGE OF RIGHT PLOT!]. One could already conclude a tendency of this subject to give underconfident ratings.}
 	\label{fig:erhn_results} 
 \end{figure}
-\subsection{Overal Confidence}
+\subsection{Confidence Plots}
+To get more compact insights about our subjects' confidence, we also created scatter plots of the type (Expected Rating) vs (Actual Rating), see figure \ref{fig:erhn_confidence} for an example. A subject's expected rating for a task is calculated out of one column of his or her probability matrix, see the above subsection for an example. The individual plots for all our subjects can be found in appendix \ref{appendix:individual_evaluations}.
+\begin{figure}[h]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\textwidth]{../assets/ERHN_calibration.png}
+	\caption{Example graphic of our individual evaluations on the confidence of subject \textit{ERHN}. We created a scatter plot with the subject's expected rating for each task on the x-axis and his or her actual achieved rating on the y-axis. Optimal confidence is indicated by the solid black line, where expectation meets the actual outcome. Scatter plots of tasks above this line indicate underconfidence for a task, while scatter plots below the line are a sign of overconfidence.}
+	\label{fig:erhn_confidence} 
+\end{figure}
+These average confidence per task is also displayed in figure \ref{fig:avg_confidence}.
+\begin{figure}[h]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=\textwidth]{../assets/average_calibration.png}
+	\caption{Scatter plot of average (Expected Rating) vs (Actual Rating) relationship with error bars in both dimensions. Note that the errors are not actual lines around the scores, but the ratings are very likely to be inside the ellipsoids spanned by these standard deviation error bars.}
+	\label{fig:avg_confidence} 
+\end{figure}
+Because we might have found a coincidence between the performance on a task and the confidence of a subject about his rating, we try to get further insights into this by our next evaluation, presented in the next subsection.
 \subsection{Task performance vs Brier Score}
-\subsection{Calibrations}
+To further examine a possible relationship as stated above, we also show the average relationship of (Task Performance) vs (Brier Score) in figure \ref{fig:tp_vs_bs}.
+\begin{figure}[h]
+	\centering
+	\captionsetup{justification=centering}
+	%\includegraphics[width=\textwidth]{../assets/average_calibration.png}
+	\caption{TODO: CAPTION}
+	\label{fig:tp_vs_bs} 
+\end{figure}
+\subsection{Overal Estimation}
+We also asked our subjects to draw their confidence about the overall performance on the questionnaire. The plots can be found in the filled questionnaires in appendix \ref{appendix:filled_questionaires}, but are not used in our evaluations. The values of these pdfs could be used in further experiments on the topic.
+
 \end{document}
