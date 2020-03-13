@@ -1,3 +1,9 @@
+""" This file is used for evaluation and visualization of the brier score vs task score relationship.
+
+All available evaluation data is read-in first.
+
+Per default this script runs plot_rating_vs_brier(), averaging over all available subjects in the subject folder.
+"""
 import src.utils
 import sys
 import numpy as np
@@ -5,8 +11,10 @@ import matplotlib.pyplot as plt
 from src.data_reader import read_csv_files
 from sklearn.linear_model import LinearRegression
 
+
 __author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
 __date__ = '12-03-2020'
+
 
 # Set working directory to the top level of our project
 src.utils.set_working_directory()
@@ -21,6 +29,14 @@ subjects, subject_task_scores, subject_brier_scores, subject_probs, max_score = 
 
 # --------------- EVALUATE DATA --------------- #
 def plot_rating_vs_brier():
+    """Evaluates the (Task Score) vs (Brier Score) relationship.
+
+    Creates a scatter plot per task by it's mean task score (x-axis) and it's mean brier score (y-axis),
+    averaged over all subjects.
+    Then fits and plots a linear regression function on this relationship.
+
+    :return: None
+    """
 
     # -------------------- Gather Data --------------------
 

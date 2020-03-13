@@ -52,14 +52,15 @@ These average confidence per task is also displayed in figure \ref{fig:avg_confi
 \end{figure}
 Because we might have found a coincidence between the performance on a task and the confidence of a subject about his rating, we try to get further insights into this by our next evaluation, presented in the next subsection.
 \subsection{Task performance vs Brier Score}
-To further examine a possible relationship as stated above, we also show the average relationship of (Task Performance) vs (Brier Score) in figure \ref{fig:tp_vs_bs}.
+To further examine a possible relationship as stated above, we also show the average relationship of (Task Performance) vs (Brier Score) in figure \ref{fig:brier_vs_rating}.
 \begin{figure}[h]
 	\centering
 	\captionsetup{justification=centering}
-	%\includegraphics[width=\textwidth]{../assets/average_calibration.png}
-	\caption{TODO: CAPTION}
-	\label{fig:tp_vs_bs} 
+	\includegraphics[width=\textwidth]{../assets/brier_vs_rating.png}
+	\caption{Scatter plot per task by it's mean task score (x-axis) and it's mean brier score (y-axis), averaged over all subjects. Black dashed line shows a linear regression fit on the data.}
+	\label{fig:brier_vs_rating} 
 \end{figure}
+We also fit a linear regression function on the data, resulting in a seemingly positive correlation between the actual achieved task score and the goodness of the subjects' prediction on it.
 \subsection{Overal Estimation}
 We also asked our subjects to draw their confidence about the overall performance on the questionnaire. The plots can be found in the filled questionnaires in appendix \ref{appendix:filled_questionaires}, but are not used in our evaluations. The values of these pdfs could be used in further experiments on the topic.
 
