@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from src.data_reader import read_csv_files
 from sklearn.linear_model import LinearRegression
 
+# TODO: Get rid of the RGBA warning...
 
 __author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
 __date__ = '12-03-2020'

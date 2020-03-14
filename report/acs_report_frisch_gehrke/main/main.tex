@@ -14,6 +14,7 @@ logofile=../logos/tuda_logo.pdf
 \usepackage{subfiles} % Best loaded last in the preamble
 \usepackage{caption} % To center captions
 \usepackage{tikz} % For drawing
+\usepackage{float} % To fix figure positions where they should be...
 \usetikzlibrary{external} % To externalize tikz figures
 \usetikzlibrary{arrows} % For fancy errors in tikz figures
 \usepackage{amsmath} % Use text in math mode
@@ -37,33 +38,29 @@ logofile=../logos/tuda_logo.pdf
 
 % ---------- Abstract ---------- % 
 \begin{abstract}
-	Several studies suggest that humans are rather poor when judging their performance after they have fulfilled a task. Probability density functions is a good way to measure the own evaluation of performance. To our knowledge, this has not yet been implemented. Which is why we wanted to test if and how one can use probability density functions in an experiment to extract the self-evaluation of task performance.
-	
-	We designed a questionnaire where subjects have to draw probability density functions after executing simple sorting tasks. We evaluated each task using a norm scoring function and assigned each task 5 points. Last, we calculated the Brier score, a score for measuring uncertainty, and came to the conclusion that humans are about average in evaluating their performance.
-	
-	The main aspect of this report is the design of a questionnaire which uses probability density functions to assess performance self-evaluation. 
+	Several studies suggest that humans are rather poor when judging their own performance after they have fulfilled a task. We present a new method to use drawn probability density functions to measure the subjects' confidence of their performance on several tasks of a questionnaire that we designed especially for that purpose. Subsequently we rate their answers using a scoring function that is unknown to the subjects, before we evaluate their confidence by statistical measurements of the discrepancy between their expected and their actual performance on the tasks. After evaluating these, we come to the conclusion that [... TODO] and give suggestions for further experiments on this topic, using a wider variety of tasks and a higher number of subjects.
 \end{abstract}
 
-\newpage
-\section{Introduction (YF)}
+\section{Introduction (Yannik P. Frisch)}
 	\label{sec:introduction}
 	\subfile{../sections/introduction.tex}
 	
-\newpage
-\section{Method (MAG)}
+\section{Method (Maximilian A. Gehrke)}
 	\label{sec:method}
 	\subfile{../sections/method.tex}
 	
-\newpage
-\section{Results (YF)}
+\section{Results (Yannik P. Frisch)}
 	\label{sec:results}
 	\subfile{../sections/results.tex}
 	
-\newpage
-\section{Discussion (MAG)}
+\section{Discussion (Maximilian A. Gehrke)}
 	\label{sec:discussion}
 	\subfile{../sections/discussion.tex}
 
+
+% ---------- Bibliography ---------- %
+\bibliography{../bib/references.bib}{}
+\bibliographystyle{plain}
 
 
 \end{document}

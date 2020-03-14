@@ -7,16 +7,16 @@ In the following we present several plots showing the results of our experiment 
 \subsection{Demographic Data}
 Our questionnaire shown in \ref{appendix:questionaire} has been evaluated on 14 subjects. Their average age was 31.5 years within a range of our youngest 22 year old subject and our oldest subject of 62 years. The group consisted of 6 females and 8 males, all with german nationality and german as their mother language. Their professions included one computer scientist, one scientific coworker, one social worker, one curative educator, one insurance agent and nine students. The subjects of the later included \textit{Psychology in IT} 5 times and \textit{Computer Science} two times. One student's subject was \textit{Social Works}, one was studying \textit{Psychology} and one student came from the field of \textit{Cognitive Science}.
 \subsection{Averaged Task Performance and Brier Score}
-The average task performance of our subjects is shown in \ref{fig:avg_scores}, with an absolute mean of [TODO: X], averaged across all subjects and tasks. 
-\begin{figure}[h]
+The average task performance of our subjects is shown in \ref{fig:avg_scores}, with an absolute mean of 2.938 points, averaged across all subjects and tasks, and a standard deviation of 1.391.
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=\textwidth]{../assets/average_task_scores.png}
 	\caption{Means and standard deviations of the achieved task scores, averaged over subjects in the left and over tasks in the right plot. The orange line displays the overall mean of [TODO], averaged over both variables.]}
 	\label{fig:avg_scores}
 \end{figure}
-The subjects abilities to judge about their own performance, encode by the average brier score, is displayed in figure \ref{fig:avg_brier} with an overall average of 0.14. 
-\begin{figure}[h]
+The subjects abilities to judge about their own performance, encoded by the average brier score, is displayed in figure \ref{fig:avg_brier} with an overall average of 0.864 and a standard deviation of 0.264. 
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=\textwidth]{../assets/average_brier_scores.png}
@@ -26,7 +26,7 @@ The subjects abilities to judge about their own performance, encode by the avera
 Please note that we excluded the 8th task from our questionnaire in figure \ref{appendix:questionaire}. For interpretation of these values, please refer to our discussion of the experiment in section \ref{sec:discussion}.
 \subsection{Individual Evaluations}
 We did individual evaluations of our subjects' task performance, brier scores and confidence ratings. While all figures can be found in appendix \ref{appendix:individual_evaluations}, figure \ref{fig:erhn_results} displays an example for one subject.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=\textwidth]{../assets/ERHN_results.png}
@@ -35,7 +35,7 @@ We did individual evaluations of our subjects' task performance, brier scores an
 \end{figure}
 \subsection{Confidence Plots}
 To get more compact insights about our subjects' confidence, we also created scatter plots of the type (Expected Rating) vs (Actual Rating), see figure \ref{fig:erhn_confidence} for an example. A subject's expected rating for a task is calculated out of one column of his or her probability matrix, see the above subsection for an example. The individual plots for all our subjects can be found in appendix \ref{appendix:individual_evaluations}.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=\textwidth]{../assets/ERHN_calibration.png}
@@ -43,7 +43,7 @@ To get more compact insights about our subjects' confidence, we also created sca
 	\label{fig:erhn_confidence} 
 \end{figure}
 These average confidence per task is also displayed in figure \ref{fig:avg_confidence}.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=\textwidth]{../assets/average_calibration.png}
@@ -53,7 +53,7 @@ These average confidence per task is also displayed in figure \ref{fig:avg_confi
 Because we might have found a coincidence between the performance on a task and the confidence of a subject about his rating, we try to get further insights into this by our next evaluation, presented in the next subsection.
 \subsection{Task performance vs Brier Score}
 To further examine a possible relationship as stated above, we also show the average relationship of (Task Performance) vs (Brier Score) in figure \ref{fig:brier_vs_rating}.
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
 	\includegraphics[width=\textwidth]{../assets/brier_vs_rating.png}
@@ -62,6 +62,6 @@ To further examine a possible relationship as stated above, we also show the ave
 \end{figure}
 We also fit a linear regression function on the data, resulting in a seemingly positive correlation between the actual achieved task score and the goodness of the subjects' prediction on it.
 \subsection{Overal Estimation}
-We also asked our subjects to draw their confidence about the overall performance on the questionnaire. The plots can be found in the filled questionnaires in appendix \ref{appendix:filled_questionaires}, but are not used in our evaluations. The values of these pdfs could be used in further experiments on the topic.
-
+We also asked our subjects to draw their confidence about the overall performance on the questionnaire. The plots can be found in the filled questionnaires in appendix \ref{appendix:filled_questionaires}, but are not used in our evaluations. The values of these pdfs could be used in further experiments on the topic.\\
+We finish with a following discussion about our methods and the presented results in the next section.
 \end{document}
