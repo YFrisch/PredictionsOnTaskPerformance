@@ -1,14 +1,12 @@
 ## TODOs
 
 - [ ] Mandatory: Project can be started with given instructions
-    - Idea: incorporate in top level README.md 
+    - Idea: incorporate in top level README.md (Done ?)
 - [ ] Readme-Files (MAG?)
-- [ ] Dependency List + Easy Installation (YF?)
-- [ ] Documentation + Readable Code (Done ?)
+- [x] Dependency List + Easy Installation (YF?)
+- [x] Documentation + Readable Code (Done ?)
 - [ ] Finish report, especially references !
-    - [ ] Add questionnaire(s) and all plots to appendix 
+    - [ ] Add questionnaire(s ?) and all plots to appendix 
 - [ ] Finish / delete todos in code
 ---
-- [ ] Evaluation of Task 8
-- [ ] Evaluation of Overall confidence
-- [ ] questionnaire.py ?
+- [ ] Wir sollen markieren, wer was programmiert hat. Müssen wir wieder aufteilen, sorry :D

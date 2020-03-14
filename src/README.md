@@ -10,4 +10,13 @@ the data that we collected in our experiment.
 - Path: /src/
 
 ### Content:
-* 
+* main.py
+* utils.py
+* pdf_reader.py
+* data_reader.py
+* discrete_distribution_reader.py
+* scoring.py
+* average_and_individual_evaluation.py
+* confidence_evaluation.py
+* brier_vs_rating_evaluation.py
+* demographics.py
