@@ -159,7 +159,6 @@ class DiscreteDistributionReader:
                     continue
 
             # Cut data where y == -1 (no dark pixels)
-            # TODO: Should not make any difference anymore?
             indices = np.where(y_raw == -1)[0]
             self.xs[i] = np.delete(x_raw, indices)
             self.ys[i] = np.delete(y_raw, indices)
@@ -176,7 +175,6 @@ class DiscreteDistributionReader:
 
         :return: None
         """
-        # TODO: Give overall estimation a different header
         path = BASE_DIR + f'/assets/subjects/subject_{self.vpn_code}/analysis/{self.vpn_code}_probabilities.csv'
         panda_df = pd.DataFrame.from_dict(self.normalized_discrete_values, orient='index')
         panda_df.to_csv(path, sep=',')
@@ -203,8 +201,6 @@ class DiscreteDistributionReader:
         """
         ppt = np.zeros(shape=(self.points_per_task+1, 1))
         ppt[vpn_points_for_task] = 1
-        print(self.normalized_discrete_values)
-        print(ppt)
         bs = np.sum([((self.normalized_discrete_values[task_id][i]) - ppt[i]) ** 2 for i in np.arange(0, len(ppt))])
         return bs
 

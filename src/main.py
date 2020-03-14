@@ -19,7 +19,6 @@ In the file 'average_and_individual_evaluation.py' we use this data to calculate
 """
 
 import sys
-
 import src.utils
 from src.scoring import apply_scoring
 from src.pdf_reader import extract_pdfs
