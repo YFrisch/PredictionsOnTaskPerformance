@@ -3,7 +3,7 @@
 Project: Predictions on Task Performance
 """
 
-__author__ = 'Maximilian A. Gehrke'
+__author__ = 'Yannik Frisch, Maximilian A. Gehrke'
 __date__ = '10-03-2020'
 
 import pandas as pd

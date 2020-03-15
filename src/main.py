@@ -14,8 +14,9 @@ we calculate the Brier score, which measures the accuracy of the subjects
 predictions.
 
 All important information is saved to the disk and is available for inspection.
-In the file 'average_and_individual_evaluation.py' we use this data to calculate statistical measures
-(e.g. mean and standard deviation) and create plots.
+In the file 'average_and_individual_evaluation.py' we use this data to
+calculate statistical measures (e.g. mean and standard deviation) and create
+plots.
 """
 
 import sys

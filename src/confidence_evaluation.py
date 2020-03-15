@@ -14,7 +14,7 @@ from src.utils import task_expectation
 from src.data_reader import read_csv_files
 
 
-__author__ = 'Yannik P. Frisch'
+__author__ = 'Yannik Frisch, Maximilian A. Gehrke'
 __date__ = '12-03-2020'
 
 
