@@ -23,7 +23,7 @@
 		\item[(3)] The task type does not allow subjects to easily assess the exact number of points they achieve for a task.
 	\end{enumerate}
 	
-	\noindent We decided to add precondition (1) for practical reasons. Precondition (2) enabled us to ask questions with difficulties and thus eliminating the potential bias that the prediction of task performance is correlated with task difficulty. The idea behind precondition (3) is to avoid counting of correct answers and to introduce enough uncertainty that leads to a meaningful conclusion about metacognition when self-evaluating task performance. Counting the exact number of points and specifying this number does not give us insights about the metacognitive processes of the human mind.
+	\noindent We decided to add precondition (1) for practical reasons. Precondition (2) enabled us to ask questions with various difficulties and thus eliminating the potential bias that the prediction of task performance is correlated with task difficulty. The idea behind precondition (3) is to avoid counting of correct answers and to introduce enough uncertainty that leads to a meaningful conclusion about metacognition when self-evaluating task performance. Counting the exact number of points and specifying this number does not give us insights about the metacognitive processes of the human mind.
 	\\\\
 	Some of our top choices for task types were text-based math, spelling, grammar, translation, estimation, mapping and fill out tasks. We discarded all of these types, because none of them allowed us to define an objective evaluation procedure while ensuring that subjects could not easily track their exact performance. The problem of most task types is the requirement of active recall for two reasons:
 	
@@ -59,7 +59,7 @@
 	
 	The idea of using probability density functions for gathering uncertainty was very intriguing to us. To incorporate probability density functions, we needed to make sure that subjects understand the concept of probability density functions and specifically how we use them in our experiment. 
 	
-	We designed a one page explanation on how probability density functions work and provided examples. We took care of normalizing the probability density functions after administering the experiment and let the subjects know that they did not need to worry about it. However, subjects still  struggled to understand how probability density functions work. Even people who knew probability density functions beforehand needed some time to understand how they are supposed to be used in this case. The confusion stemmed from the similar labels of the $x$ and $y$ axes. The $x$ axis delineates the percentage of points that the subject could get for the task ($0-100\%$). The $y$ axis shows the probability, ranging from $0$ to $1$, that the subject assigns for possibly having X\% (ranging from $0$ to $100$) of the task correct (for more detail see section \ref{sec:method}).
+	We designed a one page explanation on how probability density functions work and provided example probability density functions (see appendix \ref{appendix:questionnaire}). We took care of normalizing the probability density functions after administering the experiment and let the subjects know that they did not need to worry about it. However, subjects still  struggled to understand how probability density functions work. Even people who knew probability density functions beforehand needed some time to understand how they are supposed to be used in this case. The confusion stemmed from the similar labels of the $x$ and $y$ axes. The $x$ axis delineates the percentage of points that the subject could get for the task ($0-100\%$). The $y$ axis shows the probability, ranging from $0$ to $1$, that the subject assigns for possibly having X\% (ranging from $0$ to $100$) of the task correct (for more detail see section \ref{sec:method}).
 	
 	Probability density functions are certainly not easy to understand. We have two suggestions for future administration of the questionnaire:
 	
@@ -75,7 +75,7 @@
 	\subsection{Finding the evaluation metric}
 	\label{sec:finding_metric}
 	
-	After deciding to use sorting tasks, we needed to find a scoring metric that induces enough uncertainty and does not simply count the number of items that were assigned to the correct positions. We need enough uncertainty to draw meaningful conclusions about metacognitive processes when self-assessing task performance (see first paragraphs of section \ref{sec:finding_task_type} for more information). Our idea was to find a metric that incorporates the distances between the answer given and the correct answer.
+	After deciding to use sorting tasks, we needed to find a scoring metric that induces enough uncertainty and does not simply count the number of items that were assigned to the correct positions. We needed enough uncertainty to draw meaningful conclusions about metacognitive processes when self-assessing task performance (see first paragraphs of section \ref{sec:finding_task_type} for more information). Our idea was to find a metric that incorporates the distances between the answer given and the correct answer.
 	
 	We accomplished this by taking the L2-norm between the positions of the given answers and the positions of the correct items (an example can be seen in section \ref{sec:method}).	One caveat however is the continuous scale of the L2-norm. To calculate the Brier score (our scoring function to measure accuracy of probabilistic predictions, see next section), we need discrete values. That is why we calculated the worst L2-norm possible and split the interval of [0, L2-max-norm] into an array of a fixed amount of equidistant numbers (in our case 6). The discrete rating for a task is then the 'id' of the closest value of that array compared to the L2-norm of the answer.
 	\\\\
@@ -83,14 +83,14 @@
 	\\\\
 	To avoid bias, it is important that the subjects know the scoring procedure of the tasks. The exact scoring function (in our case a function including the L2-norm) is not as important as letting the subjects know the factors that are included into the evaluation. In our case, we incorporated the distance between the correct answer and the given answer. An answer that is close to it's correct placement will still give some points. This drastically shifts the perception of what a good or bad answer is. It is important that subjects incorporate this knowledge when drawing the probability density functions to draw valid conclusions.
 	
-	We forgot to write this information into the instructions, which we would propose for all future research. During our first session, the subject asked for the grading procedure and from that onward we orally gave this information before the people started filling out the questionnaire.
+	We did not write this information into the instructions, which we would propose for all future research. During our first session, the subject asked for the grading procedure and from that onward we orally gave this information before the people started filling out the questionnaire.
 	
 	\subsection{Brier Score}
 	\label{sec:brier_score}
 	
 	We use the Brier score to measure the self-assessment of subjects. The Brier score is a proper score function that measures the accuracy of probabilistic predictions, which is exactly what we want to know. Because the Brier score only takes discrete values, we calculate and assign each answer a discrete point value. How exactly we do that is described in the section above.
 	
-	The Brier score measures the mean squared differences between the occurrence of an event and the assigned probabilities. The best possible value of the Brier score is zero and the worst possible value is one. The Brier score assigns events that occurred a value of 1 and events that did not occur a value of 0. Therefore, the best score of $BS = 0$ can only be reached if the subject assigns a probability of 1 to the occurring event and all others 0. In the form of probability density functions subjects would need to draw a very steep summit at the location of the occurring event and with zero probability everywhere else. This is theoretically possible, but in practice subjects will draw a more smooth function. Hence, a Brier score of 0 is rarely reached, even if subjects assigned most of the probability to the correct answer.
+	The Brier score measures the mean squared differences between the occurrence of an event and the assigned probabilities. The best possible value of the Brier score is zero and the worst possible value is two. The Brier score assigns events that occurred a value of 1 and events that did not occur a value of 0. Therefore, the best score of $BS = 0$ can only be reached if the subject assigns a probability of 1 to the occurring event and a probability of 0 to all others. When using probability density functions, subjects would need to draw a very steep summit at the location of the occurring event and assign zero probability everywhere else. This is theoretically possible, but in practice subjects draw a smoother function. Hence, a Brier score of zero is rarely reached, even if subjects assigned most of the probability to the correct answer.
 	
 	The Brier score is more forgiving for two small errors than one large error. Equation (\ref{eq:brier}) shows this in numbers:
 	\begin{equation}
@@ -109,22 +109,27 @@
 	
 	We can recommend this or a similar approach. An automatic processing pipeline is much less error prone and ensures a high level of objectivity. If correctly implemented the complete evaluation process is independent of the instructor. 
 	\\\\
-	In the future, we think it would be beneficial to incorporate even more computer vision. When designing the questionnaire, we added little squares on the right of the answer panels. We used these to evaluate the subject's answers by assigning numbers from one to five for the correct placement of each item. This helped us to created a CSV file with the ordering the subjects selected for each answer. Originally we intended to read the squares with the help of computer vision and then apply Machine Learning to recognize the hand written digits. However, due to time constraints we were not able to do so. This would be a great next step to do or extracting and recognizing the answers in the answer panels.
+	In the future, we think it would be beneficial to incorporate even more computer vision. When designing the questionnaire, we added little squares on the right of the answer panels. We used these to evaluate the subject's answers by assigning numbers from one to five for the correct placement of each item. This helped us to created a CSV file with the ordering the subjects selected for each answer. A great next step would be to read the squares with the help of computer vision and then apply Machine Learning to recognize the hand written digits. 
 	
 	\subsection{Experiment results}
 	\label{sec:exp_results}
 	
-	On average, our subjects received a Brier score of $BS \approx 0.14$ for each task. This is better than we expected. A Brier score of $BS \approx 0.14$ is equal to ascribing the occuring event a probability of 70\% and two other events 15\%. If we would distribute the remaining 30\% across all remaining events, the Brier score would even fall further. 
+	The mean achieved task score over all tasks and subjects is $\mu  \approx 2.94$ with a standard deviation of $SD \approx 1.39$. Subjects got on average about have of the possible points and found some tasks difficult and some easy. This mirrors our design choice to test task performance over tasks with various difficulties.
+	
+	On average, our subjects received a Brier score of $BS \approx 0.86$ for each task. Uniformly distributing the probability across all six events (point scores) would results in a lower and therefore better Brier score of $BS \approx 0.84$ (see figure \ref{fig:briers}). This suggests that humans are poor when assessing their task performance and is in line with the current research \cite{raaijmakers2019effects, sedikides1993assessment}. 
 	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=.5\textwidth]{../assets/brier_plot.png}
-		\caption{A Brier score of 0.14 expressed as a probability function over a task that would give 0 to 5 points with the correct answer at 2.}
+		\caption{A Brier score of $BS \approx 0.84$ expressed as a probability function over a task that would give 0 to 5 points.}
+		\label{fig:briers}
 	\end{figure}
+
+	It seems that subjects overestimate their performance when performing poorly (task 3) and underestimate their performance when performing well (task 1 and 2). It seems that our subjects exhibit a cognitive bias towards assessing their performance as average, which has also been described in other research \cite{kruger1999unskilled}.
+
+	Although the Brier score was not very good for neither difficult nor simple tasks, we found a positive correlation between the task score and the Brier score. On average, the more points a subject got for a task, the lower was the Brier score. This means that participants were able to assess their performance in difficult tasks (task 3) better than in simple tasks (task 1 and 2). Because of our limited amount of data we were not able to perform a significant statistical analysis, to provide further evidence.
 	
-	This is in comparison to what we find in the literature. In the existing studies, researchers show that humans are quite bad when self-assessing their performance after executing task. We do not know why this discrepancy exists and would like to see some further research in this field that trail possible biases by executing controlled studies. Assigning the occurring event a probability of 50\%, would be at least result in a Brier score of $BS = 0.25$. Allocating the same probability for all possible events always results in a Brier score of $BS \approx 0.84$.
-	\\\\
-	In future research we would like to administer a study with more subjects, find a not so homogeneous group (we only administered white German people, mainly from university).
+	In the future, we would like to administer a study with more subjects, more tasks and different task types to get to the bottom of these questions. We would also like to collect a different group of subjects which do not depict so many similar homogeneous characteristics (we only administered white German people, mainly from university).
 	
 	
 	

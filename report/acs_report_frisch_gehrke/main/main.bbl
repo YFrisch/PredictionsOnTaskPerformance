@@ -1,9 +1,19 @@
 \begin{thebibliography}{10}
 
+\bibitem{pdf2images}
+pdf2images.
+\newblock \url{https://pypi.org/project/pdf2images/}.
+\newblock Accessed: 2020-03-15.
+
 \bibitem{azzopardi2007evaluation}
 Paul Azzopardi and Simon Evans.
 \newblock Evaluation of a'bias-free'measure of awareness.
 \newblock {\em Spatial vision}, 20(1-2):61--77, 2007.
+
+\bibitem{bradski2008learning}
+Gary Bradski and Adrian Kaehler.
+\newblock {\em Learning OpenCV: Computer vision with the OpenCV library}.
+\newblock " O'Reilly Media, Inc.", 2008.
 
 \bibitem{brier1950verification}
 Glenn~W Brier.
@@ -66,6 +76,12 @@ Craig Kunimoto, Jeff Miller, and Harold Pashler.
 \newblock Confidence and accuracy of near-threshold discrimination responses.
 \newblock {\em Consciousness and cognition}, 10(3):294--340, 2001.
 
+\bibitem{lamport1994latex}
+Leslie Lamport.
+\newblock {\em LATEX: a document preparation system: user's guide and reference
+  manual}.
+\newblock Addison-wesley, 1994.
+
 \bibitem{maniscalco2012signal}
 Brian Maniscalco and Hakwan Lau.
 \newblock A signal detection theoretic approach for estimating metacognitive
@@ -89,5 +105,18 @@ Thomas~O Nelson.
 \newblock A comparison of current measures of the accuracy of
   feeling-of-knowing predictions.
 \newblock {\em Psychological bulletin}, 95(1):109, 1984.
+
+\bibitem{raaijmakers2019effects}
+Steven~F Raaijmakers, Martine Baars, Fred Paas, Jeroen~JG van Merri{\"e}nboer,
+  and Tamara Van~Gog.
+\newblock Effects of self-assessment feedback on self-assessment and
+  task-selection accuracy.
+\newblock {\em Metacognition and Learning}, 14(1):21--42, 2019.
+
+\bibitem{sedikides1993assessment}
+Constantine Sedikides.
+\newblock Assessment, enhancement, and verification determinants of the
+  self-evaluation process.
+\newblock {\em Journal of personality and social psychology}, 65(2):317, 1993.
 
 \end{thebibliography}
