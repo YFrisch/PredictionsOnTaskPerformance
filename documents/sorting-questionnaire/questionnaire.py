@@ -147,9 +147,26 @@ def plot_brier_graph():
     plt.show()
 
 
+def plot_uniform():
+    """
+    This function draws a probability density function.
 
+    The peak of the function shall be at 70% and the right and left event
+    shall have 15%. The other events shall have 0%. This plot shall
+    illustrate how well the participants did in our experiment if we
+    transform the Brier score into a probability density function
+    """
 
+    # Data
+    x = np.arange(0, 1.015, 0.015)
+    y = np.repeat(0.166666, len(x))
 
+    # Plots
+    plt.figure()
+    plt.plot(x, y)
+    plt.ylim(0, 1)
+    plt.xlabel(f'Points')
+    plt.ylabel(f'Probability')
+    plt.show()
 
-
-plot_brier_graph()
+plot_uniform()
