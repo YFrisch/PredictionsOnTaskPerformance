@@ -18,6 +18,7 @@ logofile=../logos/tuda_logo.pdf
 \usetikzlibrary{external} % To externalize tikz figures
 \usetikzlibrary{arrows} % For fancy errors in tikz figures
 \usepackage{amsmath} % Use text in math mode
+\usepackage[toc,page]{appendix} % For appendix
 
 % ---------- Notes ---------- % 
 
@@ -65,6 +66,19 @@ logofile=../logos/tuda_logo.pdf
 \newpage
 \bibliography{../bib/references.bib}{}
 \bibliographystyle{plain}
+
+
+% ---------- Appendix ---------- %
+\newpage
+\begin{appendices}
+	\section{The Questionnaire}
+		\label{appendix:questionnaire}
+		\subfile{../sections/questionnaire.tex}
+	\newpage
+	\section{Individual Results}
+		\label{appendix:individual_results}
+		\subfile{../sections/individual_results.tex}
+\end{appendices}
 
 
 \end{document}

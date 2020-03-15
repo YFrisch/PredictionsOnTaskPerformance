@@ -5,7 +5,7 @@
 \begin{document}
 In the following we present several plots showing the results of our experiment evaluations, starting with some information about our demographic data, before displaying general averaged results, followed by a demonstration of individual evaluations of the task performance and bier scores.
 \subsection{Demographic Data}
-Our questionnaire shown in \ref{appendix:questionaire} has been evaluated on 14 subjects. Their average age was 31.5 years within a range of our youngest 22 year old subject and our oldest subject of 62 years. The group consisted of 6 females and 8 males, all with german nationality and german as their mother language. Their professions included one computer scientist, one scientific coworker, one social worker, one curative educator, one insurance agent and nine students. The subjects of the later included \textit{Psychology in IT} 5 times and \textit{Computer Science} two times. One student's subject was \textit{Social Works}, one was studying \textit{Psychology} and one student came from the field of \textit{Cognitive Science}.
+Our questionnaire shown in \ref{appendix:questionnaire} has been evaluated on 14 subjects. Their average age was 31.5 years within a range of our youngest 22 year old subject and our oldest subject of 62 years. The group consisted of 6 females and 8 males, all with german nationality and german as their mother language. Their professions included one computer scientist, one scientific coworker, one social worker, one curative educator, one insurance agent and nine students. The subjects of the later included \textit{Psychology in IT} 5 times and \textit{Computer Science} two times. One student's subject was \textit{Social Works}, one was studying \textit{Psychology} and one student came from the field of \textit{Cognitive Science}.
 \subsection{Averaged Task Performance and Brier Score}
 The average task performance of our subjects is shown in \ref{fig:avg_scores}, with an absolute mean of 2.938 points, averaged across all subjects and tasks, and a standard deviation of 1.391.
 \begin{figure}[H]
@@ -23,9 +23,9 @@ The subjects abilities to judge about their own performance, encoded by the aver
 	\caption{Means and standard deviations of the calculated brier scores, averaged over subjects in the left and over tasks in the right plot. The orange line displays the overall mean of 0.14, averaged over both variables.}
 	\label{fig:avg_brier} 
 \end{figure}
-Please note that we excluded the 8th task from our questionnaire in figure \ref{appendix:questionaire}. For interpretation of these values, please refer to our discussion of the experiment in section \ref{sec:discussion}.
+Please note that we excluded the 8th task from our questionnaire in figure \ref{appendix:questionnaire}. For interpretation of these values, please refer to our discussion of the experiment in section \ref{sec:discussion}.
 \subsection{Individual Evaluations}
-We did individual evaluations of our subjects' task performance, brier scores and confidence ratings. While all figures can be found in appendix \ref{appendix:individual_evaluations}, figure \ref{fig:erhn_results} displays an example for one subject.
+We did individual evaluations of our subjects' task performance, brier scores and confidence ratings. While all figures can be found in appendix \ref{appendix:individual_results}, figure \ref{fig:erhn_results} displays an example for one subject.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
@@ -34,11 +34,11 @@ We did individual evaluations of our subjects' task performance, brier scores an
 	\label{fig:erhn_results} 
 \end{figure}
 \subsection{Confidence Plots}
-To get more compact insights about our subjects' confidence, we also created scatter plots of the type (Expected Rating) vs (Actual Rating), see figure \ref{fig:erhn_confidence} for an example. A subject's expected rating for a task is calculated out of one column of his or her probability matrix, see the above subsection for an example. The individual plots for all our subjects can be found in appendix \ref{appendix:individual_evaluations}.
+To get more compact insights about our subjects' confidence, we also created scatter plots of the type (Expected Rating) vs (Actual Rating), see figure \ref{fig:erhn_confidence} for an example. A subject's expected rating for a task is calculated out of one column of his or her probability matrix, see the above subsection for an example. The individual plots for all our subjects can be found in appendix \ref{appendix:individual_results}.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering}
-	\includegraphics[width=\textwidth]{../assets/ERHN_calibration.png}
+	\includegraphics[width=\textwidth]{../assets/ERHN_confidence.png}
 	\caption{Example graphic of our individual evaluations on the confidence of subject \textit{ERHN}. We created a scatter plot with the subject's expected rating for each task on the x-axis and his or her actual achieved rating on the y-axis. Optimal confidence is indicated by the solid black line, where expectation meets the actual outcome. Scatter plots of tasks above this line indicate underconfidence for a task, while scatter plots below the line are a sign of overconfidence.}
 	\label{fig:erhn_confidence} 
 \end{figure}
