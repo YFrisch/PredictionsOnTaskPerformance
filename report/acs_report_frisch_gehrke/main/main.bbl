@@ -1,93 +1,105 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem{azzopardi2007evaluation}
+\bibitem[Azzopardi and Evans(2007)]{azzopardi2007evaluation}
 Paul Azzopardi and Simon Evans.
 \newblock Evaluation of a'bias-free'measure of awareness.
-\newblock {\em Spatial vision}, 20(1-2):61--77, 2007.
+\newblock \emph{Spatial vision}, 20\penalty0 (1-2):\penalty0 61--77, 2007.
 
-\bibitem{brier1950verification}
+\bibitem[Brier(1950)]{brier1950verification}
 Glenn~W Brier.
 \newblock Verification of forecasts expressed in terms of probability.
-\newblock {\em Monthly weather review}, 78(1):1--3, 1950.
+\newblock \emph{Monthly weather review}, 78\penalty0 (1):\penalty0 1--3, 1950.
 
-\bibitem{clarke1959two}
+\bibitem[Clarke et~al.(1959)Clarke, Birdsall, and Tanner~Jr]{clarke1959two}
 Frank~R Clarke, Theodore~G Birdsall, and Wilson~P Tanner~Jr.
 \newblock Two types of roc curves and definitions of parameters.
-\newblock {\em The Journal of the Acoustical Society of America},
-  31(5):629--630, 1959.
+\newblock \emph{The Journal of the Acoustical Society of America}, 31\penalty0
+  (5):\penalty0 629--630, 1959.
 
-\bibitem{cramer1999mathematical}
+\bibitem[Cram{\'e}r(1999)]{cramer1999mathematical}
 Harald Cram{\'e}r.
-\newblock {\em Mathematical methods of statistics}, volume~43.
+\newblock \emph{Mathematical methods of statistics}, volume~43.
 \newblock Princeton university press, 1999.
 
-\bibitem{fleming2014measure}
+\bibitem[Fleming and Lau(2014)]{fleming2014measure}
 Stephen~M Fleming and Hakwan~C Lau.
 \newblock How to measure metacognition.
-\newblock {\em Frontiers in human neuroscience}, 8:443, 2014.
+\newblock \emph{Frontiers in human neuroscience}, 8:\penalty0 443, 2014.
 
-\bibitem{galvin2003type}
+\bibitem[Galvin et~al.(2003)Galvin, Podd, Drga, and Whitmore]{galvin2003type}
 Susan~J Galvin, John~V Podd, Vit Drga, and John Whitmore.
 \newblock Type 2 tasks in the theory of signal detectability: Discrimination
   between correct and incorrect decisions.
-\newblock {\em Psychonomic bulletin \& review}, 10(4):843--876, 2003.
+\newblock \emph{Psychonomic bulletin \& review}, 10\penalty0 (4):\penalty0
+  843--876, 2003.
 
-\bibitem{goodman1963measures}
+\bibitem[Goodman and Kruskal(1963)]{goodman1963measures}
 Leo~A Goodman and William~H Kruskal.
 \newblock Measures of association for cross classifications iii: Approximate
   sampling theory.
-\newblock {\em Journal of the American Statistical Association},
-  58(302):310--364, 1963.
+\newblock \emph{Journal of the American Statistical Association}, 58\penalty0
+  (302):\penalty0 310--364, 1963.
 
-\bibitem{green1966signal}
+\bibitem[Green et~al.(1966)Green, Swets, et~al.]{green1966signal}
 David~Marvin Green, John~A Swets, et~al.
-\newblock {\em Signal detection theory and psychophysics}, volume~1.
+\newblock \emph{Signal detection theory and psychophysics}, volume~1.
 \newblock Wiley New York, 1966.
 
-\bibitem{harvey1997confidence}
+\bibitem[Harvey(1997)]{harvey1997confidence}
 Nigel Harvey.
 \newblock Confidence in judgment.
-\newblock {\em Trends in cognitive sciences}, 1(2):78--82, 1997.
+\newblock \emph{Trends in cognitive sciences}, 1\penalty0 (2):\penalty0 78--82,
+  1997.
 
-\bibitem{jang2012stochastic}
+\bibitem[Jang et~al.(2012)Jang, Wallsten, and Huber]{jang2012stochastic}
 Yoonhee Jang, Thomas~S Wallsten, and David~E Huber.
 \newblock A stochastic detection and retrieval model for the study of
   metacognition.
-\newblock {\em Psychological Review}, 119(1):186, 2012.
+\newblock \emph{Psychological Review}, 119\penalty0 (1):\penalty0 186, 2012.
 
-\bibitem{kruger1999unskilled}
+\bibitem[Kruger and Dunning(1999)]{kruger1999unskilled}
 Justin Kruger and David Dunning.
 \newblock Unskilled and unaware of it: how difficulties in recognizing one's
   own incompetence lead to inflated self-assessments.
-\newblock {\em Journal of personality and social psychology}, 77(6):1121, 1999.
+\newblock \emph{Journal of personality and social psychology}, 77\penalty0
+  (6):\penalty0 1121, 1999.
 
-\bibitem{kunimoto2001confidence}
+\bibitem[Kunimoto et~al.(2001)Kunimoto, Miller, and
+  Pashler]{kunimoto2001confidence}
 Craig Kunimoto, Jeff Miller, and Harold Pashler.
 \newblock Confidence and accuracy of near-threshold discrimination responses.
-\newblock {\em Consciousness and cognition}, 10(3):294--340, 2001.
+\newblock \emph{Consciousness and cognition}, 10\penalty0 (3):\penalty0
+  294--340, 2001.
 
-\bibitem{maniscalco2012signal}
+\bibitem[Maniscalco and Lau(2012)]{maniscalco2012signal}
 Brian Maniscalco and Hakwan Lau.
 \newblock A signal detection theoretic approach for estimating metacognitive
   sensitivity from confidence ratings.
-\newblock {\em Consciousness and cognition}, 21(1):422--430, 2012.
+\newblock \emph{Consciousness and cognition}, 21\penalty0 (1):\penalty0
+  422--430, 2012.
 
-\bibitem{masson2009sources}
+\bibitem[Masson and Rotello(2009)]{masson2009sources}
 Michael~EJ Masson and Caren~M Rotello.
 \newblock Sources of bias in the goodman--kruskal gamma coefficient measure of
   association: Implications for studies of metacognitive processes.
-\newblock {\em Journal of Experimental Psychology: Learning, Memory, and
-  Cognition}, 35(2):509, 2009.
+\newblock \emph{Journal of Experimental Psychology: Learning, Memory, and
+  Cognition}, 35\penalty0 (2):\penalty0 509, 2009.
 
-\bibitem{murphy1973new}
+\bibitem[Murphy(1973)]{murphy1973new}
 Allan~H Murphy.
 \newblock A new vector partition of the probability score.
-\newblock {\em Journal of applied Meteorology}, 12(4):595--600, 1973.
+\newblock \emph{Journal of applied Meteorology}, 12\penalty0 (4):\penalty0
+  595--600, 1973.
 
-\bibitem{nelson1984comparison}
+\bibitem[Nelson(1984)]{nelson1984comparison}
 Thomas~O Nelson.
 \newblock A comparison of current measures of the accuracy of
   feeling-of-knowing predictions.
-\newblock {\em Psychological bulletin}, 95(1):109, 1984.
+\newblock \emph{Psychological bulletin}, 95\penalty0 (1):\penalty0 109, 1984.
 
 \end{thebibliography}
