@@ -13,7 +13,7 @@ The "brier score" can be calculated for a given task id and actual points of the
 """
 
 
-__author__ = 'Yannik P. Frisch, Maximilian A. Gehrke'
+__author__ = 'Yannik P. Frisch'
 __date__ = '27-02-2020'
 
 

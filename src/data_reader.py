@@ -63,6 +63,7 @@ def read_csv_files():
     print(f'Done!')
     return subjects, subject_task_scores, subject_brier_scores, subject_probs, max_score
 
+
 def read_answers_from_csv(subjects, subjects_folder_path):
     """Extracting the answers of a CSV file into a dictionary.
 

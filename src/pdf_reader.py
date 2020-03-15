@@ -11,7 +11,7 @@ The function is tailored to the design of our questionnaire.
 import numpy as np
 import cv2
 
-__author__ = 'Maximilian A. Gehrke, Yannik P. Frisch'
+__author__ = 'Maximilian A. Gehrke'
 __date__ = '01-03-2020'
 
 
