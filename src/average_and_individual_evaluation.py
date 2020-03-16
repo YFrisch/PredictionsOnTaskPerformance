@@ -169,7 +169,6 @@ def plot_subject(subject_code):
                   bs.shape[0] + 0.4, color='orange')
 
     prob_matrix = np.copy(prob_matrix.T[:, 1:])
-    # TODO: Scale imshow plot to same size as other plots and colorbar
     ims = axs[2].imshow(prob_matrix, cmap='Greys')
     axs[2].scatter(np.arange(0, 7), ts, marker='x', c='orange', alpha=1)
     axs[0].set_title(f"Points of {subject_code} per task")
