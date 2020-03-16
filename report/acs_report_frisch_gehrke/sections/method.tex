@@ -8,7 +8,7 @@
 	
 	\subsection{Designing the Questionnaire}
 	
-	We started out by designing a questionnaire in LaTeX \cite{lamport1994latex} and using the corporate design of our university. We clearly separated the tasks from one another and wrote the task instructions in the task headline. The body of each task consisted of task related information on the left, space for the answer in the middle and an empty coordinate system on the right. It was important to us to repeat the same structure for all tasks to increase reliability.
+	We started out by designing a questionnaire in LaTeX \citep{lamport1994latex} and using the corporate design of our university. We clearly separated the tasks from one another and wrote the task instructions in the task headline. The body of each task consisted of task related information on the left, space for the answer in the middle and an empty coordinate system on the right. It was important to us to repeat the same structure for all tasks to increase reliability.
 	
 	Regarding the type of task, our choice fell on sorting tasks, because of their high objectivity (see section \ref{sec:discussion} for a discussion on task types). We decided to ask the subjects to sort five terms regarding a specific question. The first seven tasks were closed-form sorting tasks, where we already provided the first terms in a randomized order. Directly after executing each task, the subjects were asked to fill out the coordinate system with a probability density function over their performance. We used two simple, three medium and two difficult tasks. An example can be seen in figure \ref{fig:example-task}.
 	
@@ -132,7 +132,7 @@
 	\label{fig:processing}
 	\end{figure}
 
-	After designing the questionnaire, we implemented a processing pipeline using the programming language \textit{Python} that integrates and analyzes the data that we collect by administering the questionnaire (figure \ref{fig:processing}). We started out by digitizing the image in order to apply methods of computer vision to extract the probability density functions. For convenience, we provided two ways: either scan the questionnaire as a PDF file or photograph each page of the questionnaire and upload the pages as JPEG's. In the first case, we use the python package \textit{pdf2image} \cite{pdf2images} to convert each PDF pages into single JPEG pages, which is not necessary in the second case, because the images of the questionnaire are already available in JPEG.  
+	After designing the questionnaire, we implemented a processing pipeline using the programming language \textit{Python} that integrates and analyzes the data that we collect by administering the questionnaire (figure \ref{fig:processing}). We started out by digitizing the image in order to apply methods of computer vision to extract the probability density functions. For convenience, we provided two ways: either scan the questionnaire as a PDF file or photograph each page of the questionnaire and upload the pages as JPEG's. In the first case, we use the python package \textit{pdf2image} \footnote{\url{https://pypi.org/project/pdf2images/}} to convert each PDF pages into single JPEG pages, which is not necessary in the second case, because the images of the questionnaire are already available in JPEG.  
 
 	After the digitization of the questionnaire, we use methods of computer vision to detect and extract the probability density functions as single images. From these images we built a digital representation of each probability density functions and read discrete probabilities at specific locations. Afterwards, we normalized the probabilities so they sum to one. This way, the subjects do not need to care about drawing a normalized probability function and can rather concentrate on the relation between the probabilities that they assign.
 	
@@ -147,12 +147,12 @@
 	
 	The hard part is to identify the probability density functions in the image. However, we designed our questionnaire in a way that reduces the detection of pdfs to the detection of a big square. If we can reliably detect the coordinate system, which the subjects use to draw their pdfs, we can extract the pdfs.
 	
-	To detect squares, we needed to detect vertical and horizontal lines first, which we did by applying convolutions. Next, we extracted all the contours that could be build with horizontal and vertical lines by using the \textit{Python} library \textit{OpenCV} \cite{bradski2008learning}. This will output any form of contour, including lines, triangles, rectangles and squares. Before extracting the correct contours, we needed to sort the contours from top to bottom. To the computer all pdfs look the same, so we had to make sure that we assigned the correct pdf to the correct task by sorting it. 
+	To detect squares, we needed to detect vertical and horizontal lines first, which we did by applying convolutions. Next, we extracted all the contours that could be build with horizontal and vertical lines by using the \textit{Python} library \textit{OpenCV} \footnote{\url{https://opencv.org/}} \citep{bradski2008learning}. This will output any form of contour, including lines, triangles, rectangles and squares. Before extracting the correct contours, we needed to sort the contours from top to bottom. To the computer all pdfs look the same, so we had to make sure that we assigned the correct pdf to the correct task by sorting it. 
 	
 	Next, we had to find the correct squares from the contours. We did this by iterating over the contours and testing each contour regarding some constraints:
 	
 	\begin{enumerate}
-		\item The horizontal and vertical length of the contour had to be approximately the same length. We allowed for maximal 8\% variation. One side could be up to 8\% longer than the other side. This factor was necessary, because squares on a scan are rarely perfectly axes aligned.
+		\item The horizontal and vertical length of the contour had to be approximately the same length. We allowed for maximal 8\% variation. One side could be up to 8\% longer than the other side. This factor was necessary, because squares on a scan are rarely perfectly aligned to the axes.
 		\item The square of the coordinate system had a height of exactly 4.5cm. A Din A4 paper is exactly 29.7cm high. This means that each pdf makes up for about 15\% of the image height. Allowing for some deviation, the height of the contour had to be between 10 and 20\% of the height of the JPEG. 
 		\item The square of the coordinate system had a width of 4.5cm. A Din A4 paper is exactly 21cm wide. This means that each pdf makes up about 21\% of the image width. Allowing for some deviation, the width of the contour had to be between 15 and 25\% of the width of the JPEG. 
 		\item Last, we excluded all contours which were lying on the left half of the page.
@@ -185,7 +185,7 @@
 	
 	\subsection{Calculating the Brier Score}
 	
-	To calculate the accuracy of the subjects predictions, we used the Brier score \cite{murphy1973new}. It takes the mean squared differences between the actual outcome $c_i \in \{0, 1\}$ and the probability $f_i \in [0, 1]$ assigned to each outcome (equation \ref{eq:brier_score}).
+	To calculate the accuracy of the subjects predictions, we used the Brier score \citep{murphy1973new}. It takes the mean squared differences between the actual outcome $c_i \in \{0, 1\}$ and the probability $f_i \in [0, 1]$ assigned to each outcome (equation \ref{eq:brier_score}).
 	
 	An outcome of $c_i = 1$ represents the occurrence of an outcome and analogous constitutes an outcome of $c_i = 0$ that an outcome did not occur. A probability of $f_i = 1$ describes a 100\% certainty that a specific outcome will occur and a probability of $f_i = 0$ describes the certainty that an outcome will not occur. A Brier score of $BS = 0$ specifies a perfect correlation between actual outcomes and predictions. A Brier score of $BS = 2$ characterizes the worst possible accuracy of predictions, that is depicting a probability of $f_i = 1$ for an outcome that did not occur and assigning all other outcomes a probability of $f_i = 0$, including the outcome that actually occurred.
 	

@@ -114,22 +114,23 @@
 	\subsection{Experiment results}
 	\label{sec:exp_results}
 	
-	The mean achieved task score over all tasks and subjects is $\mu  \approx 2.94$ with a standard deviation of $SD \approx 1.39$. Subjects got on average about have of the possible points and found some tasks difficult and some easy. This mirrors our design choice to test task performance over tasks with various difficulties.
+	The mean achieved task score over all tasks and subjects is $\mu  \approx 2.94$ with a standard deviation of $SD \approx 1.39$. Subjects got on average about half of the possible points and found some tasks difficult and some easy. This mirrors our design choice to test task performance on various task difficulties.
 	
-	On average, our subjects received a Brier score of $BS \approx 0.86$ for each task. Uniformly distributing the probability across all six events (point scores) would results in a lower and therefore better Brier score of $BS \approx 0.84$ (see figure \ref{fig:briers}). This suggests that humans are poor when assessing their task performance and is in line with the current research \cite{raaijmakers2019effects, sedikides1993assessment}. 
+	On average, our subjects received a Brier score of $BS \approx 0.86$ for each task. Uniformly distributing the probability across all six events (point scores) results in a lower and therefore better Brier score of $BS \approx 0.84$ (see figure \ref{fig:briers}, left). However, according to the data, subjects very rarely drew uniform distributions. Most of the time, the distributions were shaped like a bell curve, but not aligned correctly. To illustrate this, we simulated a curve, where a subject assigned 25\% probability to the occurring event (in this case the subject received 3 points) and 25\%, 50\% and three times 0\% probability to the non-occuring events (see figure \ref{fig:briers}, right). This results in a Brier score of $BS = 0.875$, which is approximately the mean Brier score that our subjects received. Both interpretations of the Brier score suggest that humans are rather poor when assessing their task performance, which is in line with the current research \citep{raaijmakers2019effects, sedikides1993assessment}. However, the second interpretation, which is a good approximation of the probabilities drawn by our subjects, shows that humans at least assign most of the probability to some area around the occurring event.
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=.5\textwidth]{../assets/brier_plot.png}
-		\caption{A Brier score of $BS \approx 0.84$ expressed as a probability function over a task that would give 0 to 5 points.}
+		\includegraphics[width=.49\textwidth]{../assets/brier_plot.png}
+		\includegraphics[width=.49\textwidth]{../assets/brier_plot2.png}
+		\caption{Two different illustrations of the Brier score as a probability density function over a task that gives 0 to 5 points. Left: A Brier score of $BS \approx 0.84$, where every event has the same amount of probability. Right: A Brier score of $BS = 0.875$, where the occurring event (the subject received 3 points) has a probability of 25\% and the non-occurring events have a probability of 25\%, 50\% and three times 0\%. Important to notice is that the event with a probability of 50\% is located right next to the occurring event.}
 		\label{fig:briers}
 	\end{figure}
+	\newpage
+	\noindent In fact, it seems that subjects overestimate their performance when performing poorly (task 3) and underestimate their performance when performing well (task 1 and 2). It seems that our subjects exhibit a cognitive bias towards assessing their performance as average, which has also been described in other research \citep{kruger1999unskilled}.
 
-	It seems that subjects overestimate their performance when performing poorly (task 3) and underestimate their performance when performing well (task 1 and 2). It seems that our subjects exhibit a cognitive bias towards assessing their performance as average, which has also been described in other research \cite{kruger1999unskilled}.
-
-	Although the Brier score was not very good for neither difficult nor simple tasks, we found a positive correlation between the task score and the Brier score. On average, the more points a subject got for a task, the lower was the Brier score. This means that participants were able to assess their performance in difficult tasks (task 3) better than in simple tasks (task 1 and 2). Because of our limited amount of data we were not able to perform a significant statistical analysis, to provide further evidence.
+	Although the Brier score was not very good for neither difficult nor simple tasks, we found a positive correlation between the task score and the Brier score. On average, the more points a subject got for a task, the lower was the Brier score. This means that participants were able to assess their performance in difficult tasks (task 3) better than in simple tasks (task 1 and 2). Because of our limited amount of data we were not able to perform a significant statistical analysis to provide further evidence.
 	
-	In the future, we would like to administer a study with more subjects, more tasks and different task types to get to the bottom of these questions. We would also like to collect a different group of subjects which do not depict so many similar homogeneous characteristics (we only administered white German people, mainly from university).
+	In the future, we would like to administer a study with more subjects, more tasks and different task types to get to the bottom of these questions. We would also like to exclude possible biasing factors by collecting a more heterogeneous group of subjects, which do not depict so many similar characteristics.
 	
 	
 	

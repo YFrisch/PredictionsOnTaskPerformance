@@ -147,14 +147,49 @@ def plot_brier_graph():
     plt.show()
 
 
-def plot_uniform():
+def plot_brier_graph2():
     """
     This function draws a probability density function.
 
-    The peak of the function shall be at 70% and the right and left event
-    shall have 15%. The other events shall have 0%. This plot shall
+    The peak of the function shall be at 50% and the right and left event
+    shall have 25%. The other events shall have 0%. This plot shall
     illustrate how well the participants did in our experiment if we
     transform the Brier score into a probability density function
+    """
+
+    # Data
+    x = np.arange(0, 1.015, 0.015)
+    mean = 0.4
+    sd = math.sqrt(0.0248)
+    g_x = scipy.stats.norm.pdf(x, mean, sd)
+
+    # Check if 0.2 and 0.6 have 0.15 and 0.4 has 0.7
+    scatter_x = [0.2, 0.4, 0.6]
+    scatter_y = []
+    for xi in scatter_x:
+        y = scipy.stats.norm.pdf(xi, mean, sd)
+        scatter_y.append(y)
+        print(f'({xi}, {y})')
+
+    # Plots
+    plt.figure()
+    plt.plot(x, g_x, color=f'black')
+    plt.ylim(0, 5)
+    plt.yticks([0, 1, 2, 3, 4, 5], [0, 0.2, 0.4, 0.6, 0.8, 1])
+    plt.xticks([0, 0.2, 0.4, 0.6, 0.8, 1], [0, 1, 2, 3, 4, 5])
+    axes = plt.gca()
+    label = axes.xaxis.get_ticklabels()[3]
+    label.set_weight('bold')
+    label.set_color('darkblue')
+    plt.xlabel(f'Points')
+    plt.ylabel(f'Probability')
+    plt.fill_between(x, g_x, alpha=.9)
+    plt.show()
+
+
+def plot_uniform():
+    """
+    This function draws a uniform probability density function.
     """
 
     # Data
@@ -165,6 +200,7 @@ def plot_uniform():
     plt.figure()
     plt.plot(x, y)
     plt.ylim(0, 1)
+    plt.xticks([0, 0.2, 0.4, 0.6, 0.8, 1], [0, 1, 2, 3, 4, 5])
     plt.xlabel(f'Points')
     plt.ylabel(f'Probability')
     plt.show()

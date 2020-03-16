@@ -1,14 +1,9 @@
-\begin{thebibliography}{21}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[pdf()]{pdf2images}
-pdf2images.
-\newblock \url{https://pypi.org/project/pdf2images/}.
-\newblock Accessed: 2020-03-15.
 
 \bibitem[Azzopardi and Evans(2007)]{azzopardi2007evaluation}
 Paul Azzopardi and Simon Evans.
