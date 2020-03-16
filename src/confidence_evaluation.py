@@ -8,7 +8,6 @@ from collections import OrderedDict
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-# TODO: Get rid of the RGBA warning...
 import src.utils
 from src.utils import task_expectation
 from src.data_reader import read_csv_files
