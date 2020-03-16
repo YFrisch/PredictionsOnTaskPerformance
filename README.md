@@ -8,7 +8,7 @@ What must be done to run our project scripts:
 * Depending on your operating system and your software, you might need to install other
 versions of the package. Installing the latest versions of the packages via pip or
 conda should work just fine.
-* The package pdf2image the poppler package. On MacOS, install it via
+* The package pdf2image is contained in the poppler package. On MacOS, install it via
 "conda install -c conda-forge poppler" (preferred) or "brew install poppler".
 On Linux, you most of the time don't need it, if you do install the "poppler-utils" package.
 
