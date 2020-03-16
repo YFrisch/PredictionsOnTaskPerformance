@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: ../bib/references.bib
+Warning--to sort, need author or key in pdf2images
+Warning--empty year in pdf2images
+You've used 21 entries,
+            2773 wiz_defined-function locations,
+            733 strings with 8275 characters,
+and the built_in function-call counts, 8630 in all, are:
+= -- 764
+> -- 423
+< -- 16
++ -- 147
+- -- 126
+* -- 690
+:= -- 1328
+add.period$ -- 63
+call.type$ -- 21
+change.case$ -- 100
+chr.to.int$ -- 21
+cite$ -- 45
+duplicate$ -- 421
+empty$ -- 776
+format.name$ -- 160
+if$ -- 1798
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 24
+newline$ -- 113
+num.names$ -- 80
+pop$ -- 204
+preamble$ -- 1
+purify$ -- 83
+quote$ -- 0
+skip$ -- 304
+stack$ -- 0
+substring$ -- 320
+swap$ -- 23
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 211
+warning$ -- 2
+while$ -- 86
+width$ -- 0
+write$ -- 276
+(There were 2 warnings)
