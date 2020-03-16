@@ -181,7 +181,7 @@
 		L2 = \sqrt{(1-2)^2 + (2-4)^2 + (3-5)^2 + (4-1)^2  + (5 - 3)^2} \approx 4.69
 	\end{equation}
 	
-	We then calculated the worst L2-norm possible. That is the L2-norm of the difference between the actual ordering $[1, 2, 3, 4, 5]$ an the worst possible ordering $[5, 4, 3, 2, 1]$. This resulted in the worst possible L2-norm of $\text{L2-max-norm} \approx 6.32$. We then split the interval of $[0, \text{L2-max-norm}]$ into an array of a fixed amount of equidistant numbers (in our case 6). We chose six, because we assigned a score of 0 to 5 points for each task. This led to the array of $[0, 1.27, 2.53, 3.79, 5.06, 6.32]$. The discrete rating for a task was then the 'id' of the closest value of that array compared to the L2-norm of the answer. Therefore, if a subject would get a L2-norm of $L2 = 4.69$ (equation \ref{eq:l2}), the discrete score for the task would be 4 points.
+	\noindent We then calculated the worst L2-norm possible. That is the L2-norm of the difference between the actual ordering $[1, 2, 3, 4, 5]$ an the worst possible ordering $[5, 4, 3, 2, 1]$. This resulted in the worst possible L2-norm of $\text{L2-max-norm} \approx 6.32$. We then split the interval of $[0, \text{L2-max-norm}]$ into an array of a fixed amount of equidistant numbers (in our case 6). We chose six, because we assigned a score of 0 to 5 points for each task. This led to the array of $[0, 1.27, 2.53, 3.79, 5.06, 6.32]$. The discrete rating for a task was then the 'id' of the closest value of that array compared to the L2-norm of the answer. Therefore, if a subject would get a L2-norm of $L2 = 4.69$ (equation \ref{eq:l2}), the discrete score for the task would be 4 points.
 	
 	\subsection{Calculating the Brier Score}
 	
@@ -205,7 +205,7 @@
 		\label{fig:example}
 	\end{figure}
 
-	The actual score that the participant got for the task is encoded with $c_i = 1$ and the other possible scores that did not occur are represented by $c_i = 0$. The participant was underconfident and gave the possible task score of 0 points a probability of 0.2, the possible task score of 1 point a probability of 0.6 and the possible task score of 2 points (which actually occurred) a probability of 0.2. If we now apply the Brier score to our data, we get a Brier score of $BS \approx 0.17$, which can be retraced in equation \ref{eq:example-brier-score}.
+	\noindent The actual score that the participant got for the task is encoded with $c_i = 1$ and the other possible scores that did not occur are represented by $c_i = 0$. The participant was underconfident and gave the possible task score of 0 points a probability of 0.2, the possible task score of 1 point a probability of 0.6 and the possible task score of 2 points (which actually occurred) a probability of 0.2. If we now apply the Brier score to our data, we get a Brier score of $BS \approx 0.17$, which can be retraced in equation \ref{eq:example-brier-score}.
 	
 	\begin{equation}
 		\label{eq:example-brier-score}
